@@ -1,0 +1,28 @@
+<!doctype html>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<title>Lernsoftware: Netzwerke</title>
+		<link rel="stylesheet" type="text/css" href="design.css">
+	</head>
+<body>
+	<section id="header">
+		<span>Lernsoftware: Netzwerke</span>
+		<span class="login">
+			<span>Logged in as:</span>
+            <span id="user">Jan Seeger</span>
+            <a href="">Logout</a>
+		</span>
+	</section>
+	<nav>
+		{navigation}
+	</nav>
+	<section id="main">
+		{content}
+	</section>
+	<section id="state">
+        Frage:
+        {status}
+	</section>
+</body>
+</html>
