@@ -17,6 +17,7 @@ body {
 	background: rgb(43,43,43);
     background:url(wallpaper324845.jpg); /* http://imageshack.us/photo/my-images/829/wallpaper324845.jpg/ */
     background-size: 100% auto;
+    background-attachment: fixed fixed;
 }
 
 a, a:hover, a:active {

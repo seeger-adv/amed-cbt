@@ -17,7 +17,7 @@ import de.adv_boeblingen.seeegerj.amed.lernoftware.model.Session;
 public class LoginServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
-		new TemplateRenderer(getServletContext(), "/login.jtpl").PrintOutput(resp.getWriter());
+		new TemplateRenderer(req, "/login.jtpl").PrintOutput(resp.getWriter());
 	}
 
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp)

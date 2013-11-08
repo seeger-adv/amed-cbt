@@ -9,29 +9,33 @@ import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebFilter;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
-import de.adv_boeblingen.seeegerj.amed.lernoftware.controller.UserController;
-import de.adv_boeblingen.seeegerj.amed.lernoftware.model.Session;
+import de.adv_boeblingen.seeegerj.amed.lernoftware.controller.NavigationController;
+import de.adv_boeblingen.seeegerj.amed.lernoftware.model.Lesson;
 import de.adv_boeblingen.seeegerj.amed.lernoftware.util.VariableMap;
 
 @WebFilter(urlPatterns="/Lesson/*")
-public class LoginFilter implements Filter {
+public class NavigationFilter implements Filter {
 	@Override
 	public void doFilter(ServletRequest req, ServletResponse resp,
 			FilterChain chain) throws IOException, ServletException {
 
-		Session session = (Session) ((HttpServletRequest)req).getSession().getAttribute("session");
-		if(!UserController.isValidSession(session)) {
-			((HttpServletResponse)resp).sendRedirect("/Lernsoftware/login");
-		} else {
-			VariableMap map = VariableMap.getMappingFromRequest(req);
-			map.put("username", session.getUser().getUsername());
-			chain.doFilter(req, resp);
-		}
+		VariableMap map = VariableMap.getMappingFromRequest(req);
+		map.put("navigation", renderNavigation());
+
+		chain.doFilter(req, resp);
 	}
 
+	private String renderNavigation() {
+		StringBuilder navigation = new StringBuilder();
+		for(Lesson lesson: NavigationController.getNavigation()) {
+			navigation.append("<ul>");
+			navigation.append(String.format("<li>%s</li>", lesson.getTitle()));
+			navigation.append("</ul>");
+		}
+		return navigation.toString();
+	}
+	
 	@Override
 	public void init(FilterConfig arg0) throws ServletException {
 	}

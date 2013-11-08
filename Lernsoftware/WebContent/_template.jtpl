@@ -1,16 +1,17 @@
+<!-- BEGIN: main -->
 <!doctype html>
 <html>
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 		<title>Lernsoftware: Netzwerke</title>
-		<link rel="stylesheet" type="text/css" href="design.css">
+		<link rel="stylesheet" type="text/css" href="../design.css">
 	</head>
 <body>
 	<section id="header">
 		<span>Lernsoftware: Netzwerke</span>
 		<span class="login">
 			<span>Logged in as:</span>
-            <span id="user">Jan Seeger</span>
+            <span id="user">{username}</span>
             <a href="">Logout</a>
 		</span>
 	</section>
@@ -26,3 +27,4 @@
 	</section>
 </body>
 </html>
+<!-- END: main -->
