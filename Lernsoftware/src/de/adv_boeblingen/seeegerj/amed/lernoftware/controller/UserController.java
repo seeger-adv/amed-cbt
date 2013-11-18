@@ -1,5 +1,8 @@
 package de.adv_boeblingen.seeegerj.amed.lernoftware.controller;
 
+import javax.persistence.EntityManager;
+import javax.persistence.EntityTransaction;
+
 import de.adv_boeblingen.seeegerj.amed.lernoftware.model.Session;
 import de.adv_boeblingen.seeegerj.amed.lernoftware.model.User;
 import de.adv_boeblingen.seeegerj.amed.lernoftware.util.CryptUtil;
@@ -9,12 +12,12 @@ public class UserController {
 	 * Returns a {@link Session} on successful login, {@code null} otherwise.
 	 */
 	public static final Session login(String username, String password) {
-		if(username == null || password == null) {
+		if (username == null || password == null) {
 			return null;
 		}
 
 		User foundUser = findUser(username);
-		if(foundUser == null)  {
+		if (foundUser == null) {
 			return null;
 		}
 
@@ -31,29 +34,32 @@ public class UserController {
 	}
 
 	private static User findUser(String username) {
-		if(username.equals("admin")) {
-			User user = new User();
-			user.setUsername("admin");
-			String pass = CryptUtil.toSHA1("admin");
-			user.setPassword(pass);
-			return user;
-		}
-
-		return null;
+		EntityManager em = DatabaseController.getEntityManager();
+		return em.find(User.class, username);
 	}
-	
+
 	/**
 	 * Removes the Session from the DB and deletes the Session cookie.
 	 */
 	public static final void logout(Session session) {
 		session.invalidate();
 	}
-	
-	public static final Session register(String email, String password) {
-		//register here
-		return login(email, password);
+
+	public static final Session register(String username, String password) {
+		EntityManager em = DatabaseController.getEntityManager();
+
+		EntityTransaction transaction = em.getTransaction();
+		transaction.begin();
+		User user = new User();
+		String hash = CryptUtil.toSHA1(password);
+		user.setUsername(username);
+		user.setPassword(hash);
+		em.persist(user);
+		transaction.commit();
+
+		return login(username, password);
 	}
-	
+
 	public static boolean isValidSession(Session session) {
 		return session != null && session.isValid();
 	}

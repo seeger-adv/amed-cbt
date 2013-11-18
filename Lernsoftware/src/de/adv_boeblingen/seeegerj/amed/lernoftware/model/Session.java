@@ -3,13 +3,14 @@ package de.adv_boeblingen.seeegerj.amed.lernoftware.model;
 public class Session {
 	private User mUser;
 	private boolean isValid;
+	private State mState;
 
 	public Session() {
-		isValid = true;
+		this.isValid = true;
 	}
-	
+
 	public User getUser() {
-		return mUser;
+		return this.mUser;
 	}
 
 	public void setUser(User user) {
@@ -17,10 +18,18 @@ public class Session {
 	}
 
 	public boolean isValid() {
-		return isValid;
+		return this.isValid;
 	}
 
 	public void invalidate() {
-		isValid = false;
+		this.isValid = false;
+	}
+
+	public State getState() {
+		return this.mState;
+	}
+
+	public void setmState(State state) {
+		this.mState = state;
 	}
 }

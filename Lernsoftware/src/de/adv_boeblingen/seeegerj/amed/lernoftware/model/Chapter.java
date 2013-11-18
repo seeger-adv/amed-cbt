@@ -12,21 +12,21 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 
-@Entity(name = "t_lesson")
-public class Lesson {
+@Entity(name = "t_chapter")
+public class Chapter {
 	@Id
-	@Column(name = "lessonid")
+	@Column(name = "chapterid")
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private final UUID mId;
 	private String mTitle;
 
 	@OneToMany
-	@JoinColumn(name = "questionid")
-	List<Question> mQuestions;
+	@JoinColumn(name = "lessonid")
+	List<Lesson> mLessons;
 
-	public Lesson() {
+	public Chapter() {
 		this.mId = UUID.randomUUID();
-		this.mQuestions = new ArrayList<>();
+		this.mLessons = new ArrayList<>();
 	}
 
 	public String getTitle() {
@@ -37,19 +37,19 @@ public class Lesson {
 		this.mTitle = title;
 	}
 
-	public List<Question> getQuestions() {
-		return this.mQuestions;
+	public List<Lesson> getLessons() {
+		return this.mLessons;
 	}
 
 	public UUID getId() {
 		return this.mId;
 	}
 
-	public boolean add(Question question) {
-		return this.mQuestions.add(question);
+	public boolean add(Lesson lesson) {
+		return this.mLessons.add(lesson);
 	}
 
-	public boolean remove(Object question) {
-		return this.mQuestions.remove(question);
+	public boolean remove(Object leon) {
+		return this.mLessons.remove(leon);
 	}
 }

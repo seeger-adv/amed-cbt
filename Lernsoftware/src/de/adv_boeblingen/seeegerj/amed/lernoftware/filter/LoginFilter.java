@@ -16,15 +16,16 @@ import de.adv_boeblingen.seeegerj.amed.lernoftware.controller.UserController;
 import de.adv_boeblingen.seeegerj.amed.lernoftware.model.Session;
 import de.adv_boeblingen.seeegerj.amed.lernoftware.util.VariableMap;
 
-@WebFilter(urlPatterns="/Lesson/*")
+@WebFilter(urlPatterns = "/Lesson/*")
 public class LoginFilter implements Filter {
 	@Override
 	public void doFilter(ServletRequest req, ServletResponse resp,
 			FilterChain chain) throws IOException, ServletException {
 
-		Session session = (Session) ((HttpServletRequest)req).getSession().getAttribute("session");
-		if(!UserController.isValidSession(session)) {
-			((HttpServletResponse)resp).sendRedirect("/Lernsoftware/login");
+		Session session = (Session) ((HttpServletRequest) req).getSession()
+				.getAttribute("session");
+		if (!UserController.isValidSession(session)) {
+			((HttpServletResponse) resp).sendRedirect("/Lernsoftware/login");
 		} else {
 			VariableMap map = VariableMap.getMappingFromRequest(req);
 			map.put("username", session.getUser().getUsername());
