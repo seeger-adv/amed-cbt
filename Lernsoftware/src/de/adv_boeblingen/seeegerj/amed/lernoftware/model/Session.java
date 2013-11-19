@@ -3,10 +3,11 @@ package de.adv_boeblingen.seeegerj.amed.lernoftware.model;
 public class Session {
 	private User mUser;
 	private boolean isValid;
-	private State mState;
+	private final State mState;
 
 	public Session() {
 		this.isValid = true;
+		this.mState = new State();
 	}
 
 	public User getUser() {
@@ -27,9 +28,5 @@ public class Session {
 
 	public State getState() {
 		return this.mState;
-	}
-
-	public void setmState(State state) {
-		this.mState = state;
 	}
 }
