@@ -6,6 +6,7 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -29,9 +30,9 @@ public class Lesson {
 	@JoinColumn(name = "chapter", insertable = false, updatable = false, nullable = false)
 	private Chapter mChapter;
 
-	@OneToMany(cascade = { CascadeType.ALL })
+	@OneToMany(cascade = { CascadeType.ALL }, fetch = FetchType.EAGER)
 	@JoinColumn(name = "lesson")
-	@IndexColumn(name = "idx")
+	@IndexColumn(name = "questionid")
 	List<Question> mQuestions = new ArrayList<>();
 
 	public String getTitle() {
@@ -56,5 +57,9 @@ public class Lesson {
 
 	public boolean remove(Object question) {
 		return this.mQuestions.remove(question);
+	}
+
+	public Chapter getChapter() {
+		return this.mChapter;
 	}
 }
