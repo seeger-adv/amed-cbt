@@ -2,34 +2,37 @@ package de.adv_boeblingen.seeegerj.amed.lernoftware.model;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+
+import org.hibernate.annotations.IndexColumn;
 
 @Entity(name = "t_lesson")
 public class Lesson {
 	@Id
 	@Column(name = "lessonid")
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private final UUID mId;
+	private int mId;
 
 	@Column(name = "title")
 	private String mTitle;
 
-	@OneToMany
-	@JoinColumn(name = "questionid")
-	List<Question> mQuestions;
+	@ManyToOne
+	@JoinColumn(name = "chapter", insertable = false, updatable = false, nullable = false)
+	private Chapter mChapter;
 
-	public Lesson() {
-		this.mId = UUID.randomUUID();
-		this.mQuestions = new ArrayList<>();
-	}
+	@OneToMany(cascade = { CascadeType.ALL })
+	@JoinColumn(name = "lesson")
+	@IndexColumn(name = "idx")
+	List<Question> mQuestions = new ArrayList<>();
 
 	public String getTitle() {
 		return this.mTitle;
@@ -43,7 +46,7 @@ public class Lesson {
 		return this.mQuestions;
 	}
 
-	public UUID getId() {
+	public int getId() {
 		return this.mId;
 	}
 

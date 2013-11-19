@@ -3,33 +3,28 @@ package de.adv_boeblingen.seeegerj.amed.lernoftware.controller;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.EntityManager;
+import javax.persistence.Query;
+
 import de.adv_boeblingen.seeegerj.amed.lernoftware.model.Chapter;
-import de.adv_boeblingen.seeegerj.amed.lernoftware.model.Lesson;
 
 public class ChapterController {
 	public static List<Chapter> getChapters() {
-		List<Chapter> chapters = new ArrayList<>();
-		setupTestData(chapters);
-		return chapters;
-	}
+		EntityManager manager = DatabaseController.getEntityManager();
+		try {
+			String queryString = String.format("SELECT p FROM %s p",
+					Chapter.class.getName());
+			Query query = manager.createQuery(queryString);
 
-	private static void setupTestData(List<Chapter> chapters) {
-		// bla from db
-		Chapter osi = new Chapter();
-		osi.setTitle("OSI Stack");
-		chapters.add(osi);
-
-		Lesson l1 = new Lesson();
-		l1.setTitle("Layer 1");
-		osi.add(l1);
-
-		Lesson l2 = new Lesson();
-		l2.setTitle("Layer 2");
-		osi.add(l2);
-
-		Lesson l3 = new Lesson();
-		l3.setTitle("Layer 3");
-		osi.add(l3);
+			@SuppressWarnings("unchecked")
+			List<Chapter> all = query.getResultList();
+			if (all == null) {
+				return new ArrayList<>();
+			}
+			return all;
+		} finally {
+			manager.close();
+		}
 	}
 
 	public static boolean isChapterComplete(Chapter chapter) {

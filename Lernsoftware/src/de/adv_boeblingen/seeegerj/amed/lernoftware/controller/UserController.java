@@ -47,7 +47,6 @@ public class UserController {
 
 	public static final Session register(String username, String password) {
 		EntityManager em = DatabaseController.getEntityManager();
-
 		EntityTransaction transaction = em.getTransaction();
 		transaction.begin();
 		User user = new User();

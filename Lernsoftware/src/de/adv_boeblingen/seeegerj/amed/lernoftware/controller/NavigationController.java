@@ -7,7 +7,7 @@ import de.adv_boeblingen.seeegerj.amed.lernoftware.model.Lesson;
 
 public class NavigationController {
 	public static String getNavLink(Lesson lesson) {
-		return lesson.getId().toString();
+		return Integer.toString(lesson.getId());
 	}
 
 	public static boolean containsLesson(Chapter chapter, Lesson lesson) {
