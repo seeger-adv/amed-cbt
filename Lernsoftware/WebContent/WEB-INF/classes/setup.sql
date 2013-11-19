@@ -9,3 +9,7 @@ insert into T_CHAPTER (chapterid, title) values (2, 'IP Addressing');
 insert into T_LESSON (lessonid, title, chapter) values (1, 'Layer 1', 1);
 insert into T_LESSON (lessonid, title, chapter) values (2, 'Layer 2', 1);
 insert into T_LESSON (lessonid, title, chapter) values (3, 'Layer 3', 1);
+
+insert into T_LESSON (lessonid, title, chapter) values (4, 'Classful Addressing', 2);
+insert into T_LESSON (lessonid, title, chapter) values (5, 'Classless Addressing', 2);
+insert into T_LESSON (lessonid, title, chapter) values (6, 'Supernetting', 2);
