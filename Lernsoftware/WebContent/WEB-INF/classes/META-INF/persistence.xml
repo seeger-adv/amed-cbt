@@ -11,8 +11,8 @@
             <property name="hibernate.connection.username" value="seegerj"/>
             <property name="hibernate.connection.password" value="seegerj"/>
             <property name="hibernate.dialect" value="org.hibernate.dialect.Oracle10gDialect"/>
-            <!-- <property name="hibernate.hbm2ddl.auto" value="create"/> //-->
-            <property name="hibernate.hbm2ddl.auto" value="validate"/>
+            <property name="hibernate.hbm2ddl.auto" value="create"/><!-- create update validate //-->
+            <property name="hibernate.hbm2ddl.import_files" value="/setup.sql" />
             <property name="hibernate.show_sql" value="true"/>
         </properties>
     </persistence-unit>
