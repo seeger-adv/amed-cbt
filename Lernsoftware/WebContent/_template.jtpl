@@ -12,7 +12,7 @@
 		<span class="login">
 			<span>Logged in as:</span>
             <span id="user">{username}</span>
-            <a href="">Logout</a>
+            <a href="/Lernsoftware/Logout">Logout</a>
 		</span>
 	</section>
 	<nav>
