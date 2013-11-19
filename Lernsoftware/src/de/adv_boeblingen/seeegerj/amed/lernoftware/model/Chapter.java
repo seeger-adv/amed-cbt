@@ -18,6 +18,8 @@ public class Chapter {
 	@Column(name = "chapterid")
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private final UUID mId;
+
+	@Column(name = "title")
 	private String mTitle;
 
 	@OneToMany

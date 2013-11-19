@@ -18,6 +18,8 @@ public class Lesson {
 	@Column(name = "lessonid")
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private final UUID mId;
+
+	@Column(name = "title")
 	private String mTitle;
 
 	@OneToMany
