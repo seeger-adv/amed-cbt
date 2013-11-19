@@ -22,7 +22,6 @@
 		{content}
 	</section>
 	<section id="state">
-        Frage:
         {status}
 	</section>
 </body>
