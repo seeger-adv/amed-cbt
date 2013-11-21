@@ -10,7 +10,7 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebFilter;
 
-import de.adv_boeblingen.seeegerj.amed.lernoftware.controller.ChapterController;
+import de.adv_boeblingen.seeegerj.amed.lernoftware.controller.NavigationController;
 import de.adv_boeblingen.seeegerj.amed.lernoftware.model.Chapter;
 import de.adv_boeblingen.seeegerj.amed.lernoftware.model.Lesson;
 import de.adv_boeblingen.seeegerj.amed.lernoftware.util.VariableMap;
@@ -30,7 +30,7 @@ public class NavigationFilter implements Filter {
 	private String renderNavigation(ServletRequest req) {
 		StringBuilder renderedNavigation = new StringBuilder();
 
-		for (Chapter chapter : ChapterController.getChapters()) {
+		for (Chapter chapter : NavigationController.getNavigation()) {
 			renderChapter(chapter, renderedNavigation);
 		}
 

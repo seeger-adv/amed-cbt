@@ -1,11 +1,17 @@
 package de.adv_boeblingen.seeegerj.amed.lernoftware.controller;
 
+import java.util.List;
+
 import javax.servlet.ServletRequest;
 
 import de.adv_boeblingen.seeegerj.amed.lernoftware.model.Chapter;
 import de.adv_boeblingen.seeegerj.amed.lernoftware.model.Lesson;
 
 public class NavigationController {
+	public static List<Chapter> getNavigation() {
+		return ChapterController.getChapters();
+	}
+
 	public static String getNavLink(Lesson lesson) {
 		return Integer.toString(lesson.getId());
 	}

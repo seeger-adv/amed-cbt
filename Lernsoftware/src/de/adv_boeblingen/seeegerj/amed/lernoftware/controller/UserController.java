@@ -3,6 +3,7 @@ package de.adv_boeblingen.seeegerj.amed.lernoftware.controller;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 
+import de.adv_boeblingen.seeegerj.amed.lernoftware.controller.DatabaseController.TransactionRunnable;
 import de.adv_boeblingen.seeegerj.amed.lernoftware.model.Session;
 import de.adv_boeblingen.seeegerj.amed.lernoftware.model.User;
 import de.adv_boeblingen.seeegerj.amed.lernoftware.util.CryptUtil;
@@ -33,9 +34,15 @@ public class UserController {
 		return null;
 	}
 
-	private static User findUser(String username) {
-		EntityManager em = DatabaseController.getEntityManager();
-		return em.find(User.class, username);
+	private static User findUser(final String username) {
+		return DatabaseController
+				.runTransaction(new TransactionRunnable<User>() {
+					@Override
+					public User run(EntityManager manager,
+							EntityTransaction transaction) {
+						return manager.find(User.class, username);
+					}
+				});
 	}
 
 	/**
@@ -45,16 +52,19 @@ public class UserController {
 		session.invalidate();
 	}
 
-	public static final Session register(String username, String password) {
-		EntityManager em = DatabaseController.getEntityManager();
-		EntityTransaction transaction = em.getTransaction();
-		transaction.begin();
-		User user = new User();
-		String hash = CryptUtil.toSHA1(password);
-		user.setUsername(username);
-		user.setPassword(hash);
-		em.persist(user);
-		transaction.commit();
+	public static final Session register(final String username,
+			final String password) {
+		DatabaseController.runTransaction(new TransactionRunnable<Void>() {
+			@Override
+			public Void run(EntityManager manager, EntityTransaction transaction) {
+				User user = new User();
+				String hash = CryptUtil.toSHA1(password);
+				user.setUsername(username);
+				user.setPassword(hash);
+				manager.persist(user);
+				return null;
+			}
+		});
 
 		return login(username, password);
 	}
