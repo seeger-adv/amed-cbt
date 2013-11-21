@@ -1,4 +1,4 @@
-package de.adv_boeblingen.seeegerj.amed.lernoftware;
+package de.adv_boeblingen.seeegerj.amed.lernoftware.view;
 
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -8,9 +8,8 @@ import java.net.URL;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletRequest;
 
-import de.adv_boeblingen.seeegerj.amed.lernoftware.util.VariableMap;
-
 import net.sf.jtpl.Template;
+import de.adv_boeblingen.seeegerj.amed.lernoftware.util.VariableMap;
 
 public class TemplateRenderer {
 	private Template template;
@@ -22,14 +21,14 @@ public class TemplateRenderer {
 		InputStreamReader reader = null;
 		try {
 			reader = new InputStreamReader(resourceUrl.openStream());
-			template = new Template(reader);
+			this.template = new Template(reader);
 
 			VariableMap map = VariableMap.getMappingFromRequest(req);
 			for (String key : map.keySet()) {
-				template.assign(key, map.get(key));
+				this.template.assign(key, map.get(key));
 			}
 
-			template.parse("main");
+			this.template.parse("main");
 		} finally {
 			if (reader != null) {
 				reader.close();
@@ -38,7 +37,6 @@ public class TemplateRenderer {
 	}
 
 	public void PrintOutput(PrintWriter writer) {
-
-		writer.write(template.out());
+		writer.write(this.template.out());
 	}
 }

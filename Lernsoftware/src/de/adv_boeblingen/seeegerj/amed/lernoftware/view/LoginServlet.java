@@ -8,7 +8,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import de.adv_boeblingen.seeegerj.amed.lernoftware.TemplateRenderer;
 import de.adv_boeblingen.seeegerj.amed.lernoftware.controller.UserController;
 import de.adv_boeblingen.seeegerj.amed.lernoftware.model.Session;
 
