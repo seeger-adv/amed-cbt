@@ -6,7 +6,7 @@
   </session-config>
   <servlet>
     <servlet-name>index</servlet-name>
-    <servlet-class>de.adv_boeblingen.seeegerj.amed.lernoftware.view.RootRedirect</servlet-class>
+    <servlet-class>de.adv_boeblingen.seeegerj.amed.lernoftware.view.RootRedirectServlet</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>index</servlet-name>
