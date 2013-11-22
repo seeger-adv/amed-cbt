@@ -13,6 +13,7 @@ import javax.servlet.annotation.WebFilter;
 import de.adv_boeblingen.seeegerj.amed.lernoftware.controller.NavigationController;
 import de.adv_boeblingen.seeegerj.amed.lernoftware.model.Chapter;
 import de.adv_boeblingen.seeegerj.amed.lernoftware.model.Lesson;
+import de.adv_boeblingen.seeegerj.amed.lernoftware.util.Constants;
 import de.adv_boeblingen.seeegerj.amed.lernoftware.util.VariableMap;
 
 @WebFilter(urlPatterns = "/Lesson/*")
@@ -25,7 +26,7 @@ public class NavigationFilter implements Filter {
 
 		VariableMap map = VariableMap.getMappingFromRequest(req);
 		Lesson currentLesson = NavigationController.getCurrentLesson(req);
-		map.put("navigation", renderNavigation(currentLesson));
+		map.put(Constants.NAVIGATION_PARAM, renderNavigation(currentLesson));
 
 		chain.doFilter(req, resp);
 	}

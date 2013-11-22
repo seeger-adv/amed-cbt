@@ -10,6 +10,7 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebFilter;
 
+import de.adv_boeblingen.seeegerj.amed.lernoftware.util.Constants;
 import de.adv_boeblingen.seeegerj.amed.lernoftware.util.VariableMap;
 
 @WebFilter(urlPatterns = "/Lesson/*")
@@ -19,7 +20,7 @@ public class StateFilter implements Filter {
 			FilterChain chain) throws IOException, ServletException {
 
 		VariableMap map = VariableMap.getMappingFromRequest(req);
-		map.put("status", renderProgress(req));
+		map.put(Constants.STATUS_PARAM, renderProgress(req));
 
 		chain.doFilter(req, resp);
 	}

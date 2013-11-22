@@ -5,12 +5,14 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
 
+import de.adv_boeblingen.seeegerj.amed.lernoftware.util.Configuration;
+
 public class DatabaseController {
-	private static final String CONFIGURATION = "lernsoftwareconfig";
 	private static final EntityManagerFactory factory;
 
 	static {
-		factory = Persistence.createEntityManagerFactory(CONFIGURATION);
+		factory = Persistence
+				.createEntityManagerFactory(Configuration.DATABASE_CONFIG);
 	}
 
 	public static <T> T runTransaction(TransactionRunnable<T> runnable) {

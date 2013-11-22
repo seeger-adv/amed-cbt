@@ -7,6 +7,7 @@ import de.adv_boeblingen.seeegerj.amed.lernoftware.controller.DatabaseController
 import de.adv_boeblingen.seeegerj.amed.lernoftware.model.Session;
 import de.adv_boeblingen.seeegerj.amed.lernoftware.model.User;
 import de.adv_boeblingen.seeegerj.amed.lernoftware.util.CryptUtil;
+import de.adv_boeblingen.seeegerj.amed.lernoftware.util.Messages;
 
 public class UserController {
 	/**
@@ -28,7 +29,7 @@ public class UserController {
 			session.setUser(foundUser);
 			return session;
 		} else {
-			System.out.println("Failed login attempt!");
+			System.out.println(Messages.LOGIN_FAILED);
 		}
 
 		return null;

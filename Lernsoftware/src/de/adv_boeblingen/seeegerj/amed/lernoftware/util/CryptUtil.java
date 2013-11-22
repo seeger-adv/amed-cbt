@@ -7,7 +7,7 @@ public class CryptUtil {
 	public static String toSHA1(String convertme) {
 		MessageDigest md = null;
 		try {
-			md = MessageDigest.getInstance("SHA1");
+			md = MessageDigest.getInstance(Configuration.HASH_ALGORITHM);
 		} catch (NoSuchAlgorithmException e) {
 			e.printStackTrace();
 		}
@@ -17,8 +17,9 @@ public class CryptUtil {
 
 	public static String byteArrayToHexString(byte[] b) {
 		String result = "";
-		for (int i = 0; i < b.length; i++) {
-			result += Integer.toString((b[i] & 0xff) + 0x100, 16).substring(1);
+		for (byte element : b) {
+			int value = (element & 0xff) + 0x100;
+			result += Integer.toString(value, 16).substring(1);
 		}
 		return result;
 	}

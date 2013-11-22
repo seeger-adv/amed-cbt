@@ -9,6 +9,7 @@ import javax.persistence.Query;
 
 import de.adv_boeblingen.seeegerj.amed.lernoftware.controller.DatabaseController.TransactionRunnable;
 import de.adv_boeblingen.seeegerj.amed.lernoftware.model.Chapter;
+import de.adv_boeblingen.seeegerj.amed.lernoftware.util.Constants;
 
 public class ChapterController {
 	public static List<Chapter> getChapters() {
@@ -18,7 +19,7 @@ public class ChapterController {
 					public List<Chapter> run(EntityManager manager,
 							EntityTransaction transaction) {
 						String queryString = String.format(
-								"SELECT p FROM %s p", Chapter.class.getName());
+								Constants.BASIC_QUERY, Chapter.class.getName());
 
 						Query query = manager.createQuery(queryString);
 

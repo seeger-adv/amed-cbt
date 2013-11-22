@@ -14,6 +14,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import de.adv_boeblingen.seeegerj.amed.lernoftware.controller.UserController;
 import de.adv_boeblingen.seeegerj.amed.lernoftware.model.Session;
+import de.adv_boeblingen.seeegerj.amed.lernoftware.util.Constants;
+import de.adv_boeblingen.seeegerj.amed.lernoftware.util.PathUtil;
 import de.adv_boeblingen.seeegerj.amed.lernoftware.util.VariableMap;
 
 @WebFilter(urlPatterns = "/Lesson/*")
@@ -23,12 +25,13 @@ public class LoginFilter implements Filter {
 			FilterChain chain) throws IOException, ServletException {
 
 		Session session = (Session) ((HttpServletRequest) req).getSession()
-				.getAttribute("session");
+				.getAttribute(Constants.SESSION_PARAM);
 		if (!UserController.isValidSession(session)) {
-			((HttpServletResponse) resp).sendRedirect("/Lernsoftware/login");
+			((HttpServletResponse) resp).sendRedirect(PathUtil
+					.buildQuery("login"));
 		} else {
 			VariableMap map = VariableMap.getMappingFromRequest(req);
-			map.put("username", session.getUser().getUsername());
+			map.put(Constants.USERNAME_PARAM, session.getUser().getUsername());
 			chain.doFilter(req, resp);
 		}
 	}

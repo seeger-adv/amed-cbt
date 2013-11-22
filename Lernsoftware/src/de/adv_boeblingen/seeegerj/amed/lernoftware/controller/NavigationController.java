@@ -6,6 +6,7 @@ import javax.servlet.ServletRequest;
 
 import de.adv_boeblingen.seeegerj.amed.lernoftware.model.Chapter;
 import de.adv_boeblingen.seeegerj.amed.lernoftware.model.Lesson;
+import de.adv_boeblingen.seeegerj.amed.lernoftware.util.Constants;
 
 public class NavigationController {
 	public static List<Chapter> getNavigation() {
@@ -26,7 +27,7 @@ public class NavigationController {
 	}
 
 	public static Lesson getCurrentLesson(ServletRequest req) {
-		String id = (String) req.getAttribute("lesson");
+		String id = (String) req.getAttribute(Constants.LESSON_PARAM);
 
 		if (id == null) {
 			return null;
