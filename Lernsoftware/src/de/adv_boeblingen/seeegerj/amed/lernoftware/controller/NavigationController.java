@@ -25,15 +25,24 @@ public class NavigationController {
 		return false;
 	}
 
-	public static boolean isCurrentChapter(ServletRequest req, Chapter chapter) {
+	public static Lesson getCurrentLesson(ServletRequest req) {
 		String id = (String) req.getAttribute("lesson");
 
 		if (id == null) {
+			return null;
+		}
+
+		return LessonController.getLesson(id);
+	}
+
+	public static boolean isCurrent(Lesson lesson, Lesson currentLesson) {
+		if (currentLesson == null) {
 			return false;
 		}
 
-		Lesson lesson = LessonController.getLesson(id);
-		return containsLesson(chapter, lesson);
+		boolean equalsLesson = lesson.equals(currentLesson);
+		boolean equalsChapter = lesson.getChapter().equals(
+				currentLesson.getChapter());
+		return !equalsLesson && equalsChapter;
 	}
-
 }

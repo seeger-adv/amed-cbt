@@ -17,45 +17,57 @@ import de.adv_boeblingen.seeegerj.amed.lernoftware.util.VariableMap;
 
 @WebFilter(urlPatterns = "/Lesson/*")
 public class NavigationFilter implements Filter {
+	StringBuilder renderedNavigation;
+
 	@Override
 	public void doFilter(ServletRequest req, ServletResponse resp,
 			FilterChain chain) throws IOException, ServletException {
 
 		VariableMap map = VariableMap.getMappingFromRequest(req);
-		map.put("navigation", renderNavigation(req));
+		Lesson currentLesson = NavigationController.getCurrentLesson(req);
+		map.put("navigation", renderNavigation(currentLesson));
 
 		chain.doFilter(req, resp);
 	}
 
-	private String renderNavigation(ServletRequest req) {
-		StringBuilder renderedNavigation = new StringBuilder();
+	private String renderNavigation(Lesson currentLesson) {
+		this.renderedNavigation = new StringBuilder();
 
 		for (Chapter chapter : NavigationController.getNavigation()) {
-			renderChapter(chapter, renderedNavigation);
+			renderChapter(chapter, currentLesson);
 		}
 
-		return renderedNavigation.toString();
+		return this.renderedNavigation.toString();
 	}
 
-	private void renderChapter(Chapter chapter, StringBuilder navigation) {
-		navigation.append("<ul>");
-		navigation.append(String.format("<li>%s</li>", chapter.getTitle()));
+	private void renderChapter(Chapter chapter, Lesson currentLesson) {
+		this.renderedNavigation.append("<ul>").append(
+				String.format("<li>%s</li>", chapter.getTitle()));
+
 		for (Lesson lesson : chapter.getLessons()) {
 			if (lesson == null) {
 				continue;
 			}
-			renderLesson(navigation, lesson, false);
+
+			boolean isCurrent = NavigationController.isCurrent(lesson,
+					currentLesson);
+			renderLesson(lesson, isCurrent);
 		}
-		navigation.append("</ul>");
+		this.renderedNavigation.append("</ul>");
 	}
 
-	private void renderLesson(StringBuilder navigation, Lesson lesson,
-			boolean isCurrent) {
-		navigation.append("<ul>");
-		navigation.append("<li>");
-		navigation.append(lesson.getTitle());
-		navigation.append("</li>");
-		navigation.append("</ul>");
+	private void renderLesson(Lesson lesson, boolean isCurrent) {
+		this.renderedNavigation.append("<ul>").append("<li>");
+		if (isCurrent) {
+			this.renderedNavigation.append(lesson.getTitle());
+		} else {
+			this.renderedNavigation
+					.append(String.format("<a href=\"%s\">%s</a>",
+							NavigationController.getNavLink(lesson),
+							lesson.getTitle()));
+		}
+
+		this.renderedNavigation.append("</li>").append("</ul>");
 	}
 
 	@Override
