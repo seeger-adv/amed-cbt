@@ -1,5 +1,7 @@
 package de.adv_boeblingen.seeegerj.amed.lernoftware.controller;
 
+import java.util.Date;
+
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 
@@ -18,7 +20,7 @@ public class UserController {
 			return null;
 		}
 
-		User foundUser = findUser(username);
+		final User foundUser = findUser(username);
 		if (foundUser == null) {
 			return null;
 		}
@@ -27,6 +29,18 @@ public class UserController {
 		if (foundUser.getPassword().equals(passwordHash)) {
 			Session session = new Session();
 			session.setUser(foundUser);
+
+			DatabaseController.runTransaction(new TransactionRunnable<Void>() {
+				@Override
+				public Void run(EntityManager manager,
+						EntityTransaction transaction) {
+					long date = new Date().getTime();
+					foundUser.setLastLogin(date);
+					manager.persist(foundUser);
+					return null;
+				}
+			});
+
 			return session;
 		} else {
 			System.out.println(Messages.LOGIN_FAILED);
@@ -61,6 +75,8 @@ public class UserController {
 				User user = new User();
 				String hash = CryptUtil.toSHA1(password);
 				user.setUsername(username);
+				long date = new Date().getTime();
+				user.setCreated(date);
 				user.setPassword(hash);
 				manager.persist(user);
 				return null;

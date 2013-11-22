@@ -13,6 +13,12 @@ public class User {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private String mUsername;
 
+	@Column(name = "created")
+	private long mCreated;
+
+	@Column(name = "lastlogin")
+	private long mLastLogin;
+
 	@Column(name = "password")
 	private String mPassword;
 
@@ -31,4 +37,21 @@ public class User {
 	public void setPassword(String password) {
 		this.mPassword = password;
 	}
+
+	public long getCreated() {
+		return this.mCreated;
+	}
+
+	public void setCreated(long mCreated) {
+		this.mCreated = mCreated;
+	}
+
+	public long getLastLogin() {
+		return this.mLastLogin;
+	}
+
+	public void setLastLogin(long mLastLogin) {
+		this.mLastLogin = mLastLogin;
+	}
+
 }
