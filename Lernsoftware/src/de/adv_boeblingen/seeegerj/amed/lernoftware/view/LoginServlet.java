@@ -14,16 +14,28 @@ import de.adv_boeblingen.seeegerj.amed.lernoftware.model.Session;
 @WebServlet("/login")
 @SuppressWarnings("serial")
 public class LoginServlet extends HttpServlet {
+	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
 		new TemplateRenderer(req, "/login.jtpl").PrintOutput(resp.getWriter());
 	}
 
+	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
 		String user = req.getParameter("loginusername");
 		String password = req.getParameter("loginpass");
-		Session userSession = UserController.login(user, password);
+
+		Session userSession = null;
+		String action = req.getParameter("act");
+		if (action != null) {
+			if (action.equals("req")) {
+				userSession = UserController.register(user, password);
+			} else {
+				userSession = UserController.login(user, password);
+			}
+		}
+
 		req.getSession().setAttribute("session", userSession);
 		resp.sendRedirect("/Lernsoftware/Lesson/");
 	}

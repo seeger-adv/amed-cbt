@@ -17,8 +17,8 @@
             <h1>Login und so&hellip;</h1>
             <input type="text" name="loginusername" placeholder="Benutzername"><br>
             <input type="password" name="loginpass" placeholder="Password"><br>
-            <input type="submit" value="Login" id="login"> or
-            <input type="submit" value="Regstrieren" id="reg">
+            <input type="submit" name="act" value="Login" id="login"> or
+            <input type="submit" name="act" value="Regstrieren" id="reg">
         </form>
 	</section>
 	<section id="state">
