@@ -7,14 +7,14 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Query;
 
-import de.adv_boeblingen.seeegerj.amed.lernoftware.controller.DatabaseController.TransactionRunnable;
+import de.adv_boeblingen.seeegerj.amed.lernoftware.controller.DatabaseController.DatabaseRunnable;
 import de.adv_boeblingen.seeegerj.amed.lernoftware.model.Chapter;
 import de.adv_boeblingen.seeegerj.amed.lernoftware.util.Constants;
 
 public class ChapterController {
 	public static List<Chapter> getChapters() {
 		return DatabaseController
-				.runTransaction(new TransactionRunnable<List<Chapter>>() {
+				.runTransaction(new DatabaseRunnable<List<Chapter>>() {
 					@Override
 					public List<Chapter> run(EntityManager manager,
 							EntityTransaction transaction) {

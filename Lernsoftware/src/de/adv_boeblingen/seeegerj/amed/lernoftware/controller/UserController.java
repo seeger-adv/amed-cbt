@@ -5,7 +5,7 @@ import java.util.Date;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 
-import de.adv_boeblingen.seeegerj.amed.lernoftware.controller.DatabaseController.TransactionRunnable;
+import de.adv_boeblingen.seeegerj.amed.lernoftware.controller.DatabaseController.DatabaseRunnable;
 import de.adv_boeblingen.seeegerj.amed.lernoftware.model.Session;
 import de.adv_boeblingen.seeegerj.amed.lernoftware.model.User;
 import de.adv_boeblingen.seeegerj.amed.lernoftware.util.CryptUtil;
@@ -30,18 +30,9 @@ public class UserController {
 			Session session = new Session();
 			session.setUser(foundUser);
 
-			DatabaseController.runTransaction(new TransactionRunnable<Void>() {
-				@Override
-				public Void run(EntityManager manager,
-						EntityTransaction transaction) {
-					long date = new Date().getTime();
-					foundUser.setLastLogin(date);
-					manager.persist(foundUser);
-					return null;
-				}
-			});
 
 			return session;
+			writeLoginTime(foundUser);
 		} else {
 			System.out.println(Messages.LOGIN_FAILED);
 		}
@@ -49,15 +40,26 @@ public class UserController {
 		return null;
 	}
 
+	private static void writeLoginTime(final User foundUser) {
+		final long now = new Date().getTime();
+
+		DatabaseController.runTransaction(new DatabaseRunnable<Void>() {
+			@Override
+			public Void run(EntityManager manager, EntityTransaction transaction) {
+				foundUser.setLastLogin(now);
+				manager.merge(foundUser);
+				return null;
+			}
+		});
+	}
+
 	private static User findUser(final String username) {
-		return DatabaseController
-				.runTransaction(new TransactionRunnable<User>() {
-					@Override
-					public User run(EntityManager manager,
-							EntityTransaction transaction) {
-						return manager.find(User.class, username);
-					}
-				});
+		return DatabaseController.runQuery(new DatabaseRunnable<User>() {
+			@Override
+			public User run(EntityManager manager, EntityTransaction transaction) {
+				return manager.find(User.class, username);
+			}
+		});
 	}
 
 	/**
@@ -69,14 +71,15 @@ public class UserController {
 
 	public static final Session register(final String username,
 			final String password) {
-		DatabaseController.runTransaction(new TransactionRunnable<Void>() {
+		final long now = new Date().getTime();
+		DatabaseController.runTransaction(new DatabaseRunnable<Void>() {
 			@Override
 			public Void run(EntityManager manager, EntityTransaction transaction) {
 				User user = new User();
 				String hash = CryptUtil.toSHA1(password);
 				user.setUsername(username);
-				long date = new Date().getTime();
-				user.setCreated(date);
+				user.setCreated(now);
+				user.setLastLogin(0);
 				user.setPassword(hash);
 				manager.persist(user);
 				return null;

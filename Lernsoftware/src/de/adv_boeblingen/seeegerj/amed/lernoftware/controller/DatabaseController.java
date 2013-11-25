@@ -15,7 +15,7 @@ public class DatabaseController {
 				.createEntityManagerFactory(Configuration.DATABASE_CONFIG);
 	}
 
-	public static <T> T runTransaction(TransactionRunnable<T> runnable) {
+	public static <T> T runTransaction(DatabaseRunnable<T> runnable) {
 		EntityManager manager = factory.createEntityManager();
 		EntityTransaction transaction = manager.getTransaction();
 		transaction.begin();
@@ -27,7 +27,17 @@ public class DatabaseController {
 		}
 	}
 
-	public static interface TransactionRunnable<T> {
+	public static <T> T runQuery(DatabaseRunnable<T> runnable) {
+		EntityManager manager = factory.createEntityManager();
+		EntityTransaction transaction = null;
+		try {
+			return runnable.run(manager, transaction);
+		} finally {
+			manager.close();
+		}
+	}
+
+	public static interface DatabaseRunnable<T> {
 		public T run(EntityManager manager, EntityTransaction transaction);
 	}
 }
