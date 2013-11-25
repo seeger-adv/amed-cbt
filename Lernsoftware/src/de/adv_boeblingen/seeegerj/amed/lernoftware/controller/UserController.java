@@ -27,12 +27,8 @@ public class UserController {
 
 		String passwordHash = CryptUtil.toSHA1(password);
 		if (foundUser.getPassword().equals(passwordHash)) {
-			Session session = new Session();
-			session.setUser(foundUser);
-
-
-			return session;
 			writeLoginTime(foundUser);
+			return new Session(foundUser);
 		} else {
 			System.out.println(Messages.LOGIN_FAILED);
 		}
@@ -72,11 +68,12 @@ public class UserController {
 	public static final Session register(final String username,
 			final String password) {
 		final long now = new Date().getTime();
+		final String hash = CryptUtil.toSHA1(password);
+
 		DatabaseController.runTransaction(new DatabaseRunnable<Void>() {
 			@Override
 			public Void run(EntityManager manager, EntityTransaction transaction) {
 				User user = new User();
-				String hash = CryptUtil.toSHA1(password);
 				user.setUsername(username);
 				user.setCreated(now);
 				user.setLastLogin(0);

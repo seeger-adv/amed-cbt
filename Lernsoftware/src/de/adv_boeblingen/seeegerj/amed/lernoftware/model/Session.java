@@ -5,6 +5,11 @@ public class Session {
 	private boolean isValid;
 	private final State mState;
 
+	public Session(User user) {
+		this();
+		setUser(user);
+	}
+
 	public Session() {
 		this.isValid = true;
 		this.mState = new State();
