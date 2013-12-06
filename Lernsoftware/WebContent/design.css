@@ -1,7 +1,7 @@
 @import url(http://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Basic,Open+Sans:600);
 
 html {
-    height: 96%;
+    height: 100%;
 }
 
 body {
@@ -16,8 +16,7 @@ body {
 body {
 	background: rgb(43,43,43);
     background:url(wallpaper324845.jpg); /* http://imageshack.us/photo/my-images/829/wallpaper324845.jpg/ */
-    background-size: 100% auto;
-    background-attachment: fixed fixed;
+    background-size: cover;
 }
 
 a, a:hover, a:active {
