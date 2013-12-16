@@ -1,11 +1,27 @@
 package de.adv_boeblingen.seeegerj.amed.lernoftware.model;
 
+import java.io.Serializable;
+
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.OneToOne;
 
-@Entity
-public class Response {
-	private User mUser;
-	private Question mQuestion;
-	private Answer mGivenAnswer;
+@SuppressWarnings("serial")
+@Entity(name = "t_response")
+public class Response implements Serializable {
+	@Id
+	private int bla;
 
+	@OneToOne
+	protected User mUser;
+
+	@OneToOne
+	protected Question mQuestion;
+
+	@OneToOne
+	protected Answer mGivenAnswer;
+
+	@Column(name = "timestamp")
+	private long mTimestamp;
 }
