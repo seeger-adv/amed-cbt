@@ -8,5 +8,6 @@ public class Constants {
 	public static final String USERNAME_PARAM = "username";
 	public static final String NAVIGATION_PARAM = "navigation";
 	public static final String STATUS_PARAM = "status";
+	public static final String CONTENT_PARAM = "content";
 
 }
