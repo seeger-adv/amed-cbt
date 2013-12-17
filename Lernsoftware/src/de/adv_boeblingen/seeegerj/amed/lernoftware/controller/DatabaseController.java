@@ -15,12 +15,12 @@ public class DatabaseController {
 				.createEntityManagerFactory(Configuration.DATABASE_CONFIG);
 	}
 
-	public static <T> T runTransaction(DatabaseRunnable<T> runnable) {
+	public static <T> void runTransaction(DatabaseRunnable<T> runnable) {
 		EntityManager manager = factory.createEntityManager();
 		EntityTransaction transaction = manager.getTransaction();
 		transaction.begin();
 		try {
-			return runnable.run(manager, transaction);
+			runnable.run(manager, transaction);
 		} finally {
 			transaction.commit();
 			manager.close();
