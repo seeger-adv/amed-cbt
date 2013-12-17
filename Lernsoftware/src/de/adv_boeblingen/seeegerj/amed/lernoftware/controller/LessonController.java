@@ -24,4 +24,8 @@ public class LessonController {
 		return DatabaseController.runQuery(new GetAllQuery<>(Lesson.class));
 	}
 
+	public static boolean isComplete(Lesson lesson) {
+		// TODO Auto-generated method stub
+		return false;
+	}
 }

@@ -27,11 +27,13 @@ public class NavigationController {
 	}
 
 	public static Lesson getCurrentLesson(ServletRequest req) {
-		String id = (String) req.getAttribute(Constants.LESSON_PARAM);
+		String idParam = (String) req.getAttribute(Constants.LESSON_PARAM);
 
-		if (id == null) {
+		if (idParam == null) {
 			return null;
 		}
+
+		int id = Integer.parseInt(idParam);
 
 		return LessonController.getLesson(id);
 	}
