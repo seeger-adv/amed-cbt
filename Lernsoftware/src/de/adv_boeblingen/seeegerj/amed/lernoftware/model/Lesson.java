@@ -26,6 +26,9 @@ public class Lesson {
 	@Column(name = "title")
 	private String mTitle;
 
+	@Column(name = "content")
+	private String mContent;
+
 	@ManyToOne
 	@JoinColumn(name = "chapter", insertable = false, updatable = false, nullable = false)
 	private Chapter mChapter;
@@ -51,15 +54,23 @@ public class Lesson {
 		return this.mId;
 	}
 
-	public boolean add(Question question) {
+	public boolean addQuestion(Question question) {
 		return this.mQuestions.add(question);
 	}
 
-	public boolean remove(Object question) {
+	public boolean removeQuestion(Question question) {
 		return this.mQuestions.remove(question);
 	}
 
 	public Chapter getChapter() {
 		return this.mChapter;
+	}
+
+	public String getContent() {
+		return this.mContent;
+	}
+
+	public void setContent(String content) {
+		this.mContent = content;
 	}
 }
