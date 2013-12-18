@@ -1,7 +1,7 @@
 package de.adv_boeblingen.seeegerj.amed.lernoftware.model;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -34,7 +34,7 @@ public class Question {
 	@OneToMany(cascade = { CascadeType.ALL }, fetch = FetchType.EAGER)
 	@JoinColumn(name = "answer")
 	@IndexColumn(name = "answerid")
-	List<Question> mPossibleAnswers = new ArrayList<>();
+	private final Set<Answer> mPossibleAnswers = new HashSet<>();
 
 	@Column(name = "question")
 	private String mQuestion;

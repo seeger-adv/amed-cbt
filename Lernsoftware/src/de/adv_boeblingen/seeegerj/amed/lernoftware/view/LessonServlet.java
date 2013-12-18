@@ -61,7 +61,7 @@ public class LessonServlet extends HttpServlet {
 
 	private String renderDefaultLesson() {
 		Chapter firstChapter = ChapterController.getChapters().get(0);
-		Lesson firstLesson = firstChapter.getLessons().get(0);
+		Lesson firstLesson = firstChapter.getLessons().iterator().next();
 		return renderLesson(firstLesson);
 	}
 }

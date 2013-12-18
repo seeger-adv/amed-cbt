@@ -1,7 +1,7 @@
 package de.adv_boeblingen.seeegerj.amed.lernoftware.model;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -36,7 +36,7 @@ public class Lesson {
 	@OneToMany(cascade = { CascadeType.ALL }, fetch = FetchType.EAGER)
 	@JoinColumn(name = "lesson")
 	@IndexColumn(name = "questionid")
-	List<Question> mQuestions = new ArrayList<>();
+	Set<Question> mQuestions = new HashSet<>();
 
 	public String getTitle() {
 		return this.mTitle;
@@ -46,7 +46,7 @@ public class Lesson {
 		this.mTitle = title;
 	}
 
-	public List<Question> getQuestions() {
+	public Set<Question> getQuestions() {
 		return this.mQuestions;
 	}
 
@@ -54,12 +54,12 @@ public class Lesson {
 		return this.mId;
 	}
 
-	public boolean addQuestion(Question question) {
-		return this.mQuestions.add(question);
+	public void addQuestion(Question question) {
+		this.mQuestions.add(question);
 	}
 
-	public boolean removeQuestion(Question question) {
-		return this.mQuestions.remove(question);
+	public void removeQuestion(Question question) {
+		this.mQuestions.remove(question);
 	}
 
 	public Chapter getChapter() {

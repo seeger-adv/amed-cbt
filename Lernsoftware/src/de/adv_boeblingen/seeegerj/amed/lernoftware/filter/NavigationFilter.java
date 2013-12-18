@@ -46,10 +46,6 @@ public class NavigationFilter implements Filter {
 				String.format("<li>%s</li>", chapter.getTitle()));
 
 		for (Lesson lesson : chapter.getLessons()) {
-			if (lesson == null) {
-				continue;
-			}
-
 			boolean isCurrent = NavigationController.isCurrent(lesson,
 					currentLesson);
 			renderLesson(lesson, isCurrent);
