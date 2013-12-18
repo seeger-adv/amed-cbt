@@ -56,6 +56,17 @@ nav > ul > ul > li {
 	list-style: disc;
 }
 
+nav > ul > ul > li.done {
+	background-image: url(tick.png); /* http://www.raymarine.de/uploadedImages/Products/Engine_Interfacing/ECI-100/tick.png */
+	background-repeat: no-repeat;
+	background-position-y: 2px;
+	position: relative;
+	left: -24px;
+	padding-left: 24px;
+	list-style: none; 
+	
+}
+
 #main {
 	position: fixed;
 	top: 35px;
