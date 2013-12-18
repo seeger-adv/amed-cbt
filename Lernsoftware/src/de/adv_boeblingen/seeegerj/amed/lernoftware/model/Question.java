@@ -14,6 +14,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.OrderBy;
 
 import org.hibernate.annotations.IndexColumn;
 
@@ -34,6 +35,7 @@ public class Question {
 	@OneToMany(cascade = { CascadeType.ALL }, fetch = FetchType.EAGER)
 	@JoinColumn(name = "answer")
 	@IndexColumn(name = "answerid")
+	@OrderBy(value = "answerid")
 	private final Set<Answer> mPossibleAnswers = new HashSet<>();
 
 	@Column(name = "question")

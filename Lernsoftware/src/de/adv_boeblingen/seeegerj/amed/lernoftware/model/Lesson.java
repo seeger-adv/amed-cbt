@@ -13,6 +13,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OrderBy;
 
 import org.hibernate.annotations.IndexColumn;
 
@@ -36,6 +37,7 @@ public class Lesson {
 	@OneToMany(cascade = { CascadeType.ALL }, fetch = FetchType.EAGER)
 	@JoinColumn(name = "lesson")
 	@IndexColumn(name = "questionid")
+	@OrderBy(value = "questionid")
 	Set<Question> mQuestions = new HashSet<>();
 
 	public String getTitle() {
