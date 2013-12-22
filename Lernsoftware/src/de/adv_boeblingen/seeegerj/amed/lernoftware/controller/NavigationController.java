@@ -3,9 +3,11 @@ package de.adv_boeblingen.seeegerj.amed.lernoftware.controller;
 import java.util.List;
 
 import javax.servlet.ServletRequest;
+import javax.servlet.http.HttpServletRequest;
 
 import de.adv_boeblingen.seeegerj.amed.lernoftware.model.Chapter;
 import de.adv_boeblingen.seeegerj.amed.lernoftware.model.Lesson;
+import de.adv_boeblingen.seeegerj.amed.lernoftware.model.Session;
 import de.adv_boeblingen.seeegerj.amed.lernoftware.util.Constants;
 
 public class NavigationController {
@@ -44,8 +46,13 @@ public class NavigationController {
 		}
 
 		boolean equalsLesson = lesson.equals(currentLesson);
-		boolean equalsChapter = lesson.getChapter().equals(
-				currentLesson.getChapter());
+		boolean equalsChapter = lesson.getChapter().equals(currentLesson.getChapter());
 		return !equalsLesson && equalsChapter;
+	}
+
+	public static StateController retrieveFromSession(ServletRequest req) {
+		Session session = (Session) ((HttpServletRequest) req).getSession().getAttribute(Constants.SESSION_PARAM);
+		return session.getStateController();
+
 	}
 }

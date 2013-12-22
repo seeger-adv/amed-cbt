@@ -16,7 +16,7 @@ public class ChapterController {
 		boolean isComplete = false;
 
 		for (Lesson lesson : chapter.getLessons()) {
-			isComplete |= LessonController.isComplete(lesson);
+			isComplete |= LessonController.isComplete(user, lesson);
 		}
 
 		return isComplete;
