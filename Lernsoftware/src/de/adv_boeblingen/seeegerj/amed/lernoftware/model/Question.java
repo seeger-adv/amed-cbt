@@ -37,7 +37,7 @@ public class Question {
 	@JoinColumn(name = "answer")
 	@IndexColumn(name = "answerid")
 	@OrderBy(value = "answerid")
-	private final Set<Answer> mPossibleAnswers = new HashSet<>();
+	private final Set<Answer> mPossibleAnswers = new HashSet<Answer>();
 
 	@Column(name = "question")
 	private String mQuestion;

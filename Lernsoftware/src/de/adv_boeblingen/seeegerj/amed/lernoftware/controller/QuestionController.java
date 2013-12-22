@@ -7,6 +7,6 @@ import de.adv_boeblingen.seeegerj.amed.lernoftware.model.Question;
 
 public class QuestionController {
 	public static List<Question> getQuestions() {
-		return new ArrayList<>();
+		return new ArrayList<Question>();
 	}
 }

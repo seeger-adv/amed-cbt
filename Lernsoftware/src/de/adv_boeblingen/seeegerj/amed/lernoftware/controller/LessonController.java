@@ -21,7 +21,7 @@ public class LessonController {
 	}
 
 	public static List<Lesson> getLessons() {
-		return DatabaseController.runQuery(new GetAllQuery<>(Lesson.class));
+		return DatabaseController.runQuery(new GetAllQuery<Lesson>(Lesson.class));
 	}
 
 	public static boolean isComplete(Lesson lesson) {

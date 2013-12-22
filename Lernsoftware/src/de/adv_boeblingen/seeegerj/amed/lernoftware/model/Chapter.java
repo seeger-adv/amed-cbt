@@ -30,7 +30,7 @@ public class Chapter {
 	@JoinColumn(name = "chapter")
 	@IndexColumn(name = "lessonid")
 	@OrderBy(value = "lessonid")
-	private final Set<Lesson> mLessons = new HashSet<>();
+	private final Set<Lesson> mLessons = new HashSet<Lesson>();
 
 	public String getTitle() {
 		return this.mTitle;

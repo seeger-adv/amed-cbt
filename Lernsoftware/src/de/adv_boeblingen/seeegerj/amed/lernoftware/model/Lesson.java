@@ -38,7 +38,7 @@ public class Lesson {
 	@JoinColumn(name = "lesson")
 	@IndexColumn(name = "questionid")
 	@OrderBy(value = "questionid")
-	Set<Question> mQuestions = new HashSet<>();
+	Set<Question> mQuestions = new HashSet<Question>();
 
 	public String getTitle() {
 		return this.mTitle;

@@ -9,7 +9,7 @@ import de.adv_boeblingen.seeegerj.amed.lernoftware.util.GetAllQuery;
 
 public class ChapterController {
 	public static List<Chapter> getChapters() {
-		return DatabaseController.runQuery(new GetAllQuery<>(Chapter.class));
+		return DatabaseController.runQuery(new GetAllQuery<Chapter>(Chapter.class));
 	}
 
 	public static boolean isChapterComplete(User user, Chapter chapter) {
