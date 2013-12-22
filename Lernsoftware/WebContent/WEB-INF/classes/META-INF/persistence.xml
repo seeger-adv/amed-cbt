@@ -6,11 +6,10 @@
     <persistence-unit name="lernsoftwareconfig">
         <provider>org.hibernate.ejb.HibernatePersistence</provider>
         <properties>
-            <property name="hibernate.connection.driver_class" value="oracle.jdbc.OracleDriver"/>
-            <property name="hibernate.connection.url" value="jdbc:oracle:thin:@nora:1521:oracle"/>
-            <property name="hibernate.connection.username" value="seegerj"/>
-            <property name="hibernate.connection.password" value="seegerj"/>
-            <property name="hibernate.dialect" value="org.hibernate.dialect.Oracle10gDialect"/>
+            <property name="connection.driver_class" value="org.h2.Driver"/>
+        	<property name="hibernate.connection.url" value="jdbc:h2:mem:test"/>
+        	<property name="hibernate.connection.username" value="sa"/>
+        	<property name="hibernate.dialect" value="org.hibernate.dialect.H2Dialect"/>
             <property name="hibernate.hbm2ddl.auto" value="create"/><!-- create update validate //-->
             <property name="hibernate.hbm2ddl.import_files" value="/setup.sql" />
             <property name="hibernate.show_sql" value="true"/>
