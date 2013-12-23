@@ -18,17 +18,16 @@ import de.adv_boeblingen.seeegerj.amed.lernoftware.util.Constants;
 import de.adv_boeblingen.seeegerj.amed.lernoftware.util.PathUtil;
 import de.adv_boeblingen.seeegerj.amed.lernoftware.util.VariableMap;
 
-@WebFilter(urlPatterns = "/Lesson/*")
-public class LoginFilter implements Filter {
+@WebFilter(urlPatterns = { "/Lesson/*", "/Quiz/*" })
+public class LoginFilter
+		implements Filter {
 	@Override
-	public void doFilter(ServletRequest req, ServletResponse resp,
-			FilterChain chain) throws IOException, ServletException {
+	public void doFilter(ServletRequest req, ServletResponse resp, FilterChain chain) throws IOException,
+			ServletException {
 
-		Session session = (Session) ((HttpServletRequest) req).getSession()
-				.getAttribute(Constants.SESSION_PARAM);
+		Session session = (Session) ((HttpServletRequest) req).getSession().getAttribute(Constants.SESSION_PARAM);
 		if (!UserController.isValidSession(session)) {
-			((HttpServletResponse) resp).sendRedirect(PathUtil
-					.buildQuery("login"));
+			((HttpServletResponse) resp).sendRedirect(PathUtil.buildQuery("login"));
 		} else {
 			VariableMap map = VariableMap.getMappingFromRequest(req);
 			map.put(Constants.USERNAME_PARAM, session.getUser().getUsername());
