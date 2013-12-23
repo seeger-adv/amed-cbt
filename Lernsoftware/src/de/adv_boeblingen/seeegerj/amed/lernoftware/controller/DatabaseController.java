@@ -19,10 +19,9 @@ public class DatabaseController {
 	}
 
 	public static <T> T runQuery(DatabaseRunnable<T> runnable) {
-		EntityTransaction transaction = null;
 		EntityManager manager = EMF.createEntityManager();
 		try {
-			return runnable.run(manager, transaction);
+			return runnable.run(manager, null);
 		} finally {
 			manager.close();
 		}
