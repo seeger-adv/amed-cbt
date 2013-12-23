@@ -17,7 +17,7 @@ import de.adv_boeblingen.seeegerj.amed.lernoftware.model.Lesson;
 import de.adv_boeblingen.seeegerj.amed.lernoftware.util.Constants;
 import de.adv_boeblingen.seeegerj.amed.lernoftware.util.VariableMap;
 
-@WebFilter(urlPatterns = "/Lesson/*")
+@WebFilter(urlPatterns = { "/Quiz/*", "/Lesson/*" })
 public class NavigationFilter
 		implements Filter {
 	StringBuilder renderedNavigation;
@@ -48,24 +48,32 @@ public class NavigationFilter
 		boolean isCurrent = stateController.isCurrentChapter(chapter);
 
 		for (Lesson lesson : chapter.getLessons()) {
-			renderLesson(lesson, isCurrent, stateController);
+			renderLesson(lesson, stateController, isCurrent);
 		}
+
+		createEntry("Quiz", NavigationController.getQuizLink(chapter), null);
+
 		this.renderedNavigation.append("</ul>");
 	}
 
-	private void renderLesson(Lesson lesson, boolean isCurrent, StateController stateController) {
+	private void renderLesson(Lesson lesson, StateController stateController, boolean isCurrent) {
+		String label = lesson.getTitle();
+		String link = NavigationController.getNavLink(lesson);
+		createEntry(label, link, "done");
+	}
+
+	private void createEntry(String label, String link, String htmlClass) {
 		this.renderedNavigation.append("<ul>").append("<li");
 
-		if (stateController.isLessonComplete(lesson)) {
-			this.renderedNavigation.append(" class=\"done\"");
+		if (htmlClass != null) {
+			this.renderedNavigation.append(" class=\"class\"");
 		}
 
 		this.renderedNavigation.append('>');
-		if (isCurrent) {
-			this.renderedNavigation.append(lesson.getTitle());
+		if (link == null) {
+			this.renderedNavigation.append(label);
 		} else {
-			this.renderedNavigation.append(String.format("<a href=\"%s\">%s</a>",
-					NavigationController.getNavLink(lesson), lesson.getTitle()));
+			this.renderedNavigation.append(String.format("<a href=\"%s\">%s</a>", link, label));
 		}
 
 		this.renderedNavigation.append("</li>").append("</ul>");
