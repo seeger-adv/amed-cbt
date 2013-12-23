@@ -4,7 +4,8 @@ import javax.servlet.http.HttpServletRequest;
 
 public class PathUtil {
 	public static final String buildQuery(String path) {
-		return "/Lernsoftware/login";
+		return String.format("http://%s:%s/%s/%s", Constants.SERVERNAME, Constants.PORT, Constants.DEPLOYMENT_PATH,
+				path);
 	}
 
 	public static int retrieveLessonId(HttpServletRequest req) {

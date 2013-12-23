@@ -9,6 +9,7 @@ import de.adv_boeblingen.seeegerj.amed.lernoftware.model.Chapter;
 import de.adv_boeblingen.seeegerj.amed.lernoftware.model.Lesson;
 import de.adv_boeblingen.seeegerj.amed.lernoftware.model.Session;
 import de.adv_boeblingen.seeegerj.amed.lernoftware.util.Constants;
+import de.adv_boeblingen.seeegerj.amed.lernoftware.util.PathUtil;
 
 public class NavigationController {
 	public static List<Chapter> getNavigation() {
@@ -16,7 +17,7 @@ public class NavigationController {
 	}
 
 	public static String getNavLink(Lesson lesson) {
-		return Integer.toString(lesson.getId());
+		return PathUtil.buildQuery("Lesson/" + Integer.toString(lesson.getId()));
 	}
 
 	public static boolean containsLesson(Chapter chapter, Lesson lesson) {
@@ -54,5 +55,9 @@ public class NavigationController {
 		Session session = (Session) ((HttpServletRequest) req).getSession().getAttribute(Constants.SESSION_PARAM);
 		return session.getStateController();
 
+	}
+
+	public static String getQuizLink(Chapter chapter) {
+		return PathUtil.buildQuery("Quiz/" + Integer.toString(chapter.getId()));
 	}
 }
