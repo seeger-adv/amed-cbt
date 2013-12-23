@@ -10,10 +10,13 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebFilter;
 
-import com.boxysystems.jgoogleanalytics.FocusPoint;
-import com.boxysystems.jgoogleanalytics.JGoogleAnalyticsTracker;
+import com.dmurph.tracking.AnalyticsConfigData;
+import com.dmurph.tracking.JGoogleAnalyticsTracker;
+import com.dmurph.tracking.JGoogleAnalyticsTracker.GoogleAnalyticsVersion;
 
-@WebFilter(urlPatterns = "/*")
+import de.adv_boeblingen.seeegerj.amed.lernoftware.util.Constants;
+
+@WebFilter(urlPatterns = "*")
 public class AnalyticsFilter
 		implements Filter {
 
@@ -21,12 +24,17 @@ public class AnalyticsFilter
 	public void doFilter(ServletRequest req, ServletResponse resp, FilterChain chain) throws IOException,
 			ServletException {
 
-		JGoogleAnalyticsTracker tracker = new JGoogleAnalyticsTracker("Lernsoftware", "UA-46671672-1");
-		tracker.trackAsynchronously(new FocusPoint("test"));
+		final AnalyticsConfigData analyticsConfig = new AnalyticsConfigData(Constants.ANALYTICS_KEY);
+		JGoogleAnalyticsTracker tracker = new JGoogleAnalyticsTracker(analyticsConfig, GoogleAnalyticsVersion.V_4_7_2);
+		String category = ""; // possible values: lesson, quiz
+		String action = ""; // possible values: show, finished
+		tracker.trackEvent(category, action);
+
+		chain.doFilter(req, resp);
 	}
 
 	@Override
-	public void init(FilterConfig arg0) throws ServletException {
+	public void init(FilterConfig config) throws ServletException {
 	}
 
 	@Override

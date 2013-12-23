@@ -10,4 +10,6 @@ public class Constants {
 	public static final String STATUS_PARAM = "status";
 	public static final String CONTENT_PARAM = "content";
 
+	public static final String ANALYTICS_KEY = "UA-46671672-1";
+
 }
