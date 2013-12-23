@@ -13,11 +13,12 @@ import javax.servlet.annotation.WebFilter;
 import de.adv_boeblingen.seeegerj.amed.lernoftware.util.Constants;
 import de.adv_boeblingen.seeegerj.amed.lernoftware.util.VariableMap;
 
-@WebFilter(urlPatterns = "/Lesson/*")
-public class StateFilter implements Filter {
+@WebFilter(urlPatterns = "/Quiz/*")
+public class StateFilter
+		implements Filter {
 	@Override
-	public void doFilter(ServletRequest req, ServletResponse resp,
-			FilterChain chain) throws IOException, ServletException {
+	public void doFilter(ServletRequest req, ServletResponse resp, FilterChain chain) throws IOException,
+			ServletException {
 
 		VariableMap map = VariableMap.getMappingFromRequest(req);
 		map.put(Constants.STATUS_PARAM, renderProgress(req));
