@@ -1,22 +1,13 @@
 package de.adv_boeblingen.seeegerj.amed.lernoftware.controller;
 
 import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
-import javax.persistence.Persistence;
 
-import de.adv_boeblingen.seeegerj.amed.lernoftware.util.Configuration;
+import de.adv_boeblingen.seeegerj.amed.lernoftware.util.EMF;
 
 public class DatabaseController {
-	private static final EntityManagerFactory factory;
-
-	static {
-		factory = Persistence
-				.createEntityManagerFactory(Configuration.DATABASE_CONFIG);
-	}
-
 	public static <T> void runTransaction(DatabaseRunnable<T> runnable) {
-		EntityManager manager = factory.createEntityManager();
+		EntityManager manager = EMF.createEntityManager();
 		EntityTransaction transaction = manager.getTransaction();
 		transaction.begin();
 		try {
@@ -28,8 +19,8 @@ public class DatabaseController {
 	}
 
 	public static <T> T runQuery(DatabaseRunnable<T> runnable) {
-		EntityManager manager = factory.createEntityManager();
 		EntityTransaction transaction = null;
+		EntityManager manager = EMF.createEntityManager();
 		try {
 			return runnable.run(manager, transaction);
 		} finally {
