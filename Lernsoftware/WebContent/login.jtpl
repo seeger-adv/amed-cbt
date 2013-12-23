@@ -18,7 +18,7 @@
             <input type="text" name="loginusername" placeholder="Benutzername"><br>
             <input type="password" name="loginpass" placeholder="Password"><br>
             <input type="submit" name="act" value="Login" id="login"> or
-            <input type="submit" name="act" value="Regstrieren" id="reg">
+            <input type="submit" name="act" value="Registrieren" id="reg">
         </form>
 	</section>
 	<section id="state">
