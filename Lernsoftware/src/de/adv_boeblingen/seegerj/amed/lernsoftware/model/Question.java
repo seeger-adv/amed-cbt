@@ -16,8 +16,6 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.OrderBy;
 
-import org.hibernate.annotations.IndexColumn;
-
 @Entity(name = "t_question")
 public class Question {
 	@Id
@@ -26,7 +24,7 @@ public class Question {
 	private int mId;
 
 	@ManyToOne
-	@JoinColumn(name = "lesson", insertable = false, updatable = false, nullable = false)
+	@JoinColumn(name = "lesson")
 	private Lesson mLesson;
 
 	@OneToOne
@@ -34,8 +32,7 @@ public class Question {
 	private Answer mCorrectAnswer;
 
 	@OneToMany(cascade = { CascadeType.ALL }, fetch = FetchType.EAGER)
-	@JoinColumn(name = "answer")
-	@IndexColumn(name = "answerid")
+	@JoinColumn(name = "questionid")
 	@OrderBy(value = "answerid")
 	private final Set<Answer> mPossibleAnswers = new HashSet<Answer>();
 

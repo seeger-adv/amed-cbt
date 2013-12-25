@@ -14,8 +14,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OrderBy;
 
-import org.hibernate.annotations.IndexColumn;
-
 @Entity(name = "t_chapter")
 public class Chapter {
 	@Id
@@ -28,7 +26,6 @@ public class Chapter {
 
 	@OneToMany(cascade = { CascadeType.ALL }, fetch = FetchType.EAGER)
 	@JoinColumn(name = "chapter")
-	@IndexColumn(name = "lessonid")
 	@OrderBy(value = "lessonid")
 	private final Set<Lesson> mLessons = new HashSet<Lesson>();
 

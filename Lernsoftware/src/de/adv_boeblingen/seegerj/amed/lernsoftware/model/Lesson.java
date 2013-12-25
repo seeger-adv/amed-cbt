@@ -15,8 +15,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OrderBy;
 
-import org.hibernate.annotations.IndexColumn;
-
 @Entity(name = "t_lesson")
 public class Lesson {
 	@Id
@@ -31,14 +29,13 @@ public class Lesson {
 	private String mContent;
 
 	@ManyToOne
-	@JoinColumn(name = "chapter", insertable = false, updatable = false, nullable = false)
+	@JoinColumn(name = "chapter")
 	private Chapter mChapter;
 
 	@OneToMany(cascade = { CascadeType.ALL }, fetch = FetchType.EAGER)
 	@JoinColumn(name = "lesson")
-	@IndexColumn(name = "questionid")
 	@OrderBy(value = "questionid")
-	Set<Question> mQuestions = new HashSet<Question>();
+	private final Set<Question> mQuestions = new HashSet<Question>();
 
 	public String getTitle() {
 		return this.mTitle;
