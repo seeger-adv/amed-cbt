@@ -30,6 +30,7 @@ public class Question {
 	private Lesson mLesson;
 
 	@OneToOne
+	@JoinColumn(name = "correctanswer")
 	private Answer mCorrectAnswer;
 
 	@OneToMany(cascade = { CascadeType.ALL }, fetch = FetchType.EAGER)

@@ -18,4 +18,7 @@ public class Answer {
 	@OneToOne
 	@JoinColumn(name = "questionid")
 	private Question mQuestion;
+
+	@Column(name = "answer")
+	private String mAnswer;
 }
