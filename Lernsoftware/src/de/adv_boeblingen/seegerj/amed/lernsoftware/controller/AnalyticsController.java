@@ -7,15 +7,18 @@ import com.dmurph.tracking.JGoogleAnalyticsTracker;
 import com.dmurph.tracking.JGoogleAnalyticsTracker.GoogleAnalyticsVersion;
 
 import de.adv_boeblingen.seegerj.amed.lernsoftware.util.Constants;
+import de.adv_boeblingen.seegerj.amed.lernsoftware.util.PathUtil;
 
 public class AnalyticsController {
 	public static void triggerPageView(HttpServletRequest req) {
-		// String page = PathUtil.retrieveAction(req);
-		// submitAnalytics(req, page, "view");
+		String page = PathUtil.retrieveAction(req);
+		if (page == null) {
+			page = "unknown";
+		}
+		submitAnalytics(createConfig(req), page, "view");
 	}
 
-	public static void submitAnalytics(HttpServletRequest req, String category, String action) {
-		AnalyticsConfigData config = createConfig(req);
+	public static void submitAnalytics(AnalyticsConfigData config, String category, String action) {
 		JGoogleAnalyticsTracker tracker = new JGoogleAnalyticsTracker(config, GoogleAnalyticsVersion.V_4_7_2);
 		tracker.trackEvent(category, action);
 	}

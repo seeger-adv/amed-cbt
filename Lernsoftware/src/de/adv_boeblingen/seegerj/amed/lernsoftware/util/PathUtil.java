@@ -9,8 +9,7 @@ public class PathUtil {
 	}
 
 	public static int retrieveLessonId(HttpServletRequest req) {
-		String pathInfo = req.getPathInfo();
-		String[] lessonSegment = pathInfo.split("/");
+		String[] lessonSegment = spliteRequestElements(req);
 
 		if (lessonSegment.length < 2) {
 			return -1;
@@ -22,5 +21,21 @@ public class PathUtil {
 		}
 
 		return Integer.parseInt(lesson);
+	}
+
+	private static String[] spliteRequestElements(HttpServletRequest req) {
+		String pathInfo = req.getPathInfo();
+		String[] lessonSegment = pathInfo.split("/");
+		return lessonSegment;
+	}
+
+	public static String retrieveAction(HttpServletRequest req) {
+		String[] actionSegment = spliteRequestElements(req);
+
+		if (actionSegment.length > 0) {
+			return actionSegment[0];
+		}
+
+		return null;
 	}
 }
