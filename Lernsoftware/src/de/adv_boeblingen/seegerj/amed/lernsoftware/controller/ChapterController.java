@@ -2,6 +2,10 @@ package de.adv_boeblingen.seegerj.amed.lernsoftware.controller;
 
 import java.util.List;
 
+import javax.persistence.EntityManager;
+import javax.persistence.EntityTransaction;
+
+import de.adv_boeblingen.seegerj.amed.lernsoftware.controller.DatabaseController.DatabaseRunnable;
 import de.adv_boeblingen.seegerj.amed.lernsoftware.model.Chapter;
 import de.adv_boeblingen.seegerj.amed.lernsoftware.model.Lesson;
 import de.adv_boeblingen.seegerj.amed.lernsoftware.model.User;
@@ -20,5 +24,14 @@ public class ChapterController {
 		}
 
 		return isComplete;
+	}
+
+	public static Chapter getChapter(final int id) {
+		return DatabaseController.runQuery(new DatabaseRunnable<Chapter>() {
+			@Override
+			public Chapter run(EntityManager manager, EntityTransaction transaction) {
+				return manager.find(Chapter.class, id);
+			}
+		});
 	}
 }
