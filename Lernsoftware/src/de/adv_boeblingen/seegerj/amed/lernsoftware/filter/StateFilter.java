@@ -28,12 +28,12 @@ public class StateFilter
 
 	private String renderProgress(ServletRequest req) {
 		StringBuilder sb = new StringBuilder();
-		sb.append("Frage:\n");
+		sb.append("Question:\n");
 		sb.append("<div class=\"bla\" id=\"q1\">1</div>\n");
 		sb.append("<div class=\"bla\" id=\"q2\">2</div>\n");
 		sb.append("<div class=\"bla\" id=\"q3\">3</div>\n");
 		sb.append("<div class=\"bla\" id=\"q4\">4</div>\n");
-		sb.append("<a href=\"\">&Uuml;berspringen</a>");
+		sb.append("<a href=\"\">skip</a>");
 		return sb.toString();
 	}
 
