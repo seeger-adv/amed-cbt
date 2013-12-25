@@ -16,7 +16,7 @@ insert into T_LESSON (lessonid, title, chapter, content) values (7, 'Classless A
 insert into T_LESSON (lessonid, title, chapter, content) values (8, 'Supernetting', 2, '');
 
 /* Fragen */
-insert into T_QUESTION (questionid, lesson, correctanswer, question) values (1, 2, 2, 'Test frage');
+insert into T_QUESTION (questionid, lessonid, correctanswer, question) values (1, 2, 2, 'Test frage');
 
 /* Antworten */
 insert into T_ANWSER (answerid, questionid, answer) values (1, 1, 'Antwort 1');
