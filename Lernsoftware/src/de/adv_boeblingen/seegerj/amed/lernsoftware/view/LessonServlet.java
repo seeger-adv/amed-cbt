@@ -28,7 +28,7 @@ public class LessonServlet extends HttpServlet {
 		VariableMap map = VariableMap.getMappingFromRequest(req);
 		map.put(Constants.CONTENT_PARAM, renderLesson(req));
 
-		new TemplateRenderer(req, "/_template.jtpl").PrintOutput(writer);
+		new TemplateRenderer(req, "/_template.jtpl").printOutput(writer);
 	}
 
 	private String renderLesson(HttpServletRequest req) {

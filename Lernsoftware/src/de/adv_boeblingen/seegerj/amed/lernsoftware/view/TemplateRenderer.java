@@ -36,7 +36,7 @@ public class TemplateRenderer {
 		}
 	}
 
-	public void PrintOutput(PrintWriter writer) {
+	public void printOutput(PrintWriter writer) {
 		writer.write(this.template.out());
 	}
 }
