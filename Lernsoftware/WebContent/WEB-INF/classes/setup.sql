@@ -10,8 +10,15 @@ insert into T_LESSON (lessonid, title, chapter, content) values (1, 'Introductio
 insert into T_LESSON (lessonid, title, chapter, content) values (2, 'Layer 1', 1, 'Test content');
 insert into T_LESSON (lessonid, title, chapter, content) values (3, 'Layer 2', 1, 'Test content2');
 insert into T_LESSON (lessonid, title, chapter, content) values (4, 'Layer 3', 1, 'Test content3 und so&hellip;');
+insert into T_LESSON (lessonid, title, chapter, content) values (5, 'Subnetting', 2, '');
+insert into T_LESSON (lessonid, title, chapter, content) values (6, 'Classful Addressing', 2, '');
+insert into T_LESSON (lessonid, title, chapter, content) values (7, 'Classless Addressing', 2, '');
+insert into T_LESSON (lessonid, title, chapter, content) values (8, 'Supernetting', 2, '');
 
-insert into T_LESSON (lessonid, title, chapter) values (5, 'Subnetting', 2);
-insert into T_LESSON (lessonid, title, chapter) values (6, 'Classful Addressing', 2);
-insert into T_LESSON (lessonid, title, chapter) values (7, 'Classless Addressing', 2);
-insert into T_LESSON (lessonid, title, chapter) values (8, 'Supernetting', 2);
+/* Fragen */
+insert into T_QUESTION (questionid, lesson, correctanswer, question) values (1, 2, 2, 'Test frage');
+
+/* Antworten */
+insert into T_ANWSER (answerid, questionid, answer) values (1, 1, 'Antwort 1');
+insert into T_ANWSER (answerid, questionid, answer) values (2, 1, 'Antwort 2 (r)');
+insert into T_ANWSER (answerid, questionid, answer) values (3, 1, 'Antwort 3');
