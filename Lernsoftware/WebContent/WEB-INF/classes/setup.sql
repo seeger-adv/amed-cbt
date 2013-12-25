@@ -16,9 +16,11 @@ insert into T_LESSON (lessonid, title, chapter, content) values (7, 'Classless A
 insert into T_LESSON (lessonid, title, chapter, content) values (8, 'Supernetting', 2, '');
 
 /* Fragen */
-insert into T_QUESTION (questionid, lessonid, correctanswer, question) values (1, 2, 2, 'Test frage');
+insert into T_QUESTION (questionid, lesson, question) values (1, 2, 'Test frage');
 
 /* Antworten */
-insert into T_ANWSER (answerid, questionid, answer) values (1, 1, 'Antwort 1');
-insert into T_ANWSER (answerid, questionid, answer) values (2, 1, 'Antwort 2 (r)');
-insert into T_ANWSER (answerid, questionid, answer) values (3, 1, 'Antwort 3');
+insert into T_ANSWER (answerid, questionid, answer) values (1, 1, 'Antwort 1');
+insert into T_ANSWER (answerid, questionid, answer) values (2, 1, 'Antwort 2 (r)');
+insert into T_ANSWER (answerid, questionid, answer) values (3, 1, 'Antwort 3');
+
+update T_QUESTION set correctanswer = 2 WHERE questionid = 1;

@@ -27,7 +27,7 @@ public class Question {
 	@JoinColumn(name = "lesson")
 	private Lesson mLesson;
 
-	@OneToOne
+	@OneToOne(optional = true)
 	@JoinColumn(name = "correctanswer")
 	private Answer mCorrectAnswer;
 
