@@ -5,14 +5,15 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 
-import de.adv_boeblingen.seegerj.amed.lernsoftware.controller.DatabaseController.DatabaseRunnable;
+import de.adv_boeblingen.seegerj.amed.lernsoftware.misc.GetAllQuery;
 import de.adv_boeblingen.seegerj.amed.lernsoftware.model.Lesson;
 import de.adv_boeblingen.seegerj.amed.lernsoftware.model.User;
-import de.adv_boeblingen.seegerj.amed.lernsoftware.util.GetAllQuery;
+import de.adv_boeblingen.seegerj.amed.lernsoftware.util.DatabaseUtil;
+import de.adv_boeblingen.seegerj.amed.lernsoftware.util.DatabaseUtil.DatabaseRunnable;
 
 public class LessonController {
 	public static Lesson getLesson(final Integer id) {
-		return DatabaseController.runQuery(new DatabaseRunnable<Lesson>() {
+		return DatabaseUtil.runQuery(new DatabaseRunnable<Lesson>() {
 			@Override
 			public Lesson run(EntityManager manager, EntityTransaction transaction) {
 				return manager.find(Lesson.class, id);
@@ -21,7 +22,7 @@ public class LessonController {
 	}
 
 	public static List<Lesson> getLessons() {
-		return DatabaseController.runQuery(new GetAllQuery<Lesson>(Lesson.class));
+		return DatabaseUtil.runQuery(new GetAllQuery<Lesson>(Lesson.class));
 	}
 
 	public static boolean isComplete(User user, Lesson lesson) {

@@ -1,4 +1,4 @@
-package de.adv_boeblingen.seegerj.amed.lernsoftware.util;
+package de.adv_boeblingen.seegerj.amed.lernsoftware.misc;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;

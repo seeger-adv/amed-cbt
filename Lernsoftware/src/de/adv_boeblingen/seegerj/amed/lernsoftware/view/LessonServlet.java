@@ -11,11 +11,11 @@ import javax.servlet.http.HttpServletResponse;
 
 import de.adv_boeblingen.seegerj.amed.lernsoftware.controller.ChapterController;
 import de.adv_boeblingen.seegerj.amed.lernsoftware.controller.LessonController;
+import de.adv_boeblingen.seegerj.amed.lernsoftware.misc.Constants;
+import de.adv_boeblingen.seegerj.amed.lernsoftware.misc.VariableMap;
 import de.adv_boeblingen.seegerj.amed.lernsoftware.model.Chapter;
 import de.adv_boeblingen.seegerj.amed.lernsoftware.model.Lesson;
-import de.adv_boeblingen.seegerj.amed.lernsoftware.util.Constants;
 import de.adv_boeblingen.seegerj.amed.lernsoftware.util.PathUtil;
-import de.adv_boeblingen.seegerj.amed.lernsoftware.util.VariableMap;
 
 @WebServlet("/Lesson/*")
 @SuppressWarnings("serial")

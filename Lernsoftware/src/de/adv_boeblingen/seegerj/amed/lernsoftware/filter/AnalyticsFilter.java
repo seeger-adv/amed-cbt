@@ -15,7 +15,7 @@ import com.dmurph.tracking.AnalyticsConfigData;
 import com.dmurph.tracking.JGoogleAnalyticsTracker;
 import com.dmurph.tracking.JGoogleAnalyticsTracker.GoogleAnalyticsVersion;
 
-import de.adv_boeblingen.seegerj.amed.lernsoftware.util.Constants;
+import de.adv_boeblingen.seegerj.amed.lernsoftware.misc.Constants;
 
 @WebFilter(urlPatterns = { "/Quiz/*", "/Lesson/*" })
 public class AnalyticsFilter

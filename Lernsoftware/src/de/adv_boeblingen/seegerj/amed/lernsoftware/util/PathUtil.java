@@ -2,6 +2,8 @@ package de.adv_boeblingen.seegerj.amed.lernsoftware.util;
 
 import javax.servlet.http.HttpServletRequest;
 
+import de.adv_boeblingen.seegerj.amed.lernsoftware.misc.Constants;
+
 public class PathUtil {
 	public static final String buildQuery(String path) {
 		return String.format("http://%s:%s/%s/%s", Constants.SERVERNAME, Constants.PORT, Constants.DEPLOYMENT_PATH,

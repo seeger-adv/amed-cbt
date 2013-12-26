@@ -1,4 +1,4 @@
-package de.adv_boeblingen.seegerj.amed.lernsoftware.util;
+package de.adv_boeblingen.seegerj.amed.lernsoftware.misc;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -7,7 +7,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Query;
 
-import de.adv_boeblingen.seegerj.amed.lernsoftware.controller.DatabaseController.DatabaseRunnable;
+import de.adv_boeblingen.seegerj.amed.lernsoftware.util.DatabaseUtil.DatabaseRunnable;
 
 public class GetAllQuery<T> implements DatabaseRunnable<List<T>> {
 	Class<T> clazz;

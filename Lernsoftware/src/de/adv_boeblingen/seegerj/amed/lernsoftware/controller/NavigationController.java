@@ -5,10 +5,10 @@ import java.util.List;
 import javax.servlet.ServletRequest;
 import javax.servlet.http.HttpServletRequest;
 
+import de.adv_boeblingen.seegerj.amed.lernsoftware.misc.Constants;
 import de.adv_boeblingen.seegerj.amed.lernsoftware.model.Chapter;
 import de.adv_boeblingen.seegerj.amed.lernsoftware.model.Lesson;
 import de.adv_boeblingen.seegerj.amed.lernsoftware.model.Session;
-import de.adv_boeblingen.seegerj.amed.lernsoftware.util.Constants;
 import de.adv_boeblingen.seegerj.amed.lernsoftware.util.PathUtil;
 
 public class NavigationController {

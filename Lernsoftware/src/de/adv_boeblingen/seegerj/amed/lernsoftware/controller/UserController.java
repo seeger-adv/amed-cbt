@@ -5,11 +5,12 @@ import java.util.Date;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 
-import de.adv_boeblingen.seegerj.amed.lernsoftware.controller.DatabaseController.DatabaseRunnable;
+import de.adv_boeblingen.seegerj.amed.lernsoftware.misc.Messages;
 import de.adv_boeblingen.seegerj.amed.lernsoftware.model.Session;
 import de.adv_boeblingen.seegerj.amed.lernsoftware.model.User;
 import de.adv_boeblingen.seegerj.amed.lernsoftware.util.CryptUtil;
-import de.adv_boeblingen.seegerj.amed.lernsoftware.util.Messages;
+import de.adv_boeblingen.seegerj.amed.lernsoftware.util.DatabaseUtil;
+import de.adv_boeblingen.seegerj.amed.lernsoftware.util.DatabaseUtil.DatabaseRunnable;
 
 public class UserController {
 	/**
@@ -39,7 +40,7 @@ public class UserController {
 	private static void writeLoginTime(final User foundUser) {
 		final long now = new Date().getTime();
 
-		DatabaseController.runTransaction(new DatabaseRunnable<Void>() {
+		DatabaseUtil.runTransaction(new DatabaseRunnable<Void>() {
 			@Override
 			public Void run(EntityManager manager, EntityTransaction transaction) {
 				foundUser.setLastLogin(now);
@@ -50,7 +51,7 @@ public class UserController {
 	}
 
 	private static User findUser(final String username) {
-		return DatabaseController.runQuery(new DatabaseRunnable<User>() {
+		return DatabaseUtil.runQuery(new DatabaseRunnable<User>() {
 			@Override
 			public User run(EntityManager manager, EntityTransaction transaction) {
 				return manager.find(User.class, username);
@@ -69,7 +70,7 @@ public class UserController {
 		final long now = new Date().getTime();
 		final String hash = CryptUtil.toSHA1(password);
 
-		DatabaseController.runTransaction(new DatabaseRunnable<Void>() {
+		DatabaseUtil.runTransaction(new DatabaseRunnable<Void>() {
 			@Override
 			public Void run(EntityManager manager, EntityTransaction transaction) {
 				User user = new User();

@@ -12,10 +12,10 @@ import javax.servlet.annotation.WebFilter;
 
 import de.adv_boeblingen.seegerj.amed.lernsoftware.controller.NavigationController;
 import de.adv_boeblingen.seegerj.amed.lernsoftware.controller.StateController;
+import de.adv_boeblingen.seegerj.amed.lernsoftware.misc.Constants;
+import de.adv_boeblingen.seegerj.amed.lernsoftware.misc.VariableMap;
 import de.adv_boeblingen.seegerj.amed.lernsoftware.model.Chapter;
 import de.adv_boeblingen.seegerj.amed.lernsoftware.model.Lesson;
-import de.adv_boeblingen.seegerj.amed.lernsoftware.util.Constants;
-import de.adv_boeblingen.seegerj.amed.lernsoftware.util.VariableMap;
 
 @WebFilter(urlPatterns = { "/Quiz/*", "/Lesson/*" })
 public class NavigationFilter

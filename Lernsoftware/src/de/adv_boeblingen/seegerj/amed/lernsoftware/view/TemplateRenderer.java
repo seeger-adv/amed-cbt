@@ -9,7 +9,7 @@ import javax.servlet.ServletContext;
 import javax.servlet.ServletRequest;
 
 import net.sf.jtpl.Template;
-import de.adv_boeblingen.seegerj.amed.lernsoftware.util.VariableMap;
+import de.adv_boeblingen.seegerj.amed.lernsoftware.misc.VariableMap;
 
 public class TemplateRenderer {
 	private Template template;

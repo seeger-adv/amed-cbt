@@ -1,11 +1,11 @@
-package de.adv_boeblingen.seegerj.amed.lernsoftware.controller;
+package de.adv_boeblingen.seegerj.amed.lernsoftware.util;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 
-import de.adv_boeblingen.seegerj.amed.lernsoftware.util.EMF;
+import de.adv_boeblingen.seegerj.amed.lernsoftware.misc.EMF;
 
-public class DatabaseController {
+public class DatabaseUtil {
 	public static <T> void runTransaction(DatabaseRunnable<T> runnable) {
 		EntityManager manager = EMF.createEntityManager();
 		EntityTransaction transaction = manager.getTransaction();

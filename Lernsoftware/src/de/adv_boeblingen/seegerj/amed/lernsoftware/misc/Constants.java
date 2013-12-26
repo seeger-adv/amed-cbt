@@ -1,4 +1,4 @@
-package de.adv_boeblingen.seegerj.amed.lernsoftware.util;
+package de.adv_boeblingen.seegerj.amed.lernsoftware.misc;
 
 public class Constants {
 	public static final String BASIC_QUERY = "SELECT p FROM %s p";

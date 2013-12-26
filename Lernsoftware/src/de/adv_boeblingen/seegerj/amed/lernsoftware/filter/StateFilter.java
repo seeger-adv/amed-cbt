@@ -10,8 +10,8 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebFilter;
 
-import de.adv_boeblingen.seegerj.amed.lernsoftware.util.Constants;
-import de.adv_boeblingen.seegerj.amed.lernsoftware.util.VariableMap;
+import de.adv_boeblingen.seegerj.amed.lernsoftware.misc.Constants;
+import de.adv_boeblingen.seegerj.amed.lernsoftware.misc.VariableMap;
 
 @WebFilter(urlPatterns = "/Quiz/*")
 public class StateFilter

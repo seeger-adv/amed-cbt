@@ -3,6 +3,8 @@ package de.adv_boeblingen.seegerj.amed.lernsoftware.util;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
+import de.adv_boeblingen.seegerj.amed.lernsoftware.misc.Configuration;
+
 public class CryptUtil {
 	public static String toSHA1(String convertme) {
 		MessageDigest md = null;
