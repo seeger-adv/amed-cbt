@@ -3,11 +3,16 @@ package de.adv_boeblingen.seegerj.amed.lernsoftware.util;
 import javax.servlet.http.HttpServletRequest;
 
 import de.adv_boeblingen.seegerj.amed.lernsoftware.misc.Constants;
+import de.adv_boeblingen.seegerj.amed.lernsoftware.misc.UriBuilder;
 
 public class PathUtil {
-	public static final String buildQuery(String path) {
-		return String.format("http://%s:%s/%s/%s", Constants.SERVERNAME, Constants.PORT, Constants.DEPLOYMENT_PATH,
-				path);
+	public static final UriBuilder getBaseUriBuilder() {
+		UriBuilder builder = new UriBuilder();
+		builder.setScheme("http");
+		builder.setHost(Constants.SERVERNAME);
+		builder.setPort(Constants.PORT);
+		builder.setPath(Constants.DEPLOYMENT_PATH);
+		return builder;
 	}
 
 	public static int retrieveLessonId(HttpServletRequest req) {

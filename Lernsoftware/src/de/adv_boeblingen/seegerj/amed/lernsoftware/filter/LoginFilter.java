@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import de.adv_boeblingen.seegerj.amed.lernsoftware.controller.UserController;
 import de.adv_boeblingen.seegerj.amed.lernsoftware.misc.Constants;
+import de.adv_boeblingen.seegerj.amed.lernsoftware.misc.UriBuilder;
 import de.adv_boeblingen.seegerj.amed.lernsoftware.misc.VariableMap;
 import de.adv_boeblingen.seegerj.amed.lernsoftware.model.Session;
 import de.adv_boeblingen.seegerj.amed.lernsoftware.util.PathUtil;
@@ -27,7 +28,10 @@ public class LoginFilter
 
 		Session session = (Session) ((HttpServletRequest) req).getSession().getAttribute(Constants.SESSION_PARAM);
 		if (!UserController.isValidSession(session)) {
-			((HttpServletResponse) resp).sendRedirect(PathUtil.buildQuery("login"));
+			UriBuilder uriBuilder = PathUtil.getBaseUriBuilder();
+			uriBuilder.appendPathElement("login");
+			HttpServletResponse responseCast = (HttpServletResponse) resp;
+			responseCast.sendRedirect(uriBuilder.toString());
 		} else {
 			VariableMap map = VariableMap.getMappingFromRequest(req);
 			map.put(Constants.USERNAME_PARAM, session.getUser().getUsername());
