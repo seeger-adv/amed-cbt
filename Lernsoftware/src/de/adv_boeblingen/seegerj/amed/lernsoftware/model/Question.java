@@ -46,4 +46,20 @@ public class Question {
 	public void setQuestion(String question) {
 		this.mQuestion = question;
 	}
+
+	public Lesson getLesson() {
+		return mLesson;
+	}
+
+	public void setLesson(Lesson lesson) {
+		this.mLesson = lesson;
+	}
+
+	public int getId() {
+		return mId;
+	}
+
+	public void setId(int id) {
+		this.mId = id;
+	}
 }
