@@ -66,4 +66,8 @@ public class Question {
 	public Set<Answer> getAnswers() {
 		return this.mPossibleAnswers;
 	}
+
+	public String getUniqueLabel() {
+		return String.format("%s%d", "q", mId);
+	}
 }

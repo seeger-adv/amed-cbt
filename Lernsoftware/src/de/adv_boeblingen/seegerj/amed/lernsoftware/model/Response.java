@@ -25,4 +25,36 @@ public class Response {
 
 	@Column(name = "timestamp")
 	private long mTimestamp;
+
+	public User getUser() {
+		return mUser;
+	}
+
+	public void setUser(User mUser) {
+		this.mUser = mUser;
+	}
+
+	public Question getQuestion() {
+		return mQuestion;
+	}
+
+	public void setQuestion(Question mQuestion) {
+		this.mQuestion = mQuestion;
+	}
+
+	public Answer getGivenAnswer() {
+		return mGivenAnswer;
+	}
+
+	public void setGivenAnswer(Answer mGivenAnswer) {
+		this.mGivenAnswer = mGivenAnswer;
+	}
+
+	public long getTimestamp() {
+		return mTimestamp;
+	}
+
+	public void setTimestamp(long mTimestamp) {
+		this.mTimestamp = mTimestamp;
+	}
 }

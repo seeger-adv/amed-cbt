@@ -25,4 +25,16 @@ public class Answer {
 	public String getAnswer() {
 		return mAnswer;
 	}
+
+	public int getId() {
+		return mId;
+	}
+
+	public Question getQuestion() {
+		return mQuestion;
+	}
+
+	public String getUniqueLabel() {
+		return String.format("%s%s%d", mQuestion.getUniqueLabel(), "a", mId);
+	}
 }
