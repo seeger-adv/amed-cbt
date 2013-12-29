@@ -16,7 +16,7 @@ import de.adv_boeblingen.seegerj.amed.lernsoftware.misc.VariableMap;
 import de.adv_boeblingen.seegerj.amed.lernsoftware.util.PathUtil;
 
 @WebFilter(urlPatterns = "/*")
-public class BaseUrlFilter
+public class ApplicationFilter
 		implements Filter {
 
 	@Override
