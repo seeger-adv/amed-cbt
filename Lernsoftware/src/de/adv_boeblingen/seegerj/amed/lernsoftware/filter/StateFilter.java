@@ -24,10 +24,13 @@ import de.adv_boeblingen.seegerj.amed.lernsoftware.util.PathUtil;
 public class StateFilter
 		implements Filter {
 
+	private int count;
+
 	@Override
 	public void doFilter(ServletRequest req, ServletResponse resp, FilterChain chain) throws IOException,
 			ServletException {
 
+		count = 0;
 		VariableMap map = VariableMap.getMappingFromRequest(req);
 		map.put(Constants.STATUS_PARAM, renderProgress(req));
 
@@ -52,7 +55,7 @@ public class StateFilter
 
 	private String renderQuestion(StringBuilder sb, Question question) {
 		String htmlClass = getQuestionState(question);
-		String link = String.format("<a href=\"%s\">%s</a>", NavigationController.getQuizLink(question), count);
+		String link = String.format("<a href=\"%s\">%s</a>", NavigationController.getQuizLink(question), ++count);
 		return String.format("<div class=\"%s\" >%s</div>\n", htmlClass, link);
 	}
 
