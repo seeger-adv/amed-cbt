@@ -2,23 +2,21 @@ package de.adv_boeblingen.seegerj.amed.lernsoftware.view;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.Set;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
-import de.adv_boeblingen.seegerj.amed.lernsoftware.controller.ChapterController;
 import de.adv_boeblingen.seegerj.amed.lernsoftware.controller.QuestionController;
+import de.adv_boeblingen.seegerj.amed.lernsoftware.controller.StateController;
 import de.adv_boeblingen.seegerj.amed.lernsoftware.misc.Constants;
 import de.adv_boeblingen.seegerj.amed.lernsoftware.misc.VariableMap;
 import de.adv_boeblingen.seegerj.amed.lernsoftware.model.Answer;
-import de.adv_boeblingen.seegerj.amed.lernsoftware.model.Chapter;
 import de.adv_boeblingen.seegerj.amed.lernsoftware.model.Question;
 import de.adv_boeblingen.seegerj.amed.lernsoftware.model.Session;
-import de.adv_boeblingen.seegerj.amed.lernsoftware.model.User;
 import de.adv_boeblingen.seegerj.amed.lernsoftware.util.PathUtil;
 
 @WebServlet("/Quiz/*")
@@ -41,32 +39,41 @@ public class QuizServlet
 	}
 
 	private String renderQuiz(HttpServletRequest req) {
-		int id = PathUtil.retrieveLessonId(req);
-		Chapter chapter = ChapterController.getChapter(id);
-
 		StringBuilder sb = new StringBuilder();
+		int id = PathUtil.retrieveLessonId(req);
 		sb.append("<h1>Quiz for Chapter ").append(id).append("</h1>").append("<form action=\"\" method=\"post\">");
 
-		Session session = null;
-		User user = getUserFromSession();
-		Set<Question> unansweredQuestions = QuestionController.getUnansweredQuestions(user, chapter);
+		HttpServletRequest httpRequest = req;
+		HttpSession httpSession = httpRequest.getSession();
+		Session session = (Session) httpSession.getAttribute(Constants.SESSION_PARAM);
+		StateController state = session.getStateController();
 
-		for (Question question : unansweredQuestions) {
-			String renderedQuestion = renderQuestion(question);
-			sb.append(renderedQuestion);
-		}
+		int questionId = PathUtil.getCurrentQuestion(req);
+		Question question = QuestionController.getQuestion(questionId);
+		sb.append(renderQuestion(state, question));
 
 		sb.append("</form>");
 		return sb.toString();
 	}
 
-	private String renderQuestion(Question question) {
+	private String renderQuestion(StateController state, Question question) {
+		if (question == null) {
+			return "";
+		}
+
 		StringBuilder builder = new StringBuilder();
 		builder.append("<p>").append(question.getQuestion()).append("</p>");
 		for (Answer answer : question.getAnswers()) {
-			builder.append(answer.getAnswer());
+			renderAnswer(builder, answer);
 		}
 		return builder.toString();
+	}
+
+	private void renderAnswer(StringBuilder builder, Answer answer) {
+		String label = String.format("<label for=\"%s\">%s</label>", answer.getUniqueLabel(), answer.getAnswer());
+		String checkbox = String.format("<input type=\"radio\" name=\"%s\" value=\"%s\">", answer.getQuestion()
+				.getUniqueLabel(), answer.getUniqueLabel());
+		builder.append(checkbox).append(label).append("<br>");
 	}
 
 	@Override

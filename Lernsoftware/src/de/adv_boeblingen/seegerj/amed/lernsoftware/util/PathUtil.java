@@ -45,4 +45,19 @@ public class PathUtil {
 
 		return null;
 	}
+
+	public static int getCurrentQuestion(HttpServletRequest req) {
+		String[] lessonSegment = spliteRequestElements(req);
+
+		if (lessonSegment.length < 4) {
+			return 0;
+		}
+
+		String lesson = lessonSegment[3];
+		if (lesson == null) {
+			return 0;
+		}
+
+		return Integer.parseInt(lesson);
+	}
 }
