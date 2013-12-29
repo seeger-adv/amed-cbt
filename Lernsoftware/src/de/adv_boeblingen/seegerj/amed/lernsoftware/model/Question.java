@@ -62,4 +62,8 @@ public class Question {
 	public void setId(int id) {
 		this.mId = id;
 	}
+
+	public Set<Answer> getAnswers() {
+		return this.mPossibleAnswers;
+	}
 }

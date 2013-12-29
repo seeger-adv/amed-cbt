@@ -21,4 +21,8 @@ public class Answer {
 
 	@Column(name = "answer")
 	private String mAnswer;
+
+	public String getAnswer() {
+		return mAnswer;
+	}
 }
