@@ -6,6 +6,8 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 
+import de.adv_boeblingen.seegerj.amed.lernsoftware.model.Chapter;
+import de.adv_boeblingen.seegerj.amed.lernsoftware.model.Lesson;
 import de.adv_boeblingen.seegerj.amed.lernsoftware.model.Question;
 import de.adv_boeblingen.seegerj.amed.lernsoftware.util.DatabaseUtil;
 import de.adv_boeblingen.seegerj.amed.lernsoftware.util.DatabaseUtil.DatabaseRunnable;
@@ -22,5 +24,14 @@ public class QuestionController {
 				return manager.find(Question.class, questionId);
 			}
 		});
+	}
+
+	public static Question getFirstQuestionForChapter(Chapter chapter) {
+		for (Lesson lesson : chapter.getLessons()) {
+			for (Question question : lesson.getQuestions()) {
+				return question;
+			}
+		}
+		return null;
 	}
 }
