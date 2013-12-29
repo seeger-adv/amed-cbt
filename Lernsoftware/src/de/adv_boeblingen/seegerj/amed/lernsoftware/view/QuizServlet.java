@@ -2,6 +2,7 @@ package de.adv_boeblingen.seegerj.amed.lernsoftware.view;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -24,24 +25,19 @@ import de.adv_boeblingen.seegerj.amed.lernsoftware.util.PathUtil;
 public class QuizServlet
 		extends HttpServlet {
 
-	public QuizServlet() {
-		super();
-	}
-
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		PrintWriter writer = resp.getWriter();
-
 		VariableMap map = VariableMap.getMappingFromRequest(req);
 		map.put(Constants.CONTENT_PARAM, renderQuiz(req));
-
 		new TemplateRenderer(req, "/_template.jtpl").printOutput(writer);
 	}
 
 	private String renderQuiz(HttpServletRequest req) {
 		StringBuilder sb = new StringBuilder();
 		int id = PathUtil.retrieveLessonId(req);
-		sb.append("<h1>Quiz for Chapter ").append(id).append("</h1>").append("<form action=\"\" method=\"post\">");
+		sb.append(String.format(Constants.Markup.HEADLINE1, "Quiz for Chapter " + id));
+		sb.append(Constants.Markup.FORM_START);
 
 		HttpServletRequest httpRequest = req;
 		HttpSession httpSession = httpRequest.getSession();
@@ -50,19 +46,18 @@ public class QuizServlet
 
 		int questionId = PathUtil.getCurrentQuestion(req);
 		Question question = QuestionController.getQuestion(questionId);
+		if (question == null) {
+			question = QuestionController.getFirstQuestionForChapter(chapter);
+		}
 		sb.append(renderQuestion(state, question));
 
-		sb.append("</form>");
+		sb.append(Constants.Markup.FORM_END);
 		return sb.toString();
 	}
 
 	private String renderQuestion(StateController state, Question question) {
-		if (question == null) {
-			return "";
-		}
-
 		StringBuilder builder = new StringBuilder();
-		builder.append("<p>").append(question.getQuestion()).append("</p>");
+		builder.append(String.format(Constants.Markup.PAR, question.getQuestion()));
 		for (Answer answer : question.getAnswers()) {
 			renderAnswer(builder, answer);
 		}
@@ -70,10 +65,11 @@ public class QuizServlet
 	}
 
 	private void renderAnswer(StringBuilder builder, Answer answer) {
-		String label = String.format("<label for=\"%s\">%s</label>", answer.getUniqueLabel(), answer.getAnswer());
-		String checkbox = String.format("<input type=\"radio\" name=\"%s\" value=\"%s\">", answer.getQuestion()
-				.getUniqueLabel(), answer.getUniqueLabel());
-		builder.append(checkbox).append(label).append("<br>");
+		String answerLabel = answer.getUniqueLabel();
+		String questionLabel = answer.getQuestion().getUniqueLabel();
+		String label = String.format(Constants.Markup.LABEL, answerLabel, answer.getAnswer());
+		String checkbox = String.format(Constants.Markup.RADIO, questionLabel, answerLabel);
+		builder.append(checkbox).append(label).append(Constants.Markup.BREAK);
 	}
 
 	@Override

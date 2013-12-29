@@ -14,4 +14,14 @@ public class Constants {
 	public static final String SERVERNAME = "localhost";
 	public static final int PORT = 8080;
 	public static final String DEPLOYMENT_PATH = "Lernsoftware";
+
+	public static final class Markup {
+		public static final String FORM_START = "<form action=\"\" method=\"post\">";
+		public static final String FORM_END = "</form>";
+		public static final String LABEL = "<label for=\"%s\">%s</label>";
+		public static final String RADIO = "<input type=\"radio\" name=\"%s\" value=\"%s\">";
+		public static final String HEADLINE1 = "<h1>%s</h1>";
+		public static final String BREAK = "<br>";
+		public static final String PAR = "<p>%s</p>";
+	}
 }
