@@ -11,6 +11,7 @@ import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import de.adv_boeblingen.seegerj.amed.lernsoftware.controller.UserController;
 import de.adv_boeblingen.seegerj.amed.lernsoftware.misc.Constants;
@@ -26,7 +27,9 @@ public class LoginFilter
 	public void doFilter(ServletRequest req, ServletResponse resp, FilterChain chain) throws IOException,
 			ServletException {
 
-		Session session = (Session) ((HttpServletRequest) req).getSession().getAttribute(Constants.SESSION_PARAM);
+		HttpServletRequest httpRequest = (HttpServletRequest) req;
+		HttpSession httpSession = httpRequest.getSession();
+		Session session = (Session) httpSession.getAttribute(Constants.SESSION_PARAM);
 		if (!UserController.isValidSession(session)) {
 			UriBuilder uriBuilder = PathUtil.getBaseUriBuilder();
 			uriBuilder.appendPathElement("login");
