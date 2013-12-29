@@ -182,7 +182,7 @@ input {
 }
 
 #state > div {
-    background: linear-gradient(to bottom, #26bf0f 0%,#299a0b 100%);
+    background: linear-gradient(to bottom, #343434 0%,#454545 100%);
     display:inline-block;
     padding: 3px;
     border-radius:2px;
@@ -191,6 +191,11 @@ input {
     box-shadow: 1px 1px 2px 0px rgba(0, 0, 0, 0.8);
 }
 
-.bla#q4 {
+
+#state > div.correct {
+	background: linear-gradient(to bottom, #26bf0f 0%,#299a0b 100%);
+}
+
+#state > div.wrong {
     background: linear-gradient(to bottom, #a90329 0%,#8f0222 44%,#6d0019 100%);
 }
