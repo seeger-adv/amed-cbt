@@ -1,8 +1,11 @@
 package de.adv_boeblingen.seegerj.amed.lernsoftware.controller;
 
+import java.util.Date;
+
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 
+import de.adv_boeblingen.seegerj.amed.lernsoftware.model.Answer;
 import de.adv_boeblingen.seegerj.amed.lernsoftware.model.Chapter;
 import de.adv_boeblingen.seegerj.amed.lernsoftware.model.Lesson;
 import de.adv_boeblingen.seegerj.amed.lernsoftware.model.Question;
@@ -39,6 +42,22 @@ public class StateControllerImpl
 				query.setUser(mUser);
 				query.setQuestion(question);
 				return manager.find(Response.class, query);
+			}
+		});
+	}
+
+	@Override
+	public void answerQuestion(final Question question, final Answer givenAnswer) {
+		DatabaseUtil.runTransaction(new DatabaseRunnable<Void>() {
+			@Override
+			public Void run(EntityManager manager, EntityTransaction transaction) {
+				Response response = new Response();
+				response.setGivenAnswer(givenAnswer);
+				response.setQuestion(question);
+				response.setUser(mUser);
+				response.setTimestamp(new Date().getTime());
+				manager.persist(response);
+				return null;
 			}
 		});
 	}
