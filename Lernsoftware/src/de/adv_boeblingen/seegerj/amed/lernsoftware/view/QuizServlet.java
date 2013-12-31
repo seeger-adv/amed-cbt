@@ -19,6 +19,7 @@ import de.adv_boeblingen.seegerj.amed.lernsoftware.model.Answer;
 import de.adv_boeblingen.seegerj.amed.lernsoftware.model.Chapter;
 import de.adv_boeblingen.seegerj.amed.lernsoftware.model.Lesson;
 import de.adv_boeblingen.seegerj.amed.lernsoftware.model.Question;
+import de.adv_boeblingen.seegerj.amed.lernsoftware.model.QuizRenderer;
 import de.adv_boeblingen.seegerj.amed.lernsoftware.model.Session;
 import de.adv_boeblingen.seegerj.amed.lernsoftware.util.PathUtil;
 
@@ -49,22 +50,15 @@ public class QuizServlet
 			question = QuestionController.getFirstQuestionForChapter(chapter);
 		}
 
+		QuizRenderer quiz = QuestionController.getQuiz(question);
 		sb.append(String.format(Constants.Markup.PAR, question.getQuestion()));
 		for (Answer answer : question.getAnswers()) {
-			renderAnswer(sb, answer);
+			quiz.renderAnswer(sb, answer);
 		}
 
 		sb.append(Constants.Markup.SUBMIT);
 		sb.append(Constants.Markup.FORM_END);
 		return sb.toString();
-	}
-
-	private void renderAnswer(StringBuilder builder, Answer answer) {
-		String answerLabel = answer.getUniqueLabel();
-		String questionLabel = answer.getQuestion().getUniqueLabel();
-		String label = String.format(Constants.Markup.LABEL, answerLabel, answer.getAnswer());
-		String checkbox = String.format(Constants.Markup.RADIO, questionLabel, answerLabel);
-		builder.append(checkbox).append(label).append(Constants.Markup.BREAK);
 	}
 
 	@Override

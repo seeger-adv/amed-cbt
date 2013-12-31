@@ -18,6 +18,8 @@ import javax.persistence.OrderBy;
 
 @Entity(name = "t_question")
 public class Question {
+	public static final String MULTIPLE_CHOICE = "multiplechoice";
+
 	@Id
 	@Column(name = "questionid")
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -38,6 +40,9 @@ public class Question {
 
 	@Column(name = "question")
 	private String mQuestion;
+
+	@Column(name = "type")
+	private String mType;
 
 	public String getQuestion() {
 		return this.mQuestion;
@@ -69,5 +74,9 @@ public class Question {
 
 	public String getUniqueLabel() {
 		return String.format("%s%d", "q", mId);
+	}
+
+	public String getType() {
+		return mType;
 	}
 }
