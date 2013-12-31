@@ -86,10 +86,7 @@ public class QuizServlet
 
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
-		HttpServletRequest httpRequest = req;
-		HttpSession httpSession = httpRequest.getSession();
-		Session session = (Session) httpSession.getAttribute(Constants.SESSION_PARAM);
-		StateController state = session.getStateController();
+		StateController state = getSessionFromRequest(req);
 
 		Answer answer = getAnswer(req);
 		if (answer != null) {
@@ -105,6 +102,13 @@ public class QuizServlet
 
 		next = res.encodeRedirectURL(next);
 		res.sendRedirect(next);
+	}
+
+	private StateController getSessionFromRequest(HttpServletRequest req) {
+		HttpSession httpSession = req.getSession();
+		Session session = (Session) httpSession.getAttribute(Constants.SESSION_PARAM);
+		StateController state = session.getStateController();
+		return state;
 	}
 
 	private Answer getAnswer(HttpServletRequest req) {

@@ -8,7 +8,7 @@ import javax.servlet.ServletContextListener;
 import javax.servlet.annotation.WebListener;
 
 @WebListener
-public class EMF
+public class EntityManagerFactoryHelper
 		implements ServletContextListener {
 
 	private static EntityManagerFactory emf;
@@ -30,5 +30,4 @@ public class EMF
 
 		return emf.createEntityManager();
 	}
-
 }

@@ -9,10 +9,10 @@ import javax.persistence.Query;
 
 import de.adv_boeblingen.seegerj.amed.lernsoftware.util.DatabaseUtil.DatabaseRunnable;
 
-public class GetAllQuery<T> implements DatabaseRunnable<List<T>> {
+public class RetrieveAllQuery<T> implements DatabaseRunnable<List<T>> {
 	Class<T> clazz;
 
-	public GetAllQuery(Class<T> clazz) {
+	public RetrieveAllQuery(Class<T> clazz) {
 		this.clazz = clazz;
 	}
 

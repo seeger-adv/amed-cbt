@@ -5,7 +5,7 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 
-import de.adv_boeblingen.seegerj.amed.lernsoftware.misc.GetAllQuery;
+import de.adv_boeblingen.seegerj.amed.lernsoftware.misc.RetrieveAllQuery;
 import de.adv_boeblingen.seegerj.amed.lernsoftware.model.Lesson;
 import de.adv_boeblingen.seegerj.amed.lernsoftware.model.User;
 import de.adv_boeblingen.seegerj.amed.lernsoftware.util.DatabaseUtil;
@@ -22,7 +22,7 @@ public class LessonController {
 	}
 
 	public static List<Lesson> getLessons() {
-		return DatabaseUtil.runQuery(new GetAllQuery<Lesson>(Lesson.class));
+		return DatabaseUtil.runQuery(new RetrieveAllQuery<Lesson>(Lesson.class));
 	}
 
 	public static boolean isComplete(User user, Lesson lesson) {

@@ -7,6 +7,7 @@ import javax.servlet.ServletRequest;
 @SuppressWarnings("serial")
 public class VariableMap
 		extends HashMap<String, String> {
+
 	public static VariableMap getMappingFromRequest(ServletRequest req) {
 		VariableMap fromRequest = (VariableMap) req.getAttribute("template_variable_mapping");
 		if (fromRequest == null) {

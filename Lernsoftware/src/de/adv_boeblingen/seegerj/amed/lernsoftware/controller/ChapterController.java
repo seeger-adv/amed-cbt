@@ -5,7 +5,7 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 
-import de.adv_boeblingen.seegerj.amed.lernsoftware.misc.GetAllQuery;
+import de.adv_boeblingen.seegerj.amed.lernsoftware.misc.RetrieveAllQuery;
 import de.adv_boeblingen.seegerj.amed.lernsoftware.model.Chapter;
 import de.adv_boeblingen.seegerj.amed.lernsoftware.model.Lesson;
 import de.adv_boeblingen.seegerj.amed.lernsoftware.model.User;
@@ -14,7 +14,7 @@ import de.adv_boeblingen.seegerj.amed.lernsoftware.util.DatabaseUtil.DatabaseRun
 
 public class ChapterController {
 	public static List<Chapter> getChapters() {
-		return DatabaseUtil.runQuery(new GetAllQuery<Chapter>(Chapter.class));
+		return DatabaseUtil.runQuery(new RetrieveAllQuery<Chapter>(Chapter.class));
 	}
 
 	public static boolean isChapterComplete(User user, Chapter chapter) {
