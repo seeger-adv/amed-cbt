@@ -13,5 +13,5 @@ public interface StateController {
 
 	Response getResponse(Question question);
 
-	void answerQuestion(Question question, Answer givenAnswer);
+	void answerQuestion(Answer givenAnswer);
 }
