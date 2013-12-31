@@ -2,6 +2,8 @@ package de.adv_boeblingen.seegerj.amed.lernsoftware.view;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.Collections;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -60,7 +62,14 @@ public class QuizServlet
 		Question question = QuestionController.getQuestion(questionId);
 		QuizRenderer quiz = QuestionController.getQuiz(question);
 		sb.append(String.format(Constants.Markup.PAR, question.getQuestion()));
-		for (Answer answer : question.getAnswers()) {
+
+		ArrayList<Answer> answers = new ArrayList<Answer>(question.getAnswers());
+
+		if (quiz.supportsShuffledAnswers()) {
+			Collections.shuffle(answers);
+		}
+
+		for (Answer answer : answers) {
 			quiz.renderAnswer(sb, answer);
 		}
 

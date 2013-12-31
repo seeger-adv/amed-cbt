@@ -19,4 +19,9 @@ public class MultipleChoiceQuiz
 		String checkbox = String.format(Constants.Markup.RADIO, questionLabel, answerLabel);
 		builder.append(checkbox).append(label).append(Constants.Markup.BREAK);
 	}
+
+	@Override
+	public boolean supportsShuffledAnswers() {
+		return true;
+	}
 }
