@@ -18,6 +18,7 @@ import de.adv_boeblingen.seegerj.amed.lernsoftware.controller.QuestionController
 import de.adv_boeblingen.seegerj.amed.lernsoftware.controller.StateController;
 import de.adv_boeblingen.seegerj.amed.lernsoftware.misc.Constants;
 import de.adv_boeblingen.seegerj.amed.lernsoftware.misc.NavigationHelper;
+import de.adv_boeblingen.seegerj.amed.lernsoftware.misc.TemplateRenderer;
 import de.adv_boeblingen.seegerj.amed.lernsoftware.misc.VariableMap;
 import de.adv_boeblingen.seegerj.amed.lernsoftware.model.Answer;
 import de.adv_boeblingen.seegerj.amed.lernsoftware.model.Chapter;

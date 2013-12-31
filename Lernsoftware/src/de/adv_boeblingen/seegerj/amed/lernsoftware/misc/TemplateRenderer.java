@@ -1,4 +1,4 @@
-package de.adv_boeblingen.seegerj.amed.lernsoftware.view;
+package de.adv_boeblingen.seegerj.amed.lernsoftware.misc;
 
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -9,7 +9,6 @@ import javax.servlet.ServletContext;
 import javax.servlet.ServletRequest;
 
 import net.sf.jtpl.Template;
-import de.adv_boeblingen.seegerj.amed.lernsoftware.misc.VariableMap;
 
 public class TemplateRenderer {
 	private Template template;

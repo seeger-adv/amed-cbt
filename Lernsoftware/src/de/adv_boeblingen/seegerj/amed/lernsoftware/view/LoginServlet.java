@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import de.adv_boeblingen.seegerj.amed.lernsoftware.controller.UserController;
+import de.adv_boeblingen.seegerj.amed.lernsoftware.misc.TemplateRenderer;
 import de.adv_boeblingen.seegerj.amed.lernsoftware.model.Session;
 
 @WebServlet("/login")
