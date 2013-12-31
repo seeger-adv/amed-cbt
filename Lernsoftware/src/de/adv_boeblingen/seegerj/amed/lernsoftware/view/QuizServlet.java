@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import de.adv_boeblingen.seegerj.amed.lernsoftware.controller.ChapterController;
+import de.adv_boeblingen.seegerj.amed.lernsoftware.controller.LessonController;
 import de.adv_boeblingen.seegerj.amed.lernsoftware.controller.NavigationController;
 import de.adv_boeblingen.seegerj.amed.lernsoftware.controller.QuestionController;
 import de.adv_boeblingen.seegerj.amed.lernsoftware.controller.StateController;
@@ -97,10 +98,16 @@ public class QuizServlet
 			state.answerQuestion(answer);
 		}
 
-		String next = NavigationController.getNextQuestion(question);
-		if (next == null) {
+		Question nextQuestion = NavigationController.getNextQuestion(question);
+		String next = null;
+		if (nextQuestion == null) {
+			next = NavigationHelper.getQuizLink(nextQuestion);
+		} else {
 			Lesson lesson = question.getLesson();
-			next = NavigationController.getNextLesson(lesson);
+			Chapter chapter = lesson.getChapter();
+			Chapter nextChapter = NavigationController.getNextChapter(chapter);
+			Lesson firstLesson = LessonController.getFirstLesson(nextChapter);
+			next = NavigationHelper.getNavLink(firstLesson);
 		}
 
 		next = res.encodeRedirectURL(next);

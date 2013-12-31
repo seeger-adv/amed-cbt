@@ -6,6 +6,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 
 import de.adv_boeblingen.seegerj.amed.lernsoftware.misc.RetrieveAllQuery;
+import de.adv_boeblingen.seegerj.amed.lernsoftware.model.Chapter;
 import de.adv_boeblingen.seegerj.amed.lernsoftware.model.Lesson;
 import de.adv_boeblingen.seegerj.amed.lernsoftware.model.User;
 import de.adv_boeblingen.seegerj.amed.lernsoftware.util.DatabaseUtil;
@@ -27,5 +28,12 @@ public class LessonController {
 
 	public static boolean isComplete(User user, Lesson lesson) {
 		return false;
+	}
+
+	public static Lesson getFirstLesson(Chapter chapter) {
+		for (Lesson lesson : chapter.getLessons()) {
+			return lesson;
+		}
+		return null;
 	}
 }
