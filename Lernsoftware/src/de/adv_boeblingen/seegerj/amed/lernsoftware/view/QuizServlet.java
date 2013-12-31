@@ -2,7 +2,6 @@ package de.adv_boeblingen.seegerj.amed.lernsoftware.view;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -18,6 +17,7 @@ import de.adv_boeblingen.seegerj.amed.lernsoftware.misc.Constants;
 import de.adv_boeblingen.seegerj.amed.lernsoftware.misc.VariableMap;
 import de.adv_boeblingen.seegerj.amed.lernsoftware.model.Answer;
 import de.adv_boeblingen.seegerj.amed.lernsoftware.model.Chapter;
+import de.adv_boeblingen.seegerj.amed.lernsoftware.model.Lesson;
 import de.adv_boeblingen.seegerj.amed.lernsoftware.model.Question;
 import de.adv_boeblingen.seegerj.amed.lernsoftware.model.Session;
 import de.adv_boeblingen.seegerj.amed.lernsoftware.util.PathUtil;
@@ -43,29 +43,20 @@ public class QuizServlet
 		sb.append(String.format(Constants.Markup.HEADLINE1, "Quiz for Chapter " + id));
 		sb.append(Constants.Markup.FORM_START);
 
-		HttpServletRequest httpRequest = req;
-		HttpSession httpSession = httpRequest.getSession();
-		Session session = (Session) httpSession.getAttribute(Constants.SESSION_PARAM);
-		StateController state = session.getStateController();
-
 		int questionId = PathUtil.getCurrentQuestion(req);
 		Question question = QuestionController.getQuestion(questionId);
 		if (question == null) {
 			question = QuestionController.getFirstQuestionForChapter(chapter);
 		}
-		sb.append(renderQuestion(state, question));
 
+		sb.append(String.format(Constants.Markup.PAR, question.getQuestion()));
+		for (Answer answer : question.getAnswers()) {
+			renderAnswer(sb, answer);
+		}
+
+		sb.append(Constants.Markup.SUBMIT);
 		sb.append(Constants.Markup.FORM_END);
 		return sb.toString();
-	}
-
-	private String renderQuestion(StateController state, Question question) {
-		StringBuilder builder = new StringBuilder();
-		builder.append(String.format(Constants.Markup.PAR, question.getQuestion()));
-		for (Answer answer : question.getAnswers()) {
-			renderAnswer(builder, answer);
-		}
-		return builder.toString();
 	}
 
 	private void renderAnswer(StringBuilder builder, Answer answer) {

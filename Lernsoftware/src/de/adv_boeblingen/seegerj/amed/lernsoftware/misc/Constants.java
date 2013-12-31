@@ -23,5 +23,6 @@ public class Constants {
 		public static final String HEADLINE1 = "<h1>%s</h1>";
 		public static final String BREAK = "<br>";
 		public static final String PAR = "<p>%s</p>";
+		public static final String SUBMIT = "<input type=\"submit\">";
 	}
 }
