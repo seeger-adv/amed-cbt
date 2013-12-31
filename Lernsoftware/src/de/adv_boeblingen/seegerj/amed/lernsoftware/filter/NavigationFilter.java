@@ -10,6 +10,7 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebFilter;
 
+import de.adv_boeblingen.seegerj.amed.lernsoftware.controller.ChapterController;
 import de.adv_boeblingen.seegerj.amed.lernsoftware.controller.NavigationController;
 import de.adv_boeblingen.seegerj.amed.lernsoftware.controller.StateController;
 import de.adv_boeblingen.seegerj.amed.lernsoftware.misc.Constants;
@@ -36,7 +37,7 @@ public class NavigationFilter
 	private String renderNavigation(StateController stateController) {
 		this.renderedNavigation = new StringBuilder();
 
-		for (Chapter chapter : NavigationController.getNavigation()) {
+		for (Chapter chapter : ChapterController.getChapters()) {
 			renderChapter(chapter, stateController);
 		}
 

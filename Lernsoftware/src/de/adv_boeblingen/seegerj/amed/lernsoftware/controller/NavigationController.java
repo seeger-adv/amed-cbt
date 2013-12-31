@@ -15,10 +15,6 @@ import de.adv_boeblingen.seegerj.amed.lernsoftware.model.Session;
 import de.adv_boeblingen.seegerj.amed.lernsoftware.util.PathUtil;
 
 public class NavigationController {
-	public static List<Chapter> getNavigation() {
-		return ChapterController.getChapters();
-	}
-
 	public static String getNavLink(Lesson lesson) {
 		UriBuilder builder = PathUtil.getBaseUriBuilder();
 		builder.appendPathElement("Lesson");
