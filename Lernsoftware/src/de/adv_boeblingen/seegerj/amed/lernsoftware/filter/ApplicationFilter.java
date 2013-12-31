@@ -10,6 +10,7 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebFilter;
 
+import de.adv_boeblingen.seegerj.amed.lernsoftware.misc.Configuration;
 import de.adv_boeblingen.seegerj.amed.lernsoftware.misc.Constants;
 import de.adv_boeblingen.seegerj.amed.lernsoftware.misc.UriBuilder;
 import de.adv_boeblingen.seegerj.amed.lernsoftware.misc.VariableMap;
@@ -26,6 +27,7 @@ public class ApplicationFilter
 		VariableMap map = VariableMap.getMappingFromRequest(req);
 		UriBuilder builder = PathUtil.getBaseUriBuilder();
 		map.put(Constants.BASE_URL_PARAM, builder.toString());
+		map.put(Constants.TITLE_PARAM, Configuration.APP_TITLE);
 		chain.doFilter(req, resp);
 	}
 

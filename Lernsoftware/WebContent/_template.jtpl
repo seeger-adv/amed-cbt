@@ -3,12 +3,12 @@
 <html>
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-		<title>Lernsoftware: Netzwerke</title>
+		<title>{title}</title>
 		<link rel="stylesheet" type="text/css" href="{baseurl}/design.css">
 	</head>
 <body>
 	<section id="header">
-		<span>Lernsoftware: Netzwerke</span>
+		<span>{title}</span>
 		<span class="login">
 			<span>Logged in as:</span>
             <span id="user">{username}</span>
