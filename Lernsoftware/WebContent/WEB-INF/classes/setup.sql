@@ -18,6 +18,7 @@ insert into T_LESSON (lessonid, title, chapter, content) values (8, 'Supernettin
 /* Fragen */
 insert into T_QUESTION (questionid, lesson, question, type) values (1, 2, 'Test frage 1', 'multiplechoice');
 insert into T_QUESTION (questionid, lesson, question, type) values (2, 2, 'Test frage 2', 'multiplechoice');
+insert into T_QUESTION (questionid, lesson, question, type) values (3, 5, 'Test frage', 'multiplechoice');
 
 /* Antworten */
 insert into T_ANSWER (answerid, questionid, answer) values (1, 1, 'Antwort 1');
