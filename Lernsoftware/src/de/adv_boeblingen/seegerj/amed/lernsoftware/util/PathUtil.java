@@ -50,12 +50,12 @@ public class PathUtil {
 		String[] lessonSegment = spliteRequestElements(req);
 
 		if (lessonSegment.length < 4) {
-			return 0;
+			return -1;
 		}
 
 		String lesson = lessonSegment[3];
 		if (lesson == null) {
-			return 0;
+			return -1;
 		}
 
 		return Integer.parseInt(lesson);
