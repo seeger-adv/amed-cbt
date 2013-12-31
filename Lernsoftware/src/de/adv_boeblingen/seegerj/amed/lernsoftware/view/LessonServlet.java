@@ -32,7 +32,7 @@ public class LessonServlet extends HttpServlet {
 	}
 
 	private String renderLesson(HttpServletRequest req) {
-		int lessonId = PathUtil.retrieveLessonId(req);
+		int lessonId = PathUtil.getFirstUrlSegmentAsId(req);
 
 		if (lessonId == -1) {
 			return renderDefaultLesson();

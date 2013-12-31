@@ -47,7 +47,6 @@ public class QuizServlet
 		int questionId = PathUtil.getCurrentQuestion(req);
 		Question question = QuestionController.getQuestion(questionId);
 		if (question == null) {
-			question = QuestionController.getFirstQuestionForChapter(chapter);
 		}
 
 		QuizRenderer quiz = QuestionController.getQuiz(question);

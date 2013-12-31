@@ -41,7 +41,7 @@ public class StateFilter
 		StringBuilder sb = new StringBuilder();
 		sb.append("Question:\n");
 
-		int id = PathUtil.retrieveLessonId((HttpServletRequest) req);
+		int id = PathUtil.getFirstUrlSegmentAsId((HttpServletRequest) req);
 		Chapter chapter = ChapterController.getChapter(id);
 
 		for (Lesson lesson : chapter.getLessons()) {

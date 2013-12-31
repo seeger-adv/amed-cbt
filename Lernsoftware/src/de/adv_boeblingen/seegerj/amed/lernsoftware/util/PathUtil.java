@@ -15,7 +15,7 @@ public class PathUtil {
 		return builder;
 	}
 
-	public static int retrieveLessonId(HttpServletRequest req) {
+	public static int getFirstUrlSegmentAsId(HttpServletRequest req) {
 		String[] lessonSegment = spliteRequestElements(req);
 
 		if (lessonSegment.length < 2) {
