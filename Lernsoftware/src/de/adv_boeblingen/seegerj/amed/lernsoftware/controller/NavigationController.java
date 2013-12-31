@@ -49,7 +49,12 @@ public class NavigationController {
 		return session.getStateController();
 	}
 
+	public static String getNextQuestion(Question question) {
+		return null;
 	}
 
+	public static String getNextLesson(Lesson lesson) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

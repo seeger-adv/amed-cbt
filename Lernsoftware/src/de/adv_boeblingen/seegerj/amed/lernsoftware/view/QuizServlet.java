@@ -11,9 +11,11 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import de.adv_boeblingen.seegerj.amed.lernsoftware.controller.ChapterController;
+import de.adv_boeblingen.seegerj.amed.lernsoftware.controller.NavigationController;
 import de.adv_boeblingen.seegerj.amed.lernsoftware.controller.QuestionController;
 import de.adv_boeblingen.seegerj.amed.lernsoftware.controller.StateController;
 import de.adv_boeblingen.seegerj.amed.lernsoftware.misc.Constants;
+import de.adv_boeblingen.seegerj.amed.lernsoftware.misc.NavigationHelper;
 import de.adv_boeblingen.seegerj.amed.lernsoftware.misc.VariableMap;
 import de.adv_boeblingen.seegerj.amed.lernsoftware.model.Answer;
 import de.adv_boeblingen.seegerj.amed.lernsoftware.model.Chapter;
@@ -30,25 +32,32 @@ public class QuizServlet
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		int chapterId = PathUtil.getFirstUrlSegmentAsId(req);
+		int questionId = PathUtil.getCurrentQuestion(req);
+		redirectIfNoQuestionGiven(chapterId, questionId, resp);
+
 		PrintWriter writer = resp.getWriter();
 		VariableMap map = VariableMap.getMappingFromRequest(req);
-		map.put(Constants.CONTENT_PARAM, renderQuiz(req));
+		map.put(Constants.CONTENT_PARAM, renderQuiz(questionId));
 		new TemplateRenderer(req, "/_template.jtpl").printOutput(writer);
 	}
 
-	private String renderQuiz(HttpServletRequest req) {
-		int id = PathUtil.retrieveLessonId(req);
-		Chapter chapter = ChapterController.getChapter(id);
+	private void redirectIfNoQuestionGiven(int chapterId, int questionId, HttpServletResponse resp) throws IOException {
+		if (questionId == -1) {
+			Chapter chapter = ChapterController.getChapter(chapterId);
+			Question question = QuestionController.getFirstQuestionForChapter(chapter);
+			String link = NavigationHelper.getQuizLink(question);
+			link = resp.encodeRedirectURL(link);
+			resp.sendRedirect(link);
+		}
+	}
 
+	private String renderQuiz(int questionId) {
 		StringBuilder sb = new StringBuilder();
-		sb.append(String.format(Constants.Markup.HEADLINE1, "Quiz for Chapter " + id));
+		sb.append(String.format(Constants.Markup.HEADLINE1, "Quiz for Chapter " + questionId));
 		sb.append(Constants.Markup.FORM_START);
 
-		int questionId = PathUtil.getCurrentQuestion(req);
 		Question question = QuestionController.getQuestion(questionId);
-		if (question == null) {
-		}
-
 		QuizRenderer quiz = QuestionController.getQuiz(question);
 		sb.append(String.format(Constants.Markup.PAR, question.getQuestion()));
 		for (Answer answer : question.getAnswers()) {
@@ -62,5 +71,41 @@ public class QuizServlet
 
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
+		HttpServletRequest httpRequest = req;
+		HttpSession httpSession = httpRequest.getSession();
+		Session session = (Session) httpSession.getAttribute(Constants.SESSION_PARAM);
+		StateController state = session.getStateController();
+
+		Answer answer = getAnswer(req);
+		if (answer != null) {
+			state.answerQuestion(answer);
+		}
+
+		Question question = answer.getQuestion();
+		String next = NavigationController.getNextQuestion(question);
+		if (next == null) {
+			Lesson lesson = question.getLesson();
+			next = NavigationController.getNextLesson(lesson);
+		}
+
+		next = res.encodeRedirectURL(next);
+		res.sendRedirect(next);
+	}
+
+	private Answer getAnswer(HttpServletRequest req) {
+		int id = PathUtil.getFirstUrlSegmentAsId(req);
+		Chapter chapter = ChapterController.getChapter(id);
+
+		for (Lesson lesson : chapter.getLessons()) {
+			for (Question question : lesson.getQuestions()) {
+				String answerParameter = req.getParameter(question.getUniqueLabel());
+				for (Answer answer : question.getAnswers()) {
+					if (answer.getUniqueLabel().equals(answerParameter)) {
+						return answer;
+					}
+				}
+			}
+		}
+		return null;
 	}
 }
