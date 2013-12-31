@@ -1,14 +1,30 @@
 package de.adv_boeblingen.seegerj.amed.lernsoftware.model;
 
+import javax.servlet.http.HttpServletRequest;
+
+import de.adv_boeblingen.seegerj.amed.lernsoftware.controller.ChapterController;
 import de.adv_boeblingen.seegerj.amed.lernsoftware.misc.Constants;
+import de.adv_boeblingen.seegerj.amed.lernsoftware.util.PathUtil;
 
 public class MultipleChoiceQuiz
 		implements QuizRenderer {
 
 	@Override
-	public boolean isCorrect() {
-		// TODO Auto-generated method stub
-		return false;
+	public Answer getAnswer(HttpServletRequest req) {
+		int id = PathUtil.getFirstUrlSegmentAsId(req);
+		Chapter chapter = ChapterController.getChapter(id);
+
+		for (Lesson lesson : chapter.getLessons()) {
+			for (Question question : lesson.getQuestions()) {
+				String answerParameter = req.getParameter(question.getUniqueLabel());
+				for (Answer answer : question.getAnswers()) {
+					if (answer.getUniqueLabel().equals(answerParameter)) {
+						return answer;
+					}
+				}
+			}
+		}
+		return null;
 	}
 
 	@Override

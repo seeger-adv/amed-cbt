@@ -87,14 +87,16 @@ public class QuizServlet
 
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
+		int questionId = PathUtil.getCurrentQuestion(req);
 		StateController state = getSessionFromRequest(req);
 
-		Answer answer = getAnswer(req);
+		Question question = QuestionController.getQuestion(questionId);
+		QuizRenderer quiz = QuestionController.getQuiz(question);
+		Answer answer = quiz.getAnswer(req);
 		if (answer != null) {
 			state.answerQuestion(answer);
 		}
 
-		Question question = answer.getQuestion();
 		String next = NavigationController.getNextQuestion(question);
 		if (next == null) {
 			Lesson lesson = question.getLesson();
@@ -110,22 +112,5 @@ public class QuizServlet
 		Session session = (Session) httpSession.getAttribute(Constants.SESSION_PARAM);
 		StateController state = session.getStateController();
 		return state;
-	}
-
-	private Answer getAnswer(HttpServletRequest req) {
-		int id = PathUtil.getFirstUrlSegmentAsId(req);
-		Chapter chapter = ChapterController.getChapter(id);
-
-		for (Lesson lesson : chapter.getLessons()) {
-			for (Question question : lesson.getQuestions()) {
-				String answerParameter = req.getParameter(question.getUniqueLabel());
-				for (Answer answer : question.getAnswers()) {
-					if (answer.getUniqueLabel().equals(answerParameter)) {
-						return answer;
-					}
-				}
-			}
-		}
-		return null;
 	}
 }
