@@ -36,7 +36,10 @@ public class QuizServlet
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		int chapterId = PathUtil.getFirstUrlSegmentAsId(req);
 		int questionId = PathUtil.getCurrentQuestion(req);
-		redirectIfNoQuestionGiven(chapterId, questionId, resp);
+
+		if (redirectIfNoQuestionGiven(chapterId, questionId, resp)) {
+			return;
+		}
 
 		PrintWriter writer = resp.getWriter();
 		VariableMap map = VariableMap.getMappingFromRequest(req);
@@ -44,14 +47,17 @@ public class QuizServlet
 		new TemplateRenderer(req, "/_template.jtpl").printOutput(writer);
 	}
 
-	private void redirectIfNoQuestionGiven(int chapterId, int questionId, HttpServletResponse resp) throws IOException {
+	private boolean redirectIfNoQuestionGiven(int chapterId, int questionId, HttpServletResponse resp)
+			throws IOException {
 		if (questionId == -1) {
 			Chapter chapter = ChapterController.getChapter(chapterId);
 			Question question = QuestionController.getFirstQuestionForChapter(chapter);
 			String link = NavigationHelper.getQuizLink(question);
 			link = resp.encodeRedirectURL(link);
 			resp.sendRedirect(link);
+			return true;
 		}
+		return false;
 	}
 
 	private String renderQuiz(int questionId) {
