@@ -14,6 +14,7 @@ import de.adv_boeblingen.seegerj.amed.lernsoftware.controller.ChapterController;
 import de.adv_boeblingen.seegerj.amed.lernsoftware.controller.NavigationController;
 import de.adv_boeblingen.seegerj.amed.lernsoftware.controller.StateController;
 import de.adv_boeblingen.seegerj.amed.lernsoftware.misc.Constants;
+import de.adv_boeblingen.seegerj.amed.lernsoftware.misc.NavigationHelper;
 import de.adv_boeblingen.seegerj.amed.lernsoftware.misc.VariableMap;
 import de.adv_boeblingen.seegerj.amed.lernsoftware.model.Chapter;
 import de.adv_boeblingen.seegerj.amed.lernsoftware.model.Lesson;
@@ -52,14 +53,14 @@ public class NavigationFilter
 			renderLesson(lesson, stateController, isCurrent);
 		}
 
-		createEntry("Quiz", NavigationController.getQuizLink(chapter), null);
+		createEntry("Quiz", NavigationHelper.getQuizLink(chapter), null);
 
 		this.renderedNavigation.append("</ul>");
 	}
 
 	private void renderLesson(Lesson lesson, StateController stateController, boolean isCurrent) {
 		String label = lesson.getTitle();
-		String link = NavigationController.getNavLink(lesson);
+		String link = NavigationHelper.getNavLink(lesson);
 		createEntry(label, link, "done");
 	}
 

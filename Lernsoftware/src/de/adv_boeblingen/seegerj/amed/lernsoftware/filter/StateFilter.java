@@ -12,8 +12,8 @@ import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 
 import de.adv_boeblingen.seegerj.amed.lernsoftware.controller.ChapterController;
-import de.adv_boeblingen.seegerj.amed.lernsoftware.controller.NavigationController;
 import de.adv_boeblingen.seegerj.amed.lernsoftware.misc.Constants;
+import de.adv_boeblingen.seegerj.amed.lernsoftware.misc.NavigationHelper;
 import de.adv_boeblingen.seegerj.amed.lernsoftware.misc.VariableMap;
 import de.adv_boeblingen.seegerj.amed.lernsoftware.model.Chapter;
 import de.adv_boeblingen.seegerj.amed.lernsoftware.model.Lesson;
@@ -55,7 +55,7 @@ public class StateFilter
 
 	private String renderQuestion(StringBuilder sb, Question question) {
 		String htmlClass = getQuestionState(question);
-		String link = String.format("<a href=\"%s\">%s</a>", NavigationController.getQuizLink(question), ++count);
+		String link = String.format("<a href=\"%s\">%s</a>", NavigationHelper.getQuizLink(question), ++count);
 		return String.format("<div class=\"%s\" >%s</div>\n", htmlClass, link);
 	}
 

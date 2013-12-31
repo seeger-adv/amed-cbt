@@ -1,27 +1,16 @@
 package de.adv_boeblingen.seegerj.amed.lernsoftware.controller;
 
-import java.util.List;
-
 import javax.servlet.ServletRequest;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import de.adv_boeblingen.seegerj.amed.lernsoftware.misc.Constants;
-import de.adv_boeblingen.seegerj.amed.lernsoftware.misc.UriBuilder;
 import de.adv_boeblingen.seegerj.amed.lernsoftware.model.Chapter;
 import de.adv_boeblingen.seegerj.amed.lernsoftware.model.Lesson;
 import de.adv_boeblingen.seegerj.amed.lernsoftware.model.Question;
 import de.adv_boeblingen.seegerj.amed.lernsoftware.model.Session;
-import de.adv_boeblingen.seegerj.amed.lernsoftware.util.PathUtil;
 
 public class NavigationController {
-	public static String getNavLink(Lesson lesson) {
-		UriBuilder builder = PathUtil.getBaseUriBuilder();
-		builder.appendPathElement("Lesson");
-		builder.appendPathElement(Integer.toString(lesson.getId()));
-		return builder.toString();
-	}
-
 	public static boolean containsLesson(Chapter chapter, Lesson lesson) {
 		for (Lesson l : chapter.getLessons()) {
 			if (l.equals(lesson)) {
@@ -60,19 +49,7 @@ public class NavigationController {
 		return session.getStateController();
 	}
 
-	public static String getQuizLink(Chapter chapter) {
-		UriBuilder builder = PathUtil.getBaseUriBuilder();
-		builder.appendPathElement("Quiz");
-		builder.appendPathElement(Integer.toString(chapter.getId()));
-		return builder.toString();
 	}
 
-	public static String getQuizLink(Question question) {
-		UriBuilder builder = PathUtil.getBaseUriBuilder();
-		builder.appendPathElement("Quiz");
-		builder.appendPathElement(Integer.toString(question.getLesson().getChapter().getId()));
-		builder.appendPathElement("Question");
-		builder.appendPathElement(Integer.toString(question.getId()));
-		return builder.toString();
 	}
 }
