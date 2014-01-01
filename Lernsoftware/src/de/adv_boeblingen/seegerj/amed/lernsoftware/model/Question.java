@@ -19,6 +19,7 @@ import javax.persistence.OrderBy;
 @Entity(name = "t_question")
 public class Question {
 	public static final String MULTIPLE_CHOICE = "multiplechoice";
+	public static final String DROPDOWN = "dropdown";
 
 	@Id
 	@Column(name = "questionid")
