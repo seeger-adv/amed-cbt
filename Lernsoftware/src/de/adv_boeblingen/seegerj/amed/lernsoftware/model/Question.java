@@ -79,4 +79,12 @@ public class Question {
 	public String getType() {
 		return mType;
 	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (obj instanceof Question) {
+			return ((Question) obj).getId() == getId();
+		}
+		return false;
+	}
 }

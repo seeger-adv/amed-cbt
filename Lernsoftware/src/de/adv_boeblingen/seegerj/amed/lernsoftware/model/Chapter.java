@@ -52,4 +52,12 @@ public class Chapter {
 	public void remove(Object leon) {
 		this.mLessons.remove(leon);
 	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (obj instanceof Chapter) {
+			return ((Chapter) obj).getId() == getId();
+		}
+		return false;
+	}
 }
