@@ -100,7 +100,7 @@ public class QuizServlet
 
 		Question nextQuestion = NavigationController.getNextQuestion(question);
 		String next = null;
-		if (nextQuestion == null) {
+		if (nextQuestion != null) {
 			next = NavigationHelper.getQuizLink(nextQuestion);
 		} else {
 			Lesson lesson = question.getLesson();
