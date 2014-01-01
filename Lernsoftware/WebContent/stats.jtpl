@@ -1,0 +1,22 @@
+<!-- BEGIN: main -->
+<!doctype html>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<title>{title}</title>
+		<link rel="stylesheet" type="text/css" href="design.css">
+	</head>
+<body>
+	<section id="header">
+		<span>{title}</span>
+	</section>
+	<nav>
+	</nav>
+	<section id="main">
+		<h1>Hier k&ouml;nnte Ihre Werbung stehen!</h1>
+	</section>
+	<section id="state">
+	</section>
+</body>
+</html>
+<!-- END: main -->

@@ -18,6 +18,7 @@ import de.adv_boeblingen.seegerj.amed.lernsoftware.controller.StateController;
 import de.adv_boeblingen.seegerj.amed.lernsoftware.misc.Constants;
 import de.adv_boeblingen.seegerj.amed.lernsoftware.misc.NavigationHelper;
 import de.adv_boeblingen.seegerj.amed.lernsoftware.misc.TemplateRenderer;
+import de.adv_boeblingen.seegerj.amed.lernsoftware.misc.UriBuilder;
 import de.adv_boeblingen.seegerj.amed.lernsoftware.misc.VariableMap;
 import de.adv_boeblingen.seegerj.amed.lernsoftware.model.Answer;
 import de.adv_boeblingen.seegerj.amed.lernsoftware.model.Chapter;
@@ -96,8 +97,14 @@ public class QuizServlet
 			Lesson lesson = question.getLesson();
 			Chapter chapter = lesson.getChapter();
 			Chapter nextChapter = NavigationController.getNextChapter(chapter);
-			Lesson firstLesson = LessonController.getFirstLesson(nextChapter);
-			next = NavigationHelper.getNavLink(firstLesson);
+			if (nextChapter != null) {
+				Lesson firstLesson = LessonController.getFirstLesson(nextChapter);
+				next = NavigationHelper.getNavLink(firstLesson);
+			} else {
+				UriBuilder uriBuilder = PathUtil.getBaseUriBuilder();
+				uriBuilder.appendPathElement("Stats");
+				next = uriBuilder.toString();
+			}
 		}
 
 		next = res.encodeRedirectURL(next);
