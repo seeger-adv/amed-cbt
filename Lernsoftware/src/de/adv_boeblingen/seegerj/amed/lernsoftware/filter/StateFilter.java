@@ -60,12 +60,23 @@ public class StateFilter
 	}
 
 	private String renderQuestion(HttpServletRequest req, StringBuilder sb, Question question) {
-		String htmlClass = getQuestionState(req, question);
-		String link = String.format("<a href=\"%s\">%s</a>", NavigationHelper.getQuizLink(question), ++count);
-		return String.format("<div class=\"%s\" >%s</div>\n", htmlClass, link);
+		Boolean questionState = getQuestionState(req, question);
+		String content;
+		String htmlClass = null;
+		if (questionState == null) {
+			content = String.format("<a href=\"%s\">%s</a>", NavigationHelper.getQuizLink(question), ++count);
+		} else {
+			if (questionState) {
+				htmlClass = "correct";
+			} else {
+				htmlClass = "wrong";
+			}
+			content = Integer.toString(++count);
+		}
+		return String.format("<div class=\"%s\" >%s</div>\n", htmlClass, content);
 	}
 
-	private String getQuestionState(HttpServletRequest req, Question question) {
+	private Boolean getQuestionState(HttpServletRequest req, Question question) {
 		HttpSession httpSession = req.getSession();
 		Session session = (Session) httpSession.getAttribute(Constants.SESSION_PARAM);
 		StateController state = session.getStateController();
@@ -73,16 +84,12 @@ public class StateFilter
 		Response response = state.getResponse(question);
 		if (response == null) {
 			// not answered yet
-			return "";
+			return null;
 		}
 
 		Answer givenAnswer = response.getGivenAnswer();
 		Answer correctAnswer = question.getCorrectAnswer();
-		if (givenAnswer.equals(correctAnswer)) {
-			return "correct";
-		} else {
-			return "wrong";
-		}
+		return givenAnswer.equals(correctAnswer);
 	}
 
 	@Override
