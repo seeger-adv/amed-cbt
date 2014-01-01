@@ -9,23 +9,35 @@ public class NavigationHelper {
 	public static String getQuizLink(Chapter chapter) {
 		UriBuilder builder = PathUtil.getBaseUriBuilder();
 		builder.appendPathElement("Quiz");
-		builder.appendPathElement(Integer.toString(chapter.getId()));
+		if (chapter == null) {
+			return null;
+		}
+		int chapterId = chapter.getId();
+		builder.appendPathElement(Integer.toString(chapterId));
 		return builder.toString();
 	}
 
 	public static String getQuizLink(Question question) {
 		UriBuilder builder = PathUtil.getBaseUriBuilder();
 		builder.appendPathElement("Quiz");
-		builder.appendPathElement(Integer.toString(question.getLesson().getChapter().getId()));
+		if (question == null) {
+			return null;
+		}
+		Lesson lesson = question.getLesson();
+		Chapter chapter = lesson.getChapter();
+		int chapterId = chapter.getId();
+		builder.appendPathElement(Integer.toString(chapterId));
 		builder.appendPathElement("Question");
-		builder.appendPathElement(Integer.toString(question.getId()));
+		int questionId = question.getId();
+		builder.appendPathElement(Integer.toString(questionId));
 		return builder.toString();
 	}
 
 	public static String getNavLink(Lesson lesson) {
 		UriBuilder builder = PathUtil.getBaseUriBuilder();
 		builder.appendPathElement("Lesson");
-		builder.appendPathElement(Integer.toString(lesson.getId()));
+		int lessonId = lesson.getId();
+		builder.appendPathElement(Integer.toString(lessonId));
 		return builder.toString();
 	}
 }

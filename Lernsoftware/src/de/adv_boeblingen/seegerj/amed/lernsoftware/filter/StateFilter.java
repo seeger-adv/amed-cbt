@@ -54,8 +54,10 @@ public class StateFilter
 				sb.append(renderQuestion(req, sb, question));
 			}
 		}
-		// String nextQuestion = QuestionController.
-		sb.append("<a href=\"\">skip</a>");
+
+		Question nextQuestion = null;
+		String nextLink = NavigationHelper.getQuizLink(nextQuestion);
+		sb.append(String.format("<a href=\"%s\">skip</a>", nextLink));
 		return sb.toString();
 	}
 
