@@ -21,12 +21,12 @@ import de.adv_boeblingen.seegerj.amed.lernsoftware.model.Lesson;
 
 @WebFilter(urlPatterns = { "/Quiz/*", "/Lesson/*", "/Stats/*" })
 public class NavigationFilter
-		implements Filter {
+implements Filter {
 	StringBuilder renderedNavigation;
 
 	@Override
 	public void doFilter(ServletRequest req, ServletResponse resp, FilterChain chain) throws IOException,
-			ServletException {
+	ServletException {
 
 		final StateController stateController = NavigationController.retrieveFromSession(req);
 		final VariableMap map = VariableMap.getMappingFromRequest(req);
@@ -53,7 +53,11 @@ public class NavigationFilter
 			renderLesson(lesson, stateController, isCurrent);
 		}
 
-		createEntry("Quiz", NavigationHelper.getQuizLink(chapter), null);
+		String htmlClass = null;
+		if (stateController.isChapterComplete(chapter)) {
+			htmlClass = "done";
+		}
+		createEntry("Quiz", NavigationHelper.getQuizLink(chapter), htmlClass);
 
 		this.renderedNavigation.append("</ul>");
 	}
@@ -61,14 +65,14 @@ public class NavigationFilter
 	private void renderLesson(Lesson lesson, StateController stateController, boolean isCurrent) {
 		String label = lesson.getTitle();
 		String link = NavigationHelper.getNavLink(lesson);
-		createEntry(label, link, "done");
+		createEntry(label, link, null);
 	}
 
 	private void createEntry(String label, String link, String htmlClass) {
 		this.renderedNavigation.append("<ul>").append("<li");
 
 		if (htmlClass != null) {
-			this.renderedNavigation.append(" class=\"class\"");
+			this.renderedNavigation.append(String.format(" class=\"%s\"", htmlClass));
 		}
 
 		this.renderedNavigation.append('>');

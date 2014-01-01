@@ -52,12 +52,10 @@ public class LessonServlet
 			return "";
 		}
 
-		String content = lesson.getContent();
-		if (content != null) {
-			return content;
-		}
-
-		return "";
+		StringBuilder builder = new StringBuilder();
+		builder.append(String.format("<h1>%s</h1>", lesson.getTitle()));
+		builder.append(lesson.getContent());
+		return builder.toString();
 	}
 
 	private String renderDefaultLesson() {

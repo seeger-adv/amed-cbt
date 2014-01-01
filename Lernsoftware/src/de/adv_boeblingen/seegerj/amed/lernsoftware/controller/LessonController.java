@@ -8,6 +8,8 @@ import javax.persistence.EntityTransaction;
 import de.adv_boeblingen.seegerj.amed.lernsoftware.misc.RetrieveAllQuery;
 import de.adv_boeblingen.seegerj.amed.lernsoftware.model.Chapter;
 import de.adv_boeblingen.seegerj.amed.lernsoftware.model.Lesson;
+import de.adv_boeblingen.seegerj.amed.lernsoftware.model.Question;
+import de.adv_boeblingen.seegerj.amed.lernsoftware.model.Response;
 import de.adv_boeblingen.seegerj.amed.lernsoftware.model.User;
 import de.adv_boeblingen.seegerj.amed.lernsoftware.util.DatabaseUtil;
 import de.adv_boeblingen.seegerj.amed.lernsoftware.util.DatabaseUtil.DatabaseRunnable;
@@ -27,7 +29,13 @@ public class LessonController {
 	}
 
 	public static boolean isComplete(User user, Lesson lesson) {
-		return false;
+		boolean result = true;
+		for (Question question : lesson.getQuestions()) {
+			StateControllerImpl state = new StateControllerImpl(user);
+			Response response = state.getResponse(question);
+			result |= (response == null);
+		}
+		return result;
 	}
 
 	public static Lesson getFirstLesson(Chapter chapter) {

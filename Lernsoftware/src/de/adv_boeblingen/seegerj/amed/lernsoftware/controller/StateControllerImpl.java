@@ -32,7 +32,8 @@ public class StateControllerImpl
 
 	@Override
 	public boolean isCurrentChapter(Chapter chapter) {
-		return ChapterController.isChapterComplete(this.mUser, chapter);
+		// return ChapterController.isChapterComplete(this.mUser, chapter);
+		return false;
 	}
 
 	@Override
@@ -79,5 +80,10 @@ public class StateControllerImpl
 				return null;
 			}
 		});
+	}
+
+	@Override
+	public boolean isChapterComplete(Chapter chapter) {
+		return ChapterController.isChapterComplete(this.mUser, chapter);
 	}
 }

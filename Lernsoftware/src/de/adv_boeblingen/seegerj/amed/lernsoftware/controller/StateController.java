@@ -14,4 +14,6 @@ public interface StateController {
 	Response getResponse(Question question);
 
 	void answerQuestion(Answer givenAnswer);
+
+	boolean isChapterComplete(Chapter chapter);
 }
