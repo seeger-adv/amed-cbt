@@ -20,7 +20,7 @@ import de.adv_boeblingen.seegerj.amed.lernsoftware.misc.VariableMap;
 import de.adv_boeblingen.seegerj.amed.lernsoftware.model.Session;
 import de.adv_boeblingen.seegerj.amed.lernsoftware.util.PathUtil;
 
-@WebFilter(urlPatterns = { "/Lesson/*", "/Quiz/*" })
+@WebFilter(urlPatterns = { "/Lesson/*", "/Quiz/*", "/Stats/*" })
 public class LoginFilter
 		implements Filter {
 	@Override
