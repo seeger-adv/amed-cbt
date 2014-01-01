@@ -1,9 +1,16 @@
 package de.adv_boeblingen.seegerj.amed.lernsoftware.controller;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
+import javax.persistence.TypedQuery;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Path;
+import javax.persistence.criteria.Predicate;
+import javax.persistence.criteria.Root;
 
 import de.adv_boeblingen.seegerj.amed.lernsoftware.model.Answer;
 import de.adv_boeblingen.seegerj.amed.lernsoftware.model.Chapter;
@@ -38,10 +45,22 @@ public class StateControllerImpl
 		return DatabaseUtil.runQuery(new DatabaseRunnable<Response>() {
 			@Override
 			public Response run(EntityManager manager, EntityTransaction transaction) {
-				Response query = new Response();
-				query.setUser(mUser);
-				query.setQuestion(question);
-				return manager.find(Response.class, query);
+				CriteriaBuilder builder = manager.getCriteriaBuilder();
+				CriteriaQuery<Response> criteria = builder.createQuery(Response.class);
+				Root<Response> response = criteria.from(Response.class);
+
+				Path<Object> userPath = response.get("mUser").get("mUsername");
+				Predicate userPredicate = builder.equal(userPath, mUser.getUsername());
+				Path<Integer> questionPath = response.get("mQuestion").get("mId");
+				Predicate questionPredicate = builder.equal(questionPath, question.getId());
+				criteria.select(response).where(builder.and(userPredicate, questionPredicate));
+
+				TypedQuery<Response> typedQuery = manager.createQuery(criteria);
+				List<Response> resultList = typedQuery.getResultList();
+				if (resultList != null && resultList.size() > 0) {
+					return resultList.get(0);
+				}
+				return null;
 			}
 		});
 	}

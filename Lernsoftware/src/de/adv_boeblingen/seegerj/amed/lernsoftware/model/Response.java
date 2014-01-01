@@ -6,7 +6,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
+import javax.persistence.ManyToOne;
 
 @Entity(name = "t_response")
 public class Response {
@@ -14,15 +14,15 @@ public class Response {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int bla;
 
-	@OneToOne
+	@ManyToOne
 	@JoinColumn(name = "user")
 	protected User mUser;
 
-	@OneToOne
+	@ManyToOne
 	@JoinColumn(name = "question")
 	protected Question mQuestion;
 
-	@OneToOne
+	@ManyToOne
 	@JoinColumn(name = "answer")
 	protected Answer mGivenAnswer;
 
