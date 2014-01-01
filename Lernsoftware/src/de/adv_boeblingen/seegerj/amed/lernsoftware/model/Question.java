@@ -87,4 +87,8 @@ public class Question {
 		}
 		return false;
 	}
+
+	public Answer getCorrectAnswer() {
+		return mCorrectAnswer;
+	}
 }
