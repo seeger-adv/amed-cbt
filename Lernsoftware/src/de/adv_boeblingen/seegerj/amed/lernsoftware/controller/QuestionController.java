@@ -9,6 +9,7 @@ import javax.persistence.EntityTransaction;
 import de.adv_boeblingen.seegerj.amed.lernsoftware.model.Chapter;
 import de.adv_boeblingen.seegerj.amed.lernsoftware.model.Lesson;
 import de.adv_boeblingen.seegerj.amed.lernsoftware.model.Question;
+import de.adv_boeblingen.seegerj.amed.lernsoftware.model.quizmode.AddressingQuiz;
 import de.adv_boeblingen.seegerj.amed.lernsoftware.model.quizmode.DropdownQuiz;
 import de.adv_boeblingen.seegerj.amed.lernsoftware.model.quizmode.MultipleChoiceQuiz;
 import de.adv_boeblingen.seegerj.amed.lernsoftware.model.quizmode.QuizRenderer;
@@ -43,6 +44,8 @@ public class QuestionController {
 			return new MultipleChoiceQuiz();
 		} else if (question.getType().equals(Question.DROPDOWN)) {
 			return new DropdownQuiz();
+		} else if (question.getType().equals(Question.ADDRESSING)) {
+			return new AddressingQuiz();
 		}
 		return null;
 	}
