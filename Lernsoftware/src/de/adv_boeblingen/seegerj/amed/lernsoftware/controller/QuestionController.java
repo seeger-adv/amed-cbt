@@ -8,9 +8,9 @@ import javax.persistence.EntityTransaction;
 
 import de.adv_boeblingen.seegerj.amed.lernsoftware.model.Chapter;
 import de.adv_boeblingen.seegerj.amed.lernsoftware.model.Lesson;
-import de.adv_boeblingen.seegerj.amed.lernsoftware.model.MultipleChoiceQuiz;
 import de.adv_boeblingen.seegerj.amed.lernsoftware.model.Question;
-import de.adv_boeblingen.seegerj.amed.lernsoftware.model.QuizRenderer;
+import de.adv_boeblingen.seegerj.amed.lernsoftware.model.quizmode.MultipleChoiceQuiz;
+import de.adv_boeblingen.seegerj.amed.lernsoftware.model.quizmode.QuizRenderer;
 import de.adv_boeblingen.seegerj.amed.lernsoftware.util.DatabaseUtil;
 import de.adv_boeblingen.seegerj.amed.lernsoftware.util.DatabaseUtil.DatabaseRunnable;
 

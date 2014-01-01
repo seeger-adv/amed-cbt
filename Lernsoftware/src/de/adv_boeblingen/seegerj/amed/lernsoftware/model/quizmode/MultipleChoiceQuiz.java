@@ -1,13 +1,17 @@
-package de.adv_boeblingen.seegerj.amed.lernsoftware.model;
+package de.adv_boeblingen.seegerj.amed.lernsoftware.model.quizmode;
 
 import javax.servlet.http.HttpServletRequest;
 
 import de.adv_boeblingen.seegerj.amed.lernsoftware.controller.ChapterController;
 import de.adv_boeblingen.seegerj.amed.lernsoftware.misc.Constants;
+import de.adv_boeblingen.seegerj.amed.lernsoftware.model.Answer;
+import de.adv_boeblingen.seegerj.amed.lernsoftware.model.Chapter;
+import de.adv_boeblingen.seegerj.amed.lernsoftware.model.Lesson;
+import de.adv_boeblingen.seegerj.amed.lernsoftware.model.Question;
 import de.adv_boeblingen.seegerj.amed.lernsoftware.util.PathUtil;
 
 public class MultipleChoiceQuiz
-		implements QuizRenderer {
+		extends QuizRenderer {
 
 	@Override
 	public Answer getAnswer(HttpServletRequest req) {

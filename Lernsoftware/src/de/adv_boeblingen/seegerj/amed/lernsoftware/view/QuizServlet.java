@@ -2,8 +2,6 @@ package de.adv_boeblingen.seegerj.amed.lernsoftware.view;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
-import java.util.Collections;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -25,8 +23,8 @@ import de.adv_boeblingen.seegerj.amed.lernsoftware.model.Answer;
 import de.adv_boeblingen.seegerj.amed.lernsoftware.model.Chapter;
 import de.adv_boeblingen.seegerj.amed.lernsoftware.model.Lesson;
 import de.adv_boeblingen.seegerj.amed.lernsoftware.model.Question;
-import de.adv_boeblingen.seegerj.amed.lernsoftware.model.QuizRenderer;
 import de.adv_boeblingen.seegerj.amed.lernsoftware.model.Session;
+import de.adv_boeblingen.seegerj.amed.lernsoftware.model.quizmode.QuizRenderer;
 import de.adv_boeblingen.seegerj.amed.lernsoftware.util.PathUtil;
 
 @WebServlet("/Quiz/*")
@@ -71,15 +69,7 @@ public class QuizServlet
 		QuizRenderer quiz = QuestionController.getQuiz(question);
 		sb.append(String.format(Constants.Markup.PAR, question.getQuestion()));
 
-		ArrayList<Answer> answers = new ArrayList<Answer>(question.getAnswers());
-
-		if (quiz.supportsShuffledAnswers()) {
-			Collections.shuffle(answers);
-		}
-
-		for (Answer answer : answers) {
-			quiz.renderAnswer(sb, answer);
-		}
+		quiz.renderAnswers(sb, question);
 
 		sb.append(Constants.Markup.SUBMIT);
 		sb.append(Constants.Markup.FORM_END);
