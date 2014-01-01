@@ -20,10 +20,10 @@ import de.adv_boeblingen.seegerj.amed.lernsoftware.util.PathUtil;
 
 @WebServlet("/Lesson/*")
 @SuppressWarnings("serial")
-public class LessonServlet extends HttpServlet {
+public class LessonServlet
+		extends HttpServlet {
 	@Override
-	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
-			throws ServletException, IOException {
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		PrintWriter writer = resp.getWriter();
 
 		VariableMap map = VariableMap.getMappingFromRequest(req);

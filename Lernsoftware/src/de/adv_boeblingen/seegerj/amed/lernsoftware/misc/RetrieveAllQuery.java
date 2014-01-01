@@ -9,7 +9,8 @@ import javax.persistence.Query;
 
 import de.adv_boeblingen.seegerj.amed.lernsoftware.util.DatabaseUtil.DatabaseRunnable;
 
-public class RetrieveAllQuery<T> implements DatabaseRunnable<List<T>> {
+public class RetrieveAllQuery<T>
+		implements DatabaseRunnable<List<T>> {
 	Class<T> clazz;
 
 	public RetrieveAllQuery(Class<T> clazz) {
@@ -18,8 +19,7 @@ public class RetrieveAllQuery<T> implements DatabaseRunnable<List<T>> {
 
 	@Override
 	public List<T> run(EntityManager manager, EntityTransaction transaction) {
-		String queryString = String.format(Constants.BASIC_QUERY,
-				this.clazz.getName());
+		String queryString = String.format(Constants.BASIC_QUERY, this.clazz.getName());
 
 		Query query = manager.createQuery(queryString);
 

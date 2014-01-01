@@ -13,8 +13,7 @@ import net.sf.jtpl.Template;
 public class TemplateRenderer {
 	private Template template;
 
-	public TemplateRenderer(ServletRequest req, String filepath)
-			throws IOException {
+	public TemplateRenderer(ServletRequest req, String filepath) throws IOException {
 		ServletContext ctx = req.getServletContext();
 		URL resourceUrl = ctx.getResource(filepath);
 		InputStreamReader reader = null;

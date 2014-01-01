@@ -17,10 +17,10 @@ import de.adv_boeblingen.seegerj.amed.lernsoftware.model.Session;
  */
 @WebServlet("/Logout")
 @SuppressWarnings("serial")
-public class LogoutServlet extends HttpServlet {
+public class LogoutServlet
+		extends HttpServlet {
 	@Override
-	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
-			throws ServletException, IOException {
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		HttpSession session = req.getSession();
 		Session userSession = (Session) session.getAttribute("session");
 		if (userSession != null) {
