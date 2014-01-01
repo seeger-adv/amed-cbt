@@ -49,10 +49,12 @@ nav > ul > li {
 }
 
 nav > ul > ul {
-	margin-bottom: 14px;
+	margin-bottom: 15px;
+	margin-top: 5px;
 }
 
 nav > ul > ul > li {
+	line-height: 150%;
 	list-style: disc;
 }
 

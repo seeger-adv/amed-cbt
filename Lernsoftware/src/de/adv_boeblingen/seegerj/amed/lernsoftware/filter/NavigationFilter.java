@@ -21,12 +21,12 @@ import de.adv_boeblingen.seegerj.amed.lernsoftware.model.Lesson;
 
 @WebFilter(urlPatterns = { "/Quiz/*", "/Lesson/*", "/Stats/*" })
 public class NavigationFilter
-implements Filter {
+		implements Filter {
 	StringBuilder renderedNavigation;
 
 	@Override
 	public void doFilter(ServletRequest req, ServletResponse resp, FilterChain chain) throws IOException,
-	ServletException {
+			ServletException {
 
 		final StateController stateController = NavigationController.retrieveFromSession(req);
 		final VariableMap map = VariableMap.getMappingFromRequest(req);
@@ -36,19 +36,22 @@ implements Filter {
 	}
 
 	private String renderNavigation(StateController stateController) {
-		this.renderedNavigation = new StringBuilder();
+		renderedNavigation = new StringBuilder();
 
+		renderedNavigation.append("<ul>");
 		for (Chapter chapter : ChapterController.getChapters()) {
 			renderChapter(chapter, stateController);
 		}
+		renderedNavigation.append("</ul>");
 
 		return this.renderedNavigation.toString();
 	}
 
 	private void renderChapter(Chapter chapter, StateController stateController) {
-		this.renderedNavigation.append("<ul>").append(String.format("<li>%s</li>", chapter.getTitle()));
+		renderedNavigation.append(String.format("<li>%s</li>", chapter.getTitle()));
 		boolean isCurrent = stateController.isCurrentChapter(chapter);
 
+		renderedNavigation.append("<ul>");
 		for (Lesson lesson : chapter.getLessons()) {
 			renderLesson(lesson, stateController, isCurrent);
 		}
@@ -58,7 +61,6 @@ implements Filter {
 			htmlClass = "done";
 		}
 		createEntry("Quiz", NavigationHelper.getQuizLink(chapter), htmlClass);
-
 		this.renderedNavigation.append("</ul>");
 	}
 
@@ -69,20 +71,15 @@ implements Filter {
 	}
 
 	private void createEntry(String label, String link, String htmlClass) {
-		this.renderedNavigation.append("<ul>").append("<li");
-
-		if (htmlClass != null) {
-			this.renderedNavigation.append(String.format(" class=\"%s\"", htmlClass));
-		}
-
-		this.renderedNavigation.append('>');
+		String inner;
 		if (link == null) {
-			this.renderedNavigation.append(label);
+			inner = label;
 		} else {
-			this.renderedNavigation.append(String.format("<a href=\"%s\">%s</a>", link, label));
+			inner = String.format("<a href=\"%s\">%s</a>", link, label);
 		}
 
-		this.renderedNavigation.append("</li>").append("</ul>");
+		htmlClass = " class=\"" + htmlClass + "\"";
+		renderedNavigation.append(String.format("<li%s>%s</li>", htmlClass, inner));
 	}
 
 	@Override
