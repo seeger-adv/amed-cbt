@@ -6,7 +6,7 @@ insert into T_CHAPTER (chapterid, title) values (1, 'OSI Stack');
 insert into T_CHAPTER (chapterid, title) values (2, 'IP Addressing');
 
 /* Lektionen */
-insert into T_LESSON (lessonid, title, chapter, content) values (1, 'Introduction', 1, '<applet code="de.adv_boeblingen.seegerj.amed.lernsoftware.applets.IsoOsiApplet.class" codebase="../Applet/" width=100% height=99%>');
+insert into T_LESSON (lessonid, title, chapter, content) values (1, 'Introduction', 1, '<applet code="de.adv_boeblingen.seegerj.amed.lernsoftware.applets.IsoOsiApplet.class" codebase="../Applet/" width=750 height=250>');
 insert into T_LESSON (lessonid, title, chapter, content) values (2, 'Layer 1', 1, 'Test content');
 insert into T_LESSON (lessonid, title, chapter, content) values (3, 'Layer 2', 1, 'Test content2');
 insert into T_LESSON (lessonid, title, chapter, content) values (4, 'Layer 3', 1, 'Test content3 und so&hellip;');
