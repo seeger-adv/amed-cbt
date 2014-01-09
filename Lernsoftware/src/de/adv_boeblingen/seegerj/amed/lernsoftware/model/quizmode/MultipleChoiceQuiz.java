@@ -22,7 +22,8 @@ public class MultipleChoiceQuiz
 			for (Question question : lesson.getQuestions()) {
 				String answerParameter = req.getParameter(question.getUniqueLabel());
 				for (Answer answer : question.getAnswers()) {
-					if (answer.getUniqueLabel().equals(answerParameter)) {
+					String answerLabel = answer.getUniqueLabel();
+					if (answerLabel.equals(answerParameter)) {
 						return answer;
 					}
 				}
