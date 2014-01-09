@@ -30,11 +30,11 @@ import de.adv_boeblingen.seegerj.amed.lernsoftware.util.PathUtil;
 
 @WebServlet("/Quiz/*")
 @SuppressWarnings("serial")
-public class QuizServlet
-		extends HttpServlet {
+public class QuizServlet extends HttpServlet {
 
 	@Override
-	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
+			throws ServletException, IOException {
 		int chapterId = PathUtil.getFirstUrlSegmentAsId(req);
 		int questionId = PathUtil.getCurrentQuestion(req);
 
@@ -48,11 +48,12 @@ public class QuizServlet
 		new TemplateRenderer(req, "/_template.jtpl").printOutput(writer);
 	}
 
-	private boolean redirectIfNoQuestionGiven(int chapterId, int questionId, HttpServletResponse resp)
-			throws IOException {
+	private boolean redirectIfNoQuestionGiven(int chapterId, int questionId,
+			HttpServletResponse resp) throws IOException {
 		if (questionId == -1) {
 			Chapter chapter = ChapterController.getChapter(chapterId);
-			Question question = QuestionController.getFirstQuestionForChapter(chapter);
+			Question question = QuestionController
+					.getFirstQuestionForChapter(chapter);
 			String link = NavigationHelper.getQuizLink(question);
 			link = resp.encodeRedirectURL(link);
 			resp.sendRedirect(link);
@@ -63,22 +64,19 @@ public class QuizServlet
 
 	private String renderQuiz(int questionId) {
 		StringBuilder sb = new StringBuilder();
-		sb.append(String.format(Constants.Markup.HEADLINE1, "Quiz for Chapter " + questionId));
-		sb.append(Constants.Markup.FORM_START);
+		sb.append(String.format(Constants.Markup.HEADLINE1, "Quiz for Chapter "
+				+ questionId));
 
 		Question question = QuestionController.getQuestion(questionId);
 		QuizRenderer quiz = QuestionController.getQuiz(question);
-		sb.append(String.format(Constants.Markup.PAR, question.getQuestion()));
+		quiz.render(sb, question);
 
-		quiz.renderAnswers(sb, question);
-
-		sb.append(Constants.Markup.SUBMIT);
-		sb.append(Constants.Markup.FORM_END);
 		return sb.toString();
 	}
 
 	@Override
-	protected void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest req, HttpServletResponse res)
+			throws ServletException, IOException {
 		int questionId = PathUtil.getCurrentQuestion(req);
 		StateController state = getSessionFromRequest(req);
 
@@ -98,7 +96,8 @@ public class QuizServlet
 			Chapter chapter = lesson.getChapter();
 			Chapter nextChapter = NavigationController.getNextChapter(chapter);
 			if (nextChapter != null) {
-				Lesson firstLesson = LessonController.getFirstLesson(nextChapter);
+				Lesson firstLesson = LessonController
+						.getFirstLesson(nextChapter);
 				next = NavigationHelper.getNavLink(firstLesson);
 			} else {
 				UriBuilder uriBuilder = PathUtil.getBaseUriBuilder();
@@ -113,7 +112,8 @@ public class QuizServlet
 
 	private StateController getSessionFromRequest(HttpServletRequest req) {
 		HttpSession httpSession = req.getSession();
-		Session session = (Session) httpSession.getAttribute(Constants.SESSION_PARAM);
+		Session session = (Session) httpSession
+				.getAttribute(Constants.SESSION_PARAM);
 		StateController state = session.getStateController();
 		return state;
 	}
