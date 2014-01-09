@@ -21,7 +21,7 @@ public class DragNDropQuiz extends QuizRenderer {
 	@Override
 	protected void renderQuestion(StringBuilder builder, Question question) {
 		/*
-		 * http: // www.html5rocks.com/de/tutorials/dnd/basics/
+		 * http://www.html5rocks.com/de/tutorials/dnd/basics/
 		 */
 		String q = question.getQuestion();
 		for (Answer answer : question.getAnswers()) {
