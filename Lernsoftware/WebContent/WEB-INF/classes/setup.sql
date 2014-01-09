@@ -23,14 +23,14 @@ insert into T_ANSWER (answerid, questionid, answer) values (3, 1, 'Antwort 3');
 update T_QUESTION set correctanswer = 2 WHERE questionid = 1;
 
 /* Frage 2 */
-insert into T_QUESTION (questionid, lesson, question, type) values (2, 2, 'Test frage 2', 'multiplechoice');
+insert into T_QUESTION (questionid, lesson, question, type) values (2, 2, 'Test frage 2', 'dragndrop');
 insert into T_ANSWER (answerid, questionid, answer) values (4, 2, 'Antwort 1 (r)');
 insert into T_ANSWER (answerid, questionid, answer) values (5, 2, 'Antwort 2');
 insert into T_ANSWER (answerid, questionid, answer) values (6, 2, 'Antwort 3');
 update T_QUESTION set correctanswer = 4 WHERE questionid = 2;
 
 /* Frage 3 */
-insert into T_QUESTION (questionid, lesson, question, type) values (3, 5, 'Test frage', 'dropdown');
+insert into T_QUESTION (questionid, lesson, question, type) values (3, 5, 'Test frage', 'multiplechoice');
 insert into T_ANSWER (answerid, questionid, answer) values (7, 3, 'Antwort 1 (r)');
 insert into T_ANSWER (answerid, questionid, answer) values (8, 3, 'Antwort 2');
 insert into T_ANSWER (answerid, questionid, answer) values (9, 3, 'Antwort 3');

@@ -20,6 +20,7 @@ import javax.persistence.OrderBy;
 public class Question {
 	public static final String MULTIPLE_CHOICE = "multiplechoice";
 	public static final String DROPDOWN = "dropdown";
+	public static final String DRAGNDROP = "dragndrop";
 	public static final String ADDRESSING = "addressing";
 
 	@Id
