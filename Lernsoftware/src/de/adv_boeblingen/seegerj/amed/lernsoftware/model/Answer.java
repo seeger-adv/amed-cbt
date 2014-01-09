@@ -8,6 +8,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 
+import de.adv_boeblingen.seegerj.amed.lernsoftware.util.CryptUtil;
+
 @Entity(name = "t_answer")
 public class Answer {
 	@Id
@@ -35,6 +37,11 @@ public class Answer {
 	}
 
 	public String getUniqueLabel() {
-		return String.format("%s%s%d", mQuestion.getUniqueLabel(), "a", mId);
+		return String.format("%s%s%d", this.mQuestion.getUniqueLabel(), "a", this.mId);
+	}
+
+	public String getHiddenLabel() {
+		return CryptUtil.toSHA1(getUniqueLabel());
+
 	}
 }

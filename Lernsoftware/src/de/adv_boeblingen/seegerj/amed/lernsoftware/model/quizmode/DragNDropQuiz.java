@@ -25,9 +25,10 @@ public class DragNDropQuiz extends QuizRenderer {
 		 */
 		String q = question.getQuestion();
 		for (Answer answer : question.getAnswers()) {
-			String dropTarget = String.format(Constants.Markup.DROPPABLE,
-					answer.getUniqueLabel());
+			String dropTarget = String.format(Constants.Markup.DROPPABLE, answer.getUniqueLabel());
+			String dropField = String.format(Constants.Markup.HIDDEN_FIELD, answer.getHiddenLabel());
 			q = q.replaceFirst("[{]([q][0-9][a][0-9])[}]", dropTarget);
+			builder.append(dropField);
 		}
 		builder.append(q);
 		builder.append(Constants.Markup.BREAK);
@@ -35,8 +36,7 @@ public class DragNDropQuiz extends QuizRenderer {
 
 	@Override
 	protected void renderAnswer(StringBuilder builder, Answer answer) {
-		String renderedAnswer = String.format(Constants.Markup.DRAGGABLE,
-				answer.getUniqueLabel(), answer.getAnswer());
+		String renderedAnswer = String.format(Constants.Markup.DRAGGABLE, answer.getUniqueLabel(), answer.getAnswer());
 		builder.append(renderedAnswer);
 	}
 }
