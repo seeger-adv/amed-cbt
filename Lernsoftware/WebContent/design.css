@@ -205,6 +205,13 @@ input {
 	margin: 5px;
 }
 
+.droppable {
+	display: inline-block;
+	background: #777;
+	min-width: 75px;
+	margin: 0 5px;
+	border-radius: 5px;
+}
 
 /* Prevent the text contents of draggable elements from being selectable. */
 [draggable] {

@@ -27,7 +27,7 @@ public class DragNDropQuiz extends QuizRenderer {
 		for (Answer answer : question.getAnswers()) {
 			String dropTarget = String.format(Constants.Markup.DROPPABLE,
 					answer.getUniqueLabel());
-			q = q.replaceFirst("[{}]", dropTarget);
+			q = q.replaceFirst("[{]([q][0-9][a][0-9])[}]", dropTarget);
 		}
 		builder.append(q);
 		builder.append(Constants.Markup.BREAK);
