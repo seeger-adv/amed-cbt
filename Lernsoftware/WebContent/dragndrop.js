@@ -1,23 +1,39 @@
-var drop = document.querySelector('.droppable');
+$(function() {
+	$(".draggable").each(function(index, item) {
+		item.setAttribute('draggable', 'true');
 
-// Tells the browser that we *can* drop on this target
-addEvent(drop, 'dragover', cancel);
-addEvent(drop, 'dragenter', cancel);
+		addEvent(item, 'dragstart', function(e) {
+			// only dropEffect='copy' will be dropable
+			e.dataTransfer.effectAllowed = 'move';
 
-addEvent(drop, 'drop', function (event) {
-  // stops the browser from redirecting off to the text.
-  if (event.preventDefault) {
-    event.preventDefault(); 
-  }
+			// required otherwise doesn't work
+			e.dataTransfer.setData('item', item);
+		});
+	});
 
-  this.innerHTML += '<p>' + event.dataTransfer.getData('Text') + '</p>';
+	$(".droppable").each(function(index, item) {
+		// Tells the browser that we *can* drop on this target
+		addEvent(item, 'dragover', cancelDefault);
+		addEvent(item, 'dragenter', cancelDefault);
 
-  return false;
+		addEvent(item, 'drop', function(event) {
+			// stops the browser from redirecting off to the text.
+			if (event.preventDefault) {
+				event.preventDefault();
+			}
+
+			var answerid = event.dataTransfer.getData('item');
+			
+			this.innerHTML = answerid;
+
+			return false;
+		});
+	});
+	
+	function cancelDefault(event) {
+		if (event.preventDefault) {
+			event.preventDefault();
+		}
+		return false;
+	}
 });
-
-function cancel(event) {
-  if (event.preventDefault) {
-    event.preventDefault();
-  }
-  return false;
-}
