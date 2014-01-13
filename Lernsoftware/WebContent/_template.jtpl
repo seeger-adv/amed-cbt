@@ -7,6 +7,7 @@
 		<link rel="stylesheet" type="text/css" href="{baseurl}/design.css">
 		<script src="{baseurl}/jquery-2.0.3.min.js"></script>
 		<script src="{baseurl}/h5utils.js"></script>
+		<script src="{baseurl}/md5.js"></script>
 		<script src="{baseurl}/dragndrop.js"></script>
 	</head>
 <body>
