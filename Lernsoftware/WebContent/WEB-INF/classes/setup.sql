@@ -7,7 +7,7 @@ insert into T_CHAPTER (chapterid, title) values (2, 'IP Addressing');
 
 /* Lektionen */
 insert into T_LESSON (lessonid, title, chapter, content) values (1, 'Introduction', 1, '<applet code="de.adv_boeblingen.seegerj.amed.lernsoftware.applets.IsoOsiApplet.class" codebase="../Applet/" width=750 height=250>');
-insert into T_LESSON (lessonid, title, chapter, content) values (2, 'Layer 1', 1, 'Test content');
+insert into T_LESSON (lessonid, title, chapter, content) values (2, 'Layer 1', 1, '<ul><li>Unipolar Encoding (Return to zero)</li><ul><li>Between 0 and 5 Volts</li></ul><img src="../RZcode.png"><li>Polar Encoding (Non return to zero)</li><ul><li>Shift between -5 and +5 depending on value</li></ul><img src="../NRZ_code.png"><li>Phase Encoding (Manchester)</li><ul><li>Between -5 and +5 Volts depending on phase</li></ul><img src="../Manchester_code.png"></ul>');
 insert into T_LESSON (lessonid, title, chapter, content) values (3, 'Layer 2', 1, 'Test content2');
 insert into T_LESSON (lessonid, title, chapter, content) values (4, 'Layer 3', 1, 'Test content3 und so&hellip;');
 insert into T_LESSON (lessonid, title, chapter, content) values (5, 'Subnetting', 2, '');
