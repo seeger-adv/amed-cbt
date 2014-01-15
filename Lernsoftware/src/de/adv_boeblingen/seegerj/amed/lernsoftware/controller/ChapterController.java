@@ -18,10 +18,10 @@ public class ChapterController {
 	}
 
 	public static boolean isChapterComplete(User user, Chapter chapter) {
-		boolean isComplete = false;
+		boolean isComplete = true;
 
 		for (Lesson lesson : chapter.getLessons()) {
-			isComplete |= LessonController.isComplete(user, lesson);
+			isComplete &= LessonController.isComplete(user, lesson);
 		}
 
 		return isComplete;

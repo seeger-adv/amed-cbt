@@ -30,12 +30,17 @@ public class LessonController {
 
 	public static boolean isComplete(User user, Lesson lesson) {
 		boolean result = true;
+		boolean atLeastOne = false;
+
 		for (Question question : lesson.getQuestions()) {
 			StateControllerImpl state = new StateControllerImpl(user);
 			Response response = state.getResponse(question);
-			result |= (response == null);
+			if (response != null) {
+				atLeastOne = true;
+			}
+			result &= (response != null);
 		}
-		return result;
+		return atLeastOne & result;
 	}
 
 	public static Lesson getFirstLesson(Chapter chapter) {
