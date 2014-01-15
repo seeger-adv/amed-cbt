@@ -25,15 +25,15 @@ public class Answer {
 	private String mAnswer;
 
 	public String getAnswer() {
-		return mAnswer;
+		return this.mAnswer;
 	}
 
 	public int getId() {
-		return mId;
+		return this.mId;
 	}
 
 	public Question getQuestion() {
-		return mQuestion;
+		return this.mQuestion;
 	}
 
 	public String getUniqueLabel() {
@@ -42,6 +42,13 @@ public class Answer {
 
 	public String getHiddenLabel() {
 		return CryptUtil.toSHA1(getUniqueLabel());
+	}
 
+	@Override
+	public boolean equals(Object obj) {
+		if (obj instanceof Answer) {
+			return ((Answer) obj).getId() == getId();
+		}
+		return false;
 	}
 }
