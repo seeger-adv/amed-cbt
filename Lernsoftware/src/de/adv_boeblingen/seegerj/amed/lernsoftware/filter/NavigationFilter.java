@@ -20,13 +20,12 @@ import de.adv_boeblingen.seegerj.amed.lernsoftware.model.Chapter;
 import de.adv_boeblingen.seegerj.amed.lernsoftware.model.Lesson;
 
 @WebFilter(urlPatterns = { "/Quiz/*", "/Lesson/*", "/Stats/*" })
-public class NavigationFilter
-implements Filter {
+public class NavigationFilter implements Filter {
 	StringBuilder renderedNavigation;
 
 	@Override
 	public void doFilter(ServletRequest req, ServletResponse resp, FilterChain chain) throws IOException,
-	ServletException {
+			ServletException {
 
 		final StateController stateController = NavigationController.retrieveFromSession(req);
 		final VariableMap map = VariableMap.getMappingFromRequest(req);
@@ -48,13 +47,16 @@ implements Filter {
 	private void renderChapter(Chapter chapter, StateController stateController) {
 		this.renderedNavigation.append("<ul>").append(String.format("<li>%s</li>", chapter.getTitle()));
 		boolean isCurrent = stateController.isCurrentChapter(chapter);
+		boolean isChapterComplete = true;
 
 		for (Lesson lesson : chapter.getLessons()) {
-			renderLesson(lesson, stateController, isCurrent);
+			boolean isLessonComplete = stateController.isLessonComplete(lesson);
+			isChapterComplete &= isLessonComplete;
+			renderLesson(lesson, stateController, isCurrent, isLessonComplete);
 		}
 
 		String htmlClass = null;
-		if (stateController.isChapterComplete(chapter)) {
+		if (isChapterComplete) {
 			htmlClass = "done";
 		}
 		createEntry("Quiz", NavigationHelper.getQuizLink(chapter), htmlClass);
@@ -62,10 +64,15 @@ implements Filter {
 		this.renderedNavigation.append("</ul>");
 	}
 
-	private void renderLesson(Lesson lesson, StateController stateController, boolean isCurrent) {
+	private void renderLesson(Lesson lesson, StateController stateController, boolean isCurrent, boolean isComplete) {
 		String label = lesson.getTitle();
 		String link = NavigationHelper.getNavLink(lesson);
-		createEntry(label, link, null);
+
+		String htmlClass = null;
+		if (isComplete) {
+			htmlClass = "done";
+		}
+		createEntry(label, link, htmlClass);
 	}
 
 	private void createEntry(String label, String link, String htmlClass) {
