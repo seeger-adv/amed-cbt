@@ -35,5 +35,20 @@ public class ChapterController {
 			}
 		});
 	}
+
 	public static Chapter getNextChapter(Chapter chapter) {
+		boolean found = false;
+		for (Chapter currentChapter : ChapterController.getChapters()) {
+			if (currentChapter.equals(chapter)) {
+				found = true;
+				continue;
+			}
+
+			if (found) {
+				return currentChapter;
+			}
+		}
+
+		return null;
+	}
 }
