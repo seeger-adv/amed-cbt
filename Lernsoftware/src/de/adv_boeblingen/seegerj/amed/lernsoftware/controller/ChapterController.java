@@ -35,4 +35,5 @@ public class ChapterController {
 			}
 		});
 	}
+	public static Chapter getNextChapter(Chapter chapter) {
 }

@@ -52,4 +52,20 @@ public class QuestionController {
 		}
 		return null;
 	}
+
+	public static Question getNextQuestion(Question question) {
+		boolean found = false;
+		Lesson lesson = question.getLesson();
+		for (Question currentQuestion : lesson.getQuestions()) {
+			if (currentQuestion.equals(question)) {
+				found = true;
+				continue;
+			}
+
+			if (found) {
+				return currentQuestion;
+			}
+		}
+		return null;
+	}
 }
