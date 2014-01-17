@@ -26,7 +26,7 @@ public class UserController {
 			return null;
 		}
 
-		String passwordHash = CryptUtil.toSHA1(password);
+		String passwordHash = CryptUtil.loginHash(password);
 		if (foundUser.getPassword().equals(passwordHash)) {
 			writeLoginTime(foundUser);
 			return new Session(foundUser);
@@ -68,7 +68,7 @@ public class UserController {
 
 	public static final Session register(final String username, final String password) {
 		final long now = new Date().getTime();
-		final String hash = CryptUtil.toSHA1(password);
+		final String hash = CryptUtil.loginHash(password);
 
 		DatabaseUtil.runTransaction(new DatabaseRunnable<Void>() {
 			@Override

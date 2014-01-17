@@ -6,7 +6,7 @@ import java.security.NoSuchAlgorithmException;
 import de.adv_boeblingen.seegerj.amed.lernsoftware.misc.Configuration;
 
 public class CryptUtil {
-	public static String toSHA1(String convertme) {
+	public static String loginHash(String convertme) {
 		MessageDigest md = null;
 		try {
 			md = MessageDigest.getInstance(Configuration.HASH_ALGORITHM);
