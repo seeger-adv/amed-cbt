@@ -37,7 +37,7 @@ public class DragNDropQuiz extends QuizRenderer {
 
 	@Override
 	protected void renderAnswer(StringBuilder builder, Answer answer) {
-		String renderedAnswer = String.format(Constants.Markup.DRAGGABLE, answer.getUniqueLabel(), answer.getAnswer());
+		String renderedAnswer = String.format(Constants.Markup.DRAGGABLE, answer.getHiddenLabel(), answer.getAnswer());
 		builder.append(renderedAnswer);
 	}
 }
