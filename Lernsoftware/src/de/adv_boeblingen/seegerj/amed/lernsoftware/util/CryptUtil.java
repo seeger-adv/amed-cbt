@@ -25,4 +25,15 @@ public class CryptUtil {
 		}
 		return result;
 	}
+
+	public static String md5(String convertme) {
+		MessageDigest md = null;
+		try {
+			md = MessageDigest.getInstance("MD5");
+		} catch (NoSuchAlgorithmException e) {
+			e.printStackTrace();
+		}
+		byte[] hash = md.digest(convertme.getBytes());
+		return byteArrayToHexString(hash);
+	}
 }
