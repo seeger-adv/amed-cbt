@@ -25,10 +25,15 @@ public class DragNDropQuiz extends QuizRenderer {
 		 * http://www.html5rocks.com/de/tutorials/dnd/basics/
 		 */
 		String q = question.getQuestion();
+		String droppableMarkup = Constants.Markup.DROPPABLE;
+		String hiddenField = Constants.Markup.HIDDEN_FIELD;
+		String qIdentifier = "[{]([q][0-9][a][0-9])[}]";
 		for (Answer answer : question.getAnswers()) {
-			String dropTarget = String.format(Constants.Markup.DROPPABLE, answer.getUniqueLabel());
-			String dropField = String.format(Constants.Markup.HIDDEN_FIELD, answer.getHiddenLabel());
-			q = q.replaceFirst("[{]([q][0-9][a][0-9])[}]", dropTarget);
+			String uniqueLabel = answer.getUniqueLabel();
+			String dropTarget = String.format(droppableMarkup, uniqueLabel);
+			String hiddenLabel = answer.getHiddenLabel();
+			String dropField = String.format(hiddenField, hiddenLabel);
+			q = q.replaceFirst(qIdentifier, dropTarget);
 			builder.append(dropField);
 		}
 		builder.append(q);
@@ -37,7 +42,10 @@ public class DragNDropQuiz extends QuizRenderer {
 
 	@Override
 	protected void renderAnswer(StringBuilder builder, Answer answer) {
-		String renderedAnswer = String.format(Constants.Markup.DRAGGABLE, answer.getHiddenLabel(), answer.getAnswer());
+		String label = answer.getHiddenLabel();
+		String answerText = answer.getAnswer();
+		String draggableMarkup = Constants.Markup.DRAGGABLE;
+		String renderedAnswer = String.format(draggableMarkup, label, answerText);
 		builder.append(renderedAnswer);
 	}
 }
