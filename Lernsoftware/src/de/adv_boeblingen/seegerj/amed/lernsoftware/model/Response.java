@@ -9,7 +9,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 @Entity(name = "t_response")
-public class Response {
+public final class Response {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int bla;
@@ -26,11 +26,14 @@ public class Response {
 	@JoinColumn(name = "answer")
 	protected Answer mGivenAnswer;
 
+	@Column(name = "givenvalue")
+	protected String mGivenValue;
+
 	@Column(name = "timestamp")
 	private long mTimestamp;
 
 	public User getUser() {
-		return mUser;
+		return this.mUser;
 	}
 
 	public void setUser(User mUser) {
@@ -38,7 +41,7 @@ public class Response {
 	}
 
 	public Question getQuestion() {
-		return mQuestion;
+		return this.mQuestion;
 	}
 
 	public void setQuestion(Question mQuestion) {
@@ -46,7 +49,7 @@ public class Response {
 	}
 
 	public Answer getGivenAnswer() {
-		return mGivenAnswer;
+		return this.mGivenAnswer;
 	}
 
 	public void setGivenAnswer(Answer mGivenAnswer) {
@@ -54,10 +57,18 @@ public class Response {
 	}
 
 	public long getTimestamp() {
-		return mTimestamp;
+		return this.mTimestamp;
 	}
 
 	public void setTimestamp(long mTimestamp) {
 		this.mTimestamp = mTimestamp;
+	}
+
+	public void setGivenValue(String value) {
+		this.mGivenValue = value;
+	}
+
+	public String getGivenValue() {
+		return this.mGivenValue;
 	}
 }

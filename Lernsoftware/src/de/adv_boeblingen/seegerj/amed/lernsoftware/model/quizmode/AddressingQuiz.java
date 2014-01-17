@@ -4,8 +4,12 @@ import javax.servlet.http.HttpServletRequest;
 
 import de.adv_boeblingen.seegerj.amed.lernsoftware.model.Answer;
 
-public class AddressingQuiz
-		extends QuizRenderer {
+/**
+ * http://jsfiddle.net/3F2gM/3/
+ * 
+ * @author seegerj
+ */
+public class AddressingQuiz extends QuizRenderer {
 
 	@Override
 	public Answer getAnswer(HttpServletRequest request) {
@@ -21,5 +25,4 @@ public class AddressingQuiz
 	protected void renderAnswer(StringBuilder builder, Answer answer) {
 
 	}
-
 }

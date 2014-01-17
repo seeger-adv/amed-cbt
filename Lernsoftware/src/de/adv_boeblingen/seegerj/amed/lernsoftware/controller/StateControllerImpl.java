@@ -86,4 +86,23 @@ public class StateControllerImpl
 	public boolean isChapterComplete(Chapter chapter) {
 		return ChapterController.isChapterComplete(this.mUser, chapter);
 	}
+
+	@Override
+	public Boolean isUserResponseCorrect(Response response) {
+		if (response == null) {
+			// not answered yet
+			return null;
+		}
+
+		Question question = response.getQuestion();
+
+		Answer givenAnswer = response.getGivenAnswer();
+		Answer correctAnswer = question.getCorrectAnswer();
+		if (givenAnswer != null) {
+			return givenAnswer.equals(correctAnswer);
+		} else {
+			String givenValue = response.getGivenValue();
+			return givenValue.equalsIgnoreCase(correctAnswer.getAnswer());
+		}
+	}
 }
