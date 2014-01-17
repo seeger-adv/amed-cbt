@@ -1,6 +1,5 @@
 package de.adv_boeblingen.seegerj.amed.lernsoftware.controller;
 
-import de.adv_boeblingen.seegerj.amed.lernsoftware.model.Answer;
 import de.adv_boeblingen.seegerj.amed.lernsoftware.model.Chapter;
 import de.adv_boeblingen.seegerj.amed.lernsoftware.model.Lesson;
 import de.adv_boeblingen.seegerj.amed.lernsoftware.model.Question;
@@ -13,7 +12,7 @@ public interface StateController {
 
 	Response getResponse(Question question);
 
-	void answerQuestion(Answer givenAnswer);
+	void answerQuestion(Response response);
 
 	boolean isChapterComplete(Chapter chapter);
 

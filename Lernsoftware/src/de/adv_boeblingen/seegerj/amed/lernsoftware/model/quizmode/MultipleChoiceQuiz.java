@@ -8,13 +8,15 @@ import de.adv_boeblingen.seegerj.amed.lernsoftware.model.Answer;
 import de.adv_boeblingen.seegerj.amed.lernsoftware.model.Chapter;
 import de.adv_boeblingen.seegerj.amed.lernsoftware.model.Lesson;
 import de.adv_boeblingen.seegerj.amed.lernsoftware.model.Question;
+import de.adv_boeblingen.seegerj.amed.lernsoftware.model.Response;
 import de.adv_boeblingen.seegerj.amed.lernsoftware.util.PathUtil;
 
 public class MultipleChoiceQuiz
 		extends QuizRenderer {
 
 	@Override
-	public Answer getAnswer(HttpServletRequest req) {
+	public Response getResponse(HttpServletRequest req) {
+		Response response = new Response();
 		int id = PathUtil.getFirstUrlSegmentAsId(req);
 		Chapter chapter = ChapterController.getChapter(id);
 
@@ -24,7 +26,8 @@ public class MultipleChoiceQuiz
 				for (Answer answer : question.getAnswers()) {
 					String answerLabel = answer.getUniqueLabel();
 					if (answerLabel.equals(answerParameter)) {
-						return answer;
+						response.setGivenAnswer(answer);
+						return response;
 					}
 				}
 			}

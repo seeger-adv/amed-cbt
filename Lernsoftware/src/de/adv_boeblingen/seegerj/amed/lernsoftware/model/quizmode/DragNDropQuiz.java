@@ -5,6 +5,7 @@ import javax.servlet.http.HttpServletRequest;
 import de.adv_boeblingen.seegerj.amed.lernsoftware.misc.Constants;
 import de.adv_boeblingen.seegerj.amed.lernsoftware.model.Answer;
 import de.adv_boeblingen.seegerj.amed.lernsoftware.model.Question;
+import de.adv_boeblingen.seegerj.amed.lernsoftware.model.Response;
 
 public class DragNDropQuiz extends QuizRenderer {
 

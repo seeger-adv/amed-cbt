@@ -3,6 +3,7 @@ package de.adv_boeblingen.seegerj.amed.lernsoftware.model.quizmode;
 import javax.servlet.http.HttpServletRequest;
 
 import de.adv_boeblingen.seegerj.amed.lernsoftware.model.Answer;
+import de.adv_boeblingen.seegerj.amed.lernsoftware.model.Response;
 
 /**
  * http://jsfiddle.net/3F2gM/3/
@@ -12,7 +13,7 @@ import de.adv_boeblingen.seegerj.amed.lernsoftware.model.Answer;
 public class AddressingQuiz extends QuizRenderer {
 
 	@Override
-	public Answer getAnswer(HttpServletRequest request) {
+	public Response getResponse(HttpServletRequest request) {
 		return null;
 	}
 

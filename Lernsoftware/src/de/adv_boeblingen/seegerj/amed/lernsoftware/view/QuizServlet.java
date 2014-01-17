@@ -18,9 +18,9 @@ import de.adv_boeblingen.seegerj.amed.lernsoftware.misc.Constants;
 import de.adv_boeblingen.seegerj.amed.lernsoftware.misc.NavigationHelper;
 import de.adv_boeblingen.seegerj.amed.lernsoftware.misc.TemplateRenderer;
 import de.adv_boeblingen.seegerj.amed.lernsoftware.misc.VariableMap;
-import de.adv_boeblingen.seegerj.amed.lernsoftware.model.Answer;
 import de.adv_boeblingen.seegerj.amed.lernsoftware.model.Chapter;
 import de.adv_boeblingen.seegerj.amed.lernsoftware.model.Question;
+import de.adv_boeblingen.seegerj.amed.lernsoftware.model.Response;
 import de.adv_boeblingen.seegerj.amed.lernsoftware.model.Session;
 import de.adv_boeblingen.seegerj.amed.lernsoftware.model.quizmode.QuizRenderer;
 import de.adv_boeblingen.seegerj.amed.lernsoftware.util.PathUtil;
@@ -98,9 +98,11 @@ public class QuizServlet extends HttpServlet {
 
 		Question question = QuestionController.getQuestion(questionId);
 		QuizRenderer quiz = QuestionController.getQuiz(question);
-		Answer answer = quiz.getAnswer(req);
-		if (answer != null) {
-			state.answerQuestion(answer);
+
+		Response response = quiz.getResponse(req);
+		response.setQuestion(question);
+		if (response != null) {
+			state.answerQuestion(response);
 		}
 
 		String next = NavigationController.getLinkToNextQuestionOrChapter(question);

@@ -67,13 +67,10 @@ public class StateControllerImpl
 	}
 
 	@Override
-	public void answerQuestion(final Answer givenAnswer) {
+	public void answerQuestion(final Response response) {
 		DatabaseUtil.runTransaction(new DatabaseRunnable<Void>() {
 			@Override
 			public Void run(EntityManager manager, EntityTransaction transaction) {
-				Response response = new Response();
-				response.setGivenAnswer(givenAnswer);
-				response.setQuestion(givenAnswer.getQuestion());
 				response.setUser(mUser);
 				response.setTimestamp(new Date().getTime());
 				manager.persist(response);
