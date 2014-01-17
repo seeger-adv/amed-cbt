@@ -41,7 +41,7 @@ public class Answer {
 	}
 
 	public String getHiddenLabel() {
-		return CryptUtil.toSHA1(getUniqueLabel());
+		return CryptUtil.md5(getUniqueLabel());
 	}
 
 	@Override
