@@ -23,10 +23,9 @@ insert into T_ANSWER (answerid, questionid, answer) values (3, 1, 'Antwort 3');
 update T_QUESTION set correctanswer = 2 WHERE questionid = 1;
 
 /* Frage 2 */
-insert into T_QUESTION (questionid, lesson, question, type) values (2, 2, 'Test frage 2 {q1a2} mit Drag&{q1a2}', 'dragndrop');
+insert into T_QUESTION (questionid, lesson, question, type, valanswer) values (2, 2, 'Test frage 2 {q1a2} mit Drag&{q1a2}', 'dragndrop', 'q1a');
 insert into T_ANSWER (answerid, questionid, answer) values (4, 2, 'Antwort 1');
 insert into T_ANSWER (answerid, questionid, answer) values (5, 2, 'Antwort 2');
-update T_QUESTION set correctanswer = 4 WHERE questionid = 2;
 
 /* Frage 3 */
 insert into T_QUESTION (questionid, lesson, question, type) values (3, 5, 'Test frage', 'multiplechoice');

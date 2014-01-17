@@ -21,8 +21,7 @@ import de.adv_boeblingen.seegerj.amed.lernsoftware.model.User;
 import de.adv_boeblingen.seegerj.amed.lernsoftware.util.DatabaseUtil;
 import de.adv_boeblingen.seegerj.amed.lernsoftware.util.DatabaseUtil.DatabaseRunnable;
 
-public class StateControllerImpl
-		implements StateController {
+public class StateControllerImpl implements StateController {
 	private final User mUser;
 
 	public StateControllerImpl(User mUser) {
@@ -51,7 +50,7 @@ public class StateControllerImpl
 				Root<Response> response = criteria.from(Response.class);
 
 				Path<Object> userPath = response.get("mUser").get("mUsername");
-				Predicate userPredicate = builder.equal(userPath, mUser.getUsername());
+				Predicate userPredicate = builder.equal(userPath, StateControllerImpl.this.mUser.getUsername());
 				Path<Integer> questionPath = response.get("mQuestion").get("mId");
 				Predicate questionPredicate = builder.equal(questionPath, question.getId());
 				criteria.select(response).where(builder.and(userPredicate, questionPredicate));
@@ -71,7 +70,7 @@ public class StateControllerImpl
 		DatabaseUtil.runTransaction(new DatabaseRunnable<Void>() {
 			@Override
 			public Void run(EntityManager manager, EntityTransaction transaction) {
-				response.setUser(mUser);
+				response.setUser(StateControllerImpl.this.mUser);
 				response.setTimestamp(new Date().getTime());
 				manager.persist(response);
 				return null;
@@ -92,14 +91,16 @@ public class StateControllerImpl
 		}
 
 		Question question = response.getQuestion();
-
-		Answer givenAnswer = response.getGivenAnswer();
-		Answer correctAnswer = question.getCorrectAnswer();
-		if (givenAnswer != null) {
-			return givenAnswer.equals(correctAnswer);
+		if (question.isValueAnswer()) {
+			return response.getGivenValue().equals(question.getValueAnswer());
 		} else {
-			String givenValue = response.getGivenValue();
-			return givenValue.equalsIgnoreCase(correctAnswer.getAnswer());
+			Answer givenAnswer = response.getGivenAnswer();
+			Answer correctAnswer = question.getCorrectAnswer();
+			if (givenAnswer != null) {
+				return givenAnswer.equals(correctAnswer);
+			} else {
+				return null;
+			}
 		}
 	}
 }

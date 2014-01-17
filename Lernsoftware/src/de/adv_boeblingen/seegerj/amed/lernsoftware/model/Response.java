@@ -26,7 +26,7 @@ public final class Response {
 	@JoinColumn(name = "answer")
 	protected Answer mGivenAnswer;
 
-	@Column(name = "givenvalue")
+	@Column(name = "value")
 	protected String mGivenValue;
 
 	@Column(name = "timestamp")

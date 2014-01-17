@@ -2,16 +2,30 @@ package de.adv_boeblingen.seegerj.amed.lernsoftware.model.quizmode;
 
 import javax.servlet.http.HttpServletRequest;
 
+import de.adv_boeblingen.seegerj.amed.lernsoftware.controller.QuestionController;
 import de.adv_boeblingen.seegerj.amed.lernsoftware.misc.Constants;
 import de.adv_boeblingen.seegerj.amed.lernsoftware.model.Answer;
 import de.adv_boeblingen.seegerj.amed.lernsoftware.model.Question;
 import de.adv_boeblingen.seegerj.amed.lernsoftware.model.Response;
+import de.adv_boeblingen.seegerj.amed.lernsoftware.util.PathUtil;
 
 public class DragNDropQuiz extends QuizRenderer {
 
 	@Override
-	public Answer getAnswer(HttpServletRequest request) {
-		return null;
+	public Response getResponse(HttpServletRequest request) {
+		int questionId = PathUtil.getCurrentQuestion(request);
+		Question question = QuestionController.getQuestion(questionId);
+
+		StringBuilder value = new StringBuilder();
+		for (Answer answer : question.getAnswers()) {
+			String hiddenLabel = answer.getHiddenLabel();
+			String given = request.getParameter(hiddenLabel);
+			value.append(given);
+		}
+
+		Response response = new Response();
+		response.setGivenValue(value.toString());
+		return response;
 	}
 
 	@Override
