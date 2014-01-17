@@ -100,8 +100,8 @@ public class QuizServlet extends HttpServlet {
 		QuizRenderer quiz = QuestionController.getQuiz(question);
 
 		Response response = quiz.getResponse(req);
-		response.setQuestion(question);
 		if (response != null) {
+			response.setQuestion(question);
 			state.answerQuestion(response);
 		}
 
