@@ -7,7 +7,7 @@ $(function() {
 			e.dataTransfer.effectAllowed = 'move';
 
 			// required otherwise doesn't work
-			e.dataTransfer.setData('item', item);
+			e.dataTransfer.setData('item', item.id);
 		});
 	});
 
@@ -21,10 +21,15 @@ $(function() {
 			if (event.preventDefault) {
 				event.preventDefault();
 			}
-
-			var answerid = event.dataTransfer.getData('item');
 			
-			this.innerHTML = answerid;
+			var answerid = event.dataTransfer.getData('item');
+			var answeritem = $("#"+answerid+".draggable")[0];
+
+			var droppableid = MD5(item.id);
+			var responsefield = $("[name=" + droppableid + "]")[0];
+
+			responsefield.value = answerid;
+			item.innerHTML = answeritem.innerHTML;
 
 			return false;
 		});
