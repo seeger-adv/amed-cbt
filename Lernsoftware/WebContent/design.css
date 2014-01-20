@@ -144,6 +144,7 @@ form#login #login {
 }
 
 form#login #reg {
+	color: #aaa;
     background: linear-gradient(to bottom, #7a001c 1%,#4e0012 100%);
     border-radius:2px;
     cursor:pointer;
