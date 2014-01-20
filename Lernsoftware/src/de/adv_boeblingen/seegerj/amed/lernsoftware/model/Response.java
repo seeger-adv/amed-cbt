@@ -11,8 +11,9 @@ import javax.persistence.ManyToOne;
 @Entity(name = "t_response")
 public final class Response {
 	@Id
+	@Column(name = "responseid")
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private int bla;
+	private int mResponseId;
 
 	@ManyToOne
 	@JoinColumn(name = "user")
