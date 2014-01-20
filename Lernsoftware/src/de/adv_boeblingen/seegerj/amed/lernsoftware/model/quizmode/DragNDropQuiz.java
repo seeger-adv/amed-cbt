@@ -56,7 +56,7 @@ public class DragNDropQuiz extends QuizRenderer {
 
 	@Override
 	protected void renderAnswer(StringBuilder builder, Answer answer) {
-		String label = answer.getHiddenLabel();
+		String label = answer.getUniqueLabel();
 		String answerText = answer.getAnswer();
 		String draggableMarkup = Constants.Markup.DRAGGABLE;
 		String renderedAnswer = String.format(draggableMarkup, label, answerText);
