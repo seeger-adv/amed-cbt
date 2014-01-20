@@ -67,6 +67,14 @@ public class UserController {
 	}
 
 	public static final Session register(final String username, final String password) {
+		if (username == null || username.isEmpty()) {
+			return null;
+		}
+
+		if (password == null || password.isEmpty()) {
+			return null;
+		}
+
 		final long now = new Date().getTime();
 		final String hash = CryptUtil.loginHash(password);
 
