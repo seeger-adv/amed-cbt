@@ -6,12 +6,12 @@ insert into T_CHAPTER (chapterid, title) values (1, 'OSI Stack');
 insert into T_CHAPTER (chapterid, title) values (2, 'IP Addressing');
 
 /* Lektionen */
-insert into T_LESSON (lessonid, title, chapter, content) values (1, 'Introduction', 1, '<p>Hi I&apos;m Troy McClure. You may remember me from educational software like <i>Clicky the Mouse</i>, <i>Kerberos, your friendly authentication mechanism</i> and <i>Wait, where did my Reference go! Garbage Collection 101</i></p><applet code="de.adv_boeblingen.seegerj.amed.lernsoftware.applets.IsoOsiApplet.class" codebase="../Applet/" width=750 height=250>');
+insert into T_LESSON (lessonid, title, chapter, content) values (1, 'Introduction', 1, '<p>Hi I&apos;m Troy McClure. You may remember me from educational software like <i>Clicky the Mouse</i>, <i>Kerberos, your friendly authentication mechanism</i> and <i>Wait, where did my Reference go! Garbage Collection 101</i></p><iframe width="853" height="480" src="//www.youtube.com/embed/ekKDoBhoH-U?list=PLMM1dVgDCD2SVekXIYjKvOJNZRSYz2dXI" frameborder="0" allowfullscreen></iframe>');
 insert into T_LESSON (lessonid, title, chapter, content) values (2, 'Layer 1', 1, '<p>In order to successfully transmit data sender and receiver must have a common understanding of the symbols used for the transmission and their meaning.</p><ul><li>Unipolar Encoding (Return to zero)</li><ul><li>Between 0 and 5 Volts</li></ul><img src="../RZcode.png"><li>Polar Encoding (Non return to zero)</li><ul><li>Shift between -5 and +5 depending on value</li></ul><img src="../NRZ_code.png"><li>Phase Encoding (Manchester)</li><ul><li>Between -5 and +5 Volts depending on phase</li></ul><img src="../Manchester_code.png"></ul>');
 insert into T_LESSON (lessonid, title, chapter, content) values (3, 'Layer 2', 1, '<ul><li>Provides communication in the local (switched) network</li><li>Simple addressing scheme based on hardware identifiers</li></ul>');
 insert into T_LESSON (lessonid, title, chapter, content) values (4, 'Layer 3', 1, 'Test content3 und so&hellip;');
 insert into T_LESSON (lessonid, title, chapter, content) values (5, 'Subnetting', 2, '');
-insert into T_LESSON (lessonid, title, chapter, content) values (6, 'Classful Addressing', 2, '');
+insert into T_LESSON (lessonid, title, chapter, content) values (6, 'Classful Addressing', 2, '<applet code="de.adv_boeblingen.seegerj.amed.lernsoftware.applets.SubnetApplet.class" codebase="../Applet/" width=750 height=250>');
 insert into T_LESSON (lessonid, title, chapter, content) values (7, 'Classless Addressing', 2, '');
 insert into T_LESSON (lessonid, title, chapter, content) values (8, 'Supernetting', 2, '');
 
