@@ -226,3 +226,7 @@ input {
   -khtml-user-drag: element;
   -webkit-user-drag: element;
 }
+
+input.adressing{
+	font-family: monospace;
+}

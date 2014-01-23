@@ -28,5 +28,6 @@ public class Constants {
 		public static final String DRAGGABLE = "<div id=\"%s\" class=\"draggable\">%s</div>";
 		public static final String DROPPABLE = "<div id=\"%s\" class=\"droppable\">&nbsp;</div>";
 		public static final String HIDDEN_FIELD = "<input type=\"hidden\" name=\"%s\">";
+		public static final String ADRESSINGBOX = "<input type=\"text\" class=\"adress\" name=\"adress\" placeholder=\"xxx.xxx.xxx.xxx\" />";
 	}
 }

@@ -2,6 +2,7 @@ package de.adv_boeblingen.seegerj.amed.lernsoftware.model.quizmode;
 
 import javax.servlet.http.HttpServletRequest;
 
+import de.adv_boeblingen.seegerj.amed.lernsoftware.misc.Constants;
 import de.adv_boeblingen.seegerj.amed.lernsoftware.model.Answer;
 import de.adv_boeblingen.seegerj.amed.lernsoftware.model.Response;
 
@@ -14,7 +15,11 @@ public class AddressingQuiz extends QuizRenderer {
 
 	@Override
 	public Response getResponse(HttpServletRequest request) {
-		return null;
+		String given = request.getParameter("adress");
+
+		Response response = new Response();
+		response.setGivenValue(given.toString());
+		return response;
 	}
 
 	@Override
@@ -24,6 +29,6 @@ public class AddressingQuiz extends QuizRenderer {
 
 	@Override
 	protected void renderAnswer(StringBuilder builder, Answer answer) {
-
+		builder.append(Constants.Markup.ADRESSINGBOX).append(Constants.Markup.BREAK);
 	}
 }
