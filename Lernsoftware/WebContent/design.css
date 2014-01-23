@@ -195,10 +195,12 @@ input {
 
 #state > div.correct {
 	background: linear-gradient(to bottom, #26bf0f 0%,#299a0b 100%);
+	cursor:default;
 }
 
 #state > div.wrong {
     background: linear-gradient(to bottom, #a90329 0%,#8f0222 44%,#6d0019 100%);
+    cursor:default;
 }
 
 .draggable {
