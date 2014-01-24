@@ -19,7 +19,7 @@ import de.adv_boeblingen.seegerj.amed.lernsoftware.misc.VariableMap;
 import de.adv_boeblingen.seegerj.amed.lernsoftware.model.Chapter;
 import de.adv_boeblingen.seegerj.amed.lernsoftware.model.Lesson;
 
-@WebFilter(urlPatterns = { "/Quiz/*", "/Lesson/*", "/Stats/*" })
+@WebFilter(urlPatterns = { "/Quiz/*", "/Lesson/*", "/Stats" })
 public class NavigationFilter implements Filter {
 	StringBuilder renderedNavigation;
 
@@ -40,6 +40,8 @@ public class NavigationFilter implements Filter {
 		for (Chapter chapter : ChapterController.getChapters()) {
 			renderChapter(chapter, stateController);
 		}
+
+		createEntry("Stats", NavigationHelper.getStatLink(), null);
 
 		return this.renderedNavigation.toString();
 	}

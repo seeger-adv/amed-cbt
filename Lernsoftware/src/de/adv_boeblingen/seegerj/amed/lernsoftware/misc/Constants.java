@@ -29,5 +29,11 @@ public class Constants {
 		public static final String DROPPABLE = "<div id=\"%s\" class=\"droppable\">&nbsp;</div>";
 		public static final String HIDDEN_FIELD = "<input type=\"hidden\" name=\"%s\">";
 		public static final String ADRESSINGBOX = "<input type=\"text\" class=\"adress\" name=\"adress\" placeholder=\"xxx.xxx.xxx.xxx\" />";
+		public static final String TABLE_HEAD = "<table border=1>";
+		public static final String ROW_HEAD = "<tr>";
+		public static final String ROW_END = "</tr>";
+		public static final String TABLE_END = "</table>";
+		public static final String CELL_HEAD = "<td>";
+		public static final String CELL_END = "</td>";
 	}
 }

@@ -4,6 +4,7 @@ import de.adv_boeblingen.seegerj.amed.lernsoftware.model.Chapter;
 import de.adv_boeblingen.seegerj.amed.lernsoftware.model.Lesson;
 import de.adv_boeblingen.seegerj.amed.lernsoftware.model.Question;
 import de.adv_boeblingen.seegerj.amed.lernsoftware.model.Response;
+import de.adv_boeblingen.seegerj.amed.lernsoftware.model.User;
 
 public interface StateController {
 	boolean isCurrentChapter(Chapter chapter);
@@ -17,4 +18,6 @@ public interface StateController {
 	boolean isChapterComplete(Chapter chapter);
 
 	Boolean isUserResponseCorrect(Response response);
+
+	User getUser();
 }

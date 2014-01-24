@@ -6,6 +6,7 @@ import java.util.Collections;
 import javax.servlet.http.HttpServletRequest;
 
 import de.adv_boeblingen.seegerj.amed.lernsoftware.misc.Constants;
+import de.adv_boeblingen.seegerj.amed.lernsoftware.misc.NavigationHelper;
 import de.adv_boeblingen.seegerj.amed.lernsoftware.model.Answer;
 import de.adv_boeblingen.seegerj.amed.lernsoftware.model.Question;
 import de.adv_boeblingen.seegerj.amed.lernsoftware.model.Response;
@@ -29,8 +30,7 @@ public abstract class QuizRenderer {
 	protected abstract void renderAnswer(StringBuilder builder, Answer answer);
 
 	protected void renderQuestion(StringBuilder builder, Question question) {
-		builder.append(String.format(Constants.Markup.PAR,
-				question.getQuestion()));
+		builder.append(String.format(Constants.Markup.PAR, question.getQuestion()));
 	}
 
 	public void render(StringBuilder builder, Question question) {
@@ -42,5 +42,8 @@ public abstract class QuizRenderer {
 		builder.append(Constants.Markup.BREAK);
 		builder.append(Constants.Markup.SUBMIT);
 		builder.append(Constants.Markup.FORM_END);
+
+		String helperLink = NavigationHelper.getHelperLink(question);
+		builder.append(helperLink);
 	}
 }
