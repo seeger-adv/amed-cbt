@@ -4,6 +4,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import de.adv_boeblingen.seegerj.amed.lernsoftware.misc.Constants;
 import de.adv_boeblingen.seegerj.amed.lernsoftware.model.Answer;
+import de.adv_boeblingen.seegerj.amed.lernsoftware.model.Question;
 import de.adv_boeblingen.seegerj.amed.lernsoftware.model.Response;
 
 /**
@@ -25,6 +26,11 @@ public class AddressingQuiz extends QuizRenderer {
 	@Override
 	protected boolean supportsShuffledAnswers() {
 		return false;
+	}
+
+	@Override
+	public void renderAnswers(StringBuilder builder, Question question) {
+		renderAnswer(builder, null);
 	}
 
 	@Override
