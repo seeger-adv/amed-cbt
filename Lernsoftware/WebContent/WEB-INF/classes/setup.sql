@@ -33,3 +33,6 @@ insert into T_ANSWER (answerid, questionid, answer) values (7, 3, 'Antwort 1 (r)
 insert into T_ANSWER (answerid, questionid, answer) values (8, 3, 'Antwort 2');
 insert into T_ANSWER (answerid, questionid, answer) values (9, 3, 'Antwort 3');
 update T_QUESTION set correctanswer = 7 WHERE questionid = 3;
+
+/* Frage 4 */
+insert into T_QUESTION (questionid, lesson, question, type, isvalanswer, valanswer) values (4, 6, 'Enter the first available address that can be used by a host for 192.168.34.0/24.', 'addressing', true, '192.168.34.1');

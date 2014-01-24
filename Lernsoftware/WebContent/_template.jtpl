@@ -9,6 +9,8 @@
 		<script src="{baseurl}/h5utils.js"></script>
 		<script src="{baseurl}/md5.js"></script>
 		<script src="{baseurl}/dragndrop.js"></script>
+		<script src="{baseurl}/maskedinput.jquery.js"></script>
+		<script src="{baseurl}/addressfield.js"></script>
 	</head>
 <body>
 	<section id="header">
