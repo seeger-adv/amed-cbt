@@ -1,11 +1,13 @@
 package de.adv_boeblingen.seegerj.amed.lernsoftware.controller;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 
 import de.adv_boeblingen.seegerj.amed.lernsoftware.misc.Messages;
+import de.adv_boeblingen.seegerj.amed.lernsoftware.misc.RetrieveAllQuery;
 import de.adv_boeblingen.seegerj.amed.lernsoftware.model.Session;
 import de.adv_boeblingen.seegerj.amed.lernsoftware.model.User;
 import de.adv_boeblingen.seegerj.amed.lernsoftware.util.CryptUtil;
@@ -35,6 +37,10 @@ public class UserController {
 		}
 
 		return null;
+	}
+
+	public static List<User> getUsers() {
+		return DatabaseUtil.runQuery(new RetrieveAllQuery<User>(User.class));
 	}
 
 	private static void writeLoginTime(final User foundUser) {

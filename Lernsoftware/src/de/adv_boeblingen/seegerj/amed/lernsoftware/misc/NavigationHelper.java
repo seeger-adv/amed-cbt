@@ -40,4 +40,10 @@ public class NavigationHelper {
 		builder.appendPathElement(Integer.toString(lessonId));
 		return builder.toString();
 	}
+
+	public static String getStatLink() {
+		UriBuilder builder = PathUtil.getBaseUriBuilder();
+		builder.appendPathElement("Stats");
+		return builder.toString();
+	}
 }
