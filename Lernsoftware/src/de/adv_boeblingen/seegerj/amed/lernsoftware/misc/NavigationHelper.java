@@ -52,4 +52,10 @@ public class NavigationHelper {
 		String lessonLink = builder.toString();
 		return String.format("<a hreF=\"%s\">Help</a>", lessonLink);
 	}
+
+	public static String getStatLink() {
+		UriBuilder builder = PathUtil.getBaseUriBuilder();
+		builder.appendPathElement("Stats");
+		return builder.toString();
+	}
 }

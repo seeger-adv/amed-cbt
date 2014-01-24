@@ -24,9 +24,9 @@ import de.adv_boeblingen.seegerj.amed.lernsoftware.util.DatabaseUtil.DatabaseRun
 public class StateControllerImpl implements StateController {
 	private final User mUser;
 
-	public StateControllerImpl(User mUser) {
+	public StateControllerImpl(User user) {
 		super();
-		this.mUser = mUser;
+		this.mUser = user;
 	}
 
 	@Override
@@ -102,5 +102,10 @@ public class StateControllerImpl implements StateController {
 				return null;
 			}
 		}
+	}
+
+	@Override
+	public User getUser() {
+		return this.mUser;
 	}
 }
