@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import de.adv_boeblingen.seegerj.amed.lernsoftware.controller.ChapterController;
+import de.adv_boeblingen.seegerj.amed.lernsoftware.controller.QuestionController;
 import de.adv_boeblingen.seegerj.amed.lernsoftware.controller.StateController;
 import de.adv_boeblingen.seegerj.amed.lernsoftware.misc.Constants;
 import de.adv_boeblingen.seegerj.amed.lernsoftware.misc.NavigationHelper;
@@ -53,7 +54,7 @@ public class StateFilter implements Filter {
 			}
 		}
 
-		Question nextQuestion = null;
+		Question nextQuestion = QuestionController.getFirstQuestionForChapter(chapter);
 		String nextLink = NavigationHelper.getQuizLink(nextQuestion);
 		sb.append(String.format("<a href=\"%s\">skip</a>", nextLink));
 		return sb.toString();
