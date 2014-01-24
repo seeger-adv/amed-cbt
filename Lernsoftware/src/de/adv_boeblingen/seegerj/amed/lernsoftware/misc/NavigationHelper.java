@@ -40,4 +40,16 @@ public class NavigationHelper {
 		builder.appendPathElement(Integer.toString(lessonId));
 		return builder.toString();
 	}
+
+	public static String getHelperLink(Question question) {
+		Lesson lesson = question.getLesson();
+		String lessonId = Integer.toString(lesson.getId());
+
+		UriBuilder builder = PathUtil.getBaseUriBuilder();
+		builder.appendPathElement("Lesson");
+		builder.appendPathElement(lessonId);
+
+		String lessonLink = builder.toString();
+		return String.format("<a hreF=\"%s\">Help</a>", lessonLink);
+	}
 }
