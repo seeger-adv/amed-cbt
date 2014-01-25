@@ -42,9 +42,10 @@ implements Filter {
 		for (Chapter chapter : ChapterController.getChapters()) {
 			renderChapter(chapter, stateController);
 		}
-		renderedNavigation.append("</ul>");
 
 		createEntry("Stats", NavigationHelper.getStatLink(), null);
+
+		renderedNavigation.append("</ul>");
 
 		return this.renderedNavigation.toString();
 	}
