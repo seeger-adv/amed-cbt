@@ -5,10 +5,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import de.adv_boeblingen.seegerj.amed.lernsoftware.misc.Constants;
+import de.adv_boeblingen.seegerj.amed.lernsoftware.misc.NavigationHelper;
+import de.adv_boeblingen.seegerj.amed.lernsoftware.misc.UriBuilder;
 import de.adv_boeblingen.seegerj.amed.lernsoftware.model.Chapter;
 import de.adv_boeblingen.seegerj.amed.lernsoftware.model.Lesson;
 import de.adv_boeblingen.seegerj.amed.lernsoftware.model.Question;
 import de.adv_boeblingen.seegerj.amed.lernsoftware.model.Session;
+import de.adv_boeblingen.seegerj.amed.lernsoftware.util.PathUtil;
 
 public class NavigationController {
 	public static boolean containsLesson(Chapter chapter, Lesson lesson) {
@@ -49,35 +52,24 @@ public class NavigationController {
 		return session.getStateController();
 	}
 
-	public static Question getNextQuestion(Question question) {
-		boolean found = false;
-		Lesson lesson = question.getLesson();
-		for (Question currentQuestion : lesson.getQuestions()) {
-			if (currentQuestion.equals(question)) {
-				found = true;
-				continue;
-			}
-
-			if (found) {
-				return currentQuestion;
-			}
-		}
-		return null;
-	}
-
-	public static Chapter getNextChapter(Chapter chapter) {
-		boolean found = false;
-		for (Chapter currentChapter : ChapterController.getChapters()) {
-			if (currentChapter.equals(chapter)) {
-				found = true;
-				continue;
-			}
-
-			if (found) {
-				return currentChapter;
+	public static String getLinkToNextQuestionOrChapter(Question question) {
+		Question nextQuestion = QuestionController.getNextQuestion(question);
+		String next = null;
+		if (nextQuestion != null) {
+			next = NavigationHelper.getQuizLink(nextQuestion);
+		} else {
+			Lesson lesson = question.getLesson();
+			Chapter chapter = lesson.getChapter();
+			Chapter nextChapter = ChapterController.getNextChapter(chapter);
+			if (nextChapter != null) {
+				Lesson firstLesson = LessonController.getFirstLesson(nextChapter);
+				next = NavigationHelper.getNavLink(firstLesson);
+			} else {
+				UriBuilder uriBuilder = PathUtil.getBaseUriBuilder();
+				uriBuilder.appendPathElement("Stats");
+				next = uriBuilder.toString();
 			}
 		}
-
-		return null;
+		return next;
 	}
 }

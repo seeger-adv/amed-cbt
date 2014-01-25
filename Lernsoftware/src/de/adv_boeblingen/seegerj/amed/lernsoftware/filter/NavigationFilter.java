@@ -19,9 +19,9 @@ import de.adv_boeblingen.seegerj.amed.lernsoftware.misc.VariableMap;
 import de.adv_boeblingen.seegerj.amed.lernsoftware.model.Chapter;
 import de.adv_boeblingen.seegerj.amed.lernsoftware.model.Lesson;
 
-@WebFilter(urlPatterns = { "/Quiz/*", "/Lesson/*", "/Stats/*" })
+@WebFilter(urlPatterns = { "/Quiz/*", "/Lesson/*", "/Stats" })
 public class NavigationFilter
-		implements Filter {
+implements Filter {
 	StringBuilder renderedNavigation;
 
 	@Override
@@ -44,30 +44,40 @@ public class NavigationFilter
 		}
 		renderedNavigation.append("</ul>");
 
+		createEntry("Stats", NavigationHelper.getStatLink(), null);
+
 		return this.renderedNavigation.toString();
 	}
 
 	private void renderChapter(Chapter chapter, StateController stateController) {
 		renderedNavigation.append(String.format("<li>%s</li>", chapter.getTitle()));
 		boolean isCurrent = stateController.isCurrentChapter(chapter);
+		boolean isChapterComplete = true;
 
 		renderedNavigation.append("<ul>");
 		for (Lesson lesson : chapter.getLessons()) {
-			renderLesson(lesson, stateController, isCurrent);
+			boolean isLessonComplete = stateController.isLessonComplete(lesson);
+			isChapterComplete &= isLessonComplete;
+			renderLesson(lesson, stateController, isCurrent, isLessonComplete);
 		}
 
 		String htmlClass = null;
-		if (stateController.isChapterComplete(chapter)) {
+		if (isChapterComplete) {
 			htmlClass = "done";
 		}
 		createEntry("Quiz", NavigationHelper.getQuizLink(chapter), htmlClass);
 		this.renderedNavigation.append("</ul>");
 	}
 
-	private void renderLesson(Lesson lesson, StateController stateController, boolean isCurrent) {
+	private void renderLesson(Lesson lesson, StateController stateController, boolean isCurrent, boolean isComplete) {
 		String label = lesson.getTitle();
 		String link = NavigationHelper.getNavLink(lesson);
-		createEntry(label, link, null);
+
+		String htmlClass = null;
+		if (isComplete) {
+			htmlClass = "done";
+		}
+		createEntry(label, link, htmlClass);
 	}
 
 	private void createEntry(String label, String link, String htmlClass) {

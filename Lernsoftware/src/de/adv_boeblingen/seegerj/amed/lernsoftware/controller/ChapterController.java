@@ -18,10 +18,10 @@ public class ChapterController {
 	}
 
 	public static boolean isChapterComplete(User user, Chapter chapter) {
-		boolean isComplete = false;
+		boolean isComplete = true;
 
 		for (Lesson lesson : chapter.getLessons()) {
-			isComplete |= LessonController.isComplete(user, lesson);
+			isComplete &= LessonController.isComplete(user, lesson);
 		}
 
 		return isComplete;
@@ -34,5 +34,21 @@ public class ChapterController {
 				return manager.find(Chapter.class, id);
 			}
 		});
+	}
+
+	public static Chapter getNextChapter(Chapter chapter) {
+		boolean found = false;
+		for (Chapter currentChapter : ChapterController.getChapters()) {
+			if (currentChapter.equals(chapter)) {
+				found = true;
+				continue;
+			}
+
+			if (found) {
+				return currentChapter;
+			}
+		}
+
+		return null;
 	}
 }

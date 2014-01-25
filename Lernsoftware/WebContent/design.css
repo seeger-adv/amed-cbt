@@ -146,6 +146,7 @@ form#login #login {
 }
 
 form#login #reg {
+	color: #aaa;
     background: linear-gradient(to bottom, #7a001c 1%,#4e0012 100%);
     border-radius:2px;
     cursor:pointer;
@@ -196,8 +197,38 @@ input {
 
 #state > div.correct {
 	background: linear-gradient(to bottom, #26bf0f 0%,#299a0b 100%);
+	cursor:default;
 }
 
 #state > div.wrong {
     background: linear-gradient(to bottom, #a90329 0%,#8f0222 44%,#6d0019 100%);
+    cursor:default;
+}
+
+.draggable {
+	display: inline-block;
+	margin: 5px;
+}
+
+.droppable {
+	display: inline-block;
+	background: #777;
+	min-width: 75px;
+	margin: 0 5px;
+	border-radius: 5px;
+}
+
+/* Prevent the text contents of draggable elements from being selectable. */
+[draggable] {
+  -moz-user-select: none;
+  -khtml-user-select: none;
+  -webkit-user-select: none;
+  user-select: none;
+  /* Required to make elements draggable in old WebKit */
+  -khtml-user-drag: element;
+  -webkit-user-drag: element;
+}
+
+input.adressing{
+	font-family: monospace;
 }

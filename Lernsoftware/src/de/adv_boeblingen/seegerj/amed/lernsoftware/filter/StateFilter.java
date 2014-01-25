@@ -13,11 +13,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import de.adv_boeblingen.seegerj.amed.lernsoftware.controller.ChapterController;
+import de.adv_boeblingen.seegerj.amed.lernsoftware.controller.QuestionController;
 import de.adv_boeblingen.seegerj.amed.lernsoftware.controller.StateController;
 import de.adv_boeblingen.seegerj.amed.lernsoftware.misc.Constants;
 import de.adv_boeblingen.seegerj.amed.lernsoftware.misc.NavigationHelper;
 import de.adv_boeblingen.seegerj.amed.lernsoftware.misc.VariableMap;
-import de.adv_boeblingen.seegerj.amed.lernsoftware.model.Answer;
 import de.adv_boeblingen.seegerj.amed.lernsoftware.model.Chapter;
 import de.adv_boeblingen.seegerj.amed.lernsoftware.model.Lesson;
 import de.adv_boeblingen.seegerj.amed.lernsoftware.model.Question;
@@ -26,8 +26,7 @@ import de.adv_boeblingen.seegerj.amed.lernsoftware.model.Session;
 import de.adv_boeblingen.seegerj.amed.lernsoftware.util.PathUtil;
 
 @WebFilter(urlPatterns = "/Quiz/*")
-public class StateFilter
-		implements Filter {
+public class StateFilter implements Filter {
 
 	private int count;
 
@@ -35,7 +34,7 @@ public class StateFilter
 	public void doFilter(ServletRequest req, ServletResponse resp, FilterChain chain) throws IOException,
 			ServletException {
 
-		count = 0;
+		this.count = 0;
 		VariableMap map = VariableMap.getMappingFromRequest(req);
 		map.put(Constants.STATUS_PARAM, renderProgress((HttpServletRequest) req));
 
@@ -55,7 +54,7 @@ public class StateFilter
 			}
 		}
 
-		Question nextQuestion = null;
+		Question nextQuestion = QuestionController.getFirstQuestionForChapter(chapter);
 		String nextLink = NavigationHelper.getQuizLink(nextQuestion);
 		sb.append(String.format("<a href=\"%s\">skip</a>", nextLink));
 		return sb.toString();
@@ -66,14 +65,14 @@ public class StateFilter
 		String content;
 		String htmlClass = null;
 		if (questionState == null) {
-			content = String.format("<a href=\"%s\">%s</a>", NavigationHelper.getQuizLink(question), ++count);
+			content = String.format("<a href=\"%s\">%s</a>", NavigationHelper.getQuizLink(question), ++this.count);
 		} else {
 			if (questionState) {
 				htmlClass = "correct";
 			} else {
 				htmlClass = "wrong";
 			}
-			content = Integer.toString(++count);
+			content = Integer.toString(++this.count);
 		}
 		return String.format("<div class=\"%s\" >%s</div>\n", htmlClass, content);
 	}
@@ -84,14 +83,7 @@ public class StateFilter
 		StateController state = session.getStateController();
 
 		Response response = state.getResponse(question);
-		if (response == null) {
-			// not answered yet
-			return null;
-		}
-
-		Answer givenAnswer = response.getGivenAnswer();
-		Answer correctAnswer = question.getCorrectAnswer();
-		return givenAnswer.equals(correctAnswer);
+		return state.isUserResponseCorrect(response);
 	}
 
 	@Override

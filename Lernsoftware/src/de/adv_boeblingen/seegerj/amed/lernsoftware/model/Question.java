@@ -20,6 +20,7 @@ import javax.persistence.OrderBy;
 public class Question {
 	public static final String MULTIPLE_CHOICE = "multiplechoice";
 	public static final String DROPDOWN = "dropdown";
+	public static final String DRAGNDROP = "dragndrop";
 	public static final String ADDRESSING = "addressing";
 
 	@Id
@@ -43,8 +44,26 @@ public class Question {
 	@Column(name = "question")
 	private String mQuestion;
 
+	@Column(name = "isvalanswer", columnDefinition = "boolean default false")
+	private boolean mIsValueAnswer = false;
+
+	@Column(name = "valanswer")
+	private String mValueAnswer;
+
 	@Column(name = "type")
 	private String mType;
+
+	public boolean isValueAnswer() {
+		return this.mIsValueAnswer;
+	}
+
+	public void setValueAnswer(boolean isValueAnswer) {
+		this.mIsValueAnswer = isValueAnswer;
+	}
+
+	public String getValueAnswer() {
+		return this.mValueAnswer;
+	}
 
 	public String getQuestion() {
 		return this.mQuestion;
@@ -55,7 +74,7 @@ public class Question {
 	}
 
 	public Lesson getLesson() {
-		return mLesson;
+		return this.mLesson;
 	}
 
 	public void setLesson(Lesson lesson) {
@@ -63,7 +82,7 @@ public class Question {
 	}
 
 	public int getId() {
-		return mId;
+		return this.mId;
 	}
 
 	public void setId(int id) {
@@ -75,11 +94,11 @@ public class Question {
 	}
 
 	public String getUniqueLabel() {
-		return String.format("%s%d", "q", mId);
+		return String.format("%s%d", "q", this.mId);
 	}
 
 	public String getType() {
-		return mType;
+		return this.mType;
 	}
 
 	@Override
@@ -91,6 +110,6 @@ public class Question {
 	}
 
 	public Answer getCorrectAnswer() {
-		return mCorrectAnswer;
+		return this.mCorrectAnswer;
 	}
 }

@@ -17,7 +17,7 @@ import java.util.List;
 import javax.swing.BoxLayout;
 
 @SuppressWarnings("serial")
-public class IsoOsiApplet
+public class SubnetApplet
 		extends Applet {
 	private static List<Layer> sNetworkingLayers;
 

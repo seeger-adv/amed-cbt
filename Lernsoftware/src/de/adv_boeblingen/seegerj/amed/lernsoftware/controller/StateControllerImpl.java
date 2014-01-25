@@ -21,13 +21,12 @@ import de.adv_boeblingen.seegerj.amed.lernsoftware.model.User;
 import de.adv_boeblingen.seegerj.amed.lernsoftware.util.DatabaseUtil;
 import de.adv_boeblingen.seegerj.amed.lernsoftware.util.DatabaseUtil.DatabaseRunnable;
 
-public class StateControllerImpl
-		implements StateController {
+public class StateControllerImpl implements StateController {
 	private final User mUser;
 
-	public StateControllerImpl(User mUser) {
+	public StateControllerImpl(User user) {
 		super();
-		this.mUser = mUser;
+		this.mUser = user;
 	}
 
 	@Override
@@ -51,7 +50,7 @@ public class StateControllerImpl
 				Root<Response> response = criteria.from(Response.class);
 
 				Path<Object> userPath = response.get("mUser").get("mUsername");
-				Predicate userPredicate = builder.equal(userPath, mUser.getUsername());
+				Predicate userPredicate = builder.equal(userPath, StateControllerImpl.this.mUser.getUsername());
 				Path<Integer> questionPath = response.get("mQuestion").get("mId");
 				Predicate questionPredicate = builder.equal(questionPath, question.getId());
 				criteria.select(response).where(builder.and(userPredicate, questionPredicate));
@@ -67,14 +66,11 @@ public class StateControllerImpl
 	}
 
 	@Override
-	public void answerQuestion(final Answer givenAnswer) {
+	public void answerQuestion(final Response response) {
 		DatabaseUtil.runTransaction(new DatabaseRunnable<Void>() {
 			@Override
 			public Void run(EntityManager manager, EntityTransaction transaction) {
-				Response response = new Response();
-				response.setGivenAnswer(givenAnswer);
-				response.setQuestion(givenAnswer.getQuestion());
-				response.setUser(mUser);
+				response.setUser(StateControllerImpl.this.mUser);
 				response.setTimestamp(new Date().getTime());
 				manager.persist(response);
 				return null;
@@ -85,5 +81,31 @@ public class StateControllerImpl
 	@Override
 	public boolean isChapterComplete(Chapter chapter) {
 		return ChapterController.isChapterComplete(this.mUser, chapter);
+	}
+
+	@Override
+	public Boolean isUserResponseCorrect(Response response) {
+		if (response == null) {
+			// not answered yet
+			return null;
+		}
+
+		Question question = response.getQuestion();
+		if (question.isValueAnswer()) {
+			return response.getGivenValue().equals(question.getValueAnswer());
+		} else {
+			Answer givenAnswer = response.getGivenAnswer();
+			Answer correctAnswer = question.getCorrectAnswer();
+			if (givenAnswer != null) {
+				return givenAnswer.equals(correctAnswer);
+			} else {
+				return null;
+			}
+		}
+	}
+
+	@Override
+	public User getUser() {
+		return this.mUser;
 	}
 }

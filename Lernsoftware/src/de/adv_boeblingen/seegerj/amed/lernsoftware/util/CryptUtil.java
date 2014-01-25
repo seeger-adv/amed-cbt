@@ -6,7 +6,7 @@ import java.security.NoSuchAlgorithmException;
 import de.adv_boeblingen.seegerj.amed.lernsoftware.misc.Configuration;
 
 public class CryptUtil {
-	public static String toSHA1(String convertme) {
+	public static String loginHash(String convertme) {
 		MessageDigest md = null;
 		try {
 			md = MessageDigest.getInstance(Configuration.HASH_ALGORITHM);
@@ -24,5 +24,16 @@ public class CryptUtil {
 			result += Integer.toString(value, 16).substring(1);
 		}
 		return result;
+	}
+
+	public static String md5(String convertme) {
+		MessageDigest md = null;
+		try {
+			md = MessageDigest.getInstance("MD5");
+		} catch (NoSuchAlgorithmException e) {
+			e.printStackTrace();
+		}
+		byte[] hash = md.digest(convertme.getBytes());
+		return byteArrayToHexString(hash);
 	}
 }

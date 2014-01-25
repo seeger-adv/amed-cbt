@@ -25,7 +25,7 @@ public class Lesson {
 	@Column(name = "title")
 	private String mTitle;
 
-	@Column(name = "content")
+	@Column(name = "content", columnDefinition = "TEXT")
 	private String mContent;
 
 	@ManyToOne

@@ -20,9 +20,8 @@ import de.adv_boeblingen.seegerj.amed.lernsoftware.misc.VariableMap;
 import de.adv_boeblingen.seegerj.amed.lernsoftware.model.Session;
 import de.adv_boeblingen.seegerj.amed.lernsoftware.util.PathUtil;
 
-@WebFilter(urlPatterns = { "/Lesson/*", "/Quiz/*", "/Stats/*" })
-public class LoginFilter
-		implements Filter {
+@WebFilter(urlPatterns = { "/Lesson/*", "/Quiz/*", "/Stats" })
+public class LoginFilter implements Filter {
 	@Override
 	public void doFilter(ServletRequest req, ServletResponse resp, FilterChain chain) throws IOException,
 			ServletException {
