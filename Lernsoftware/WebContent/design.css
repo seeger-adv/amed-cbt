@@ -229,6 +229,8 @@ input {
   -webkit-user-drag: element;
 }
 
-input.adressing{
+input.address{
 	font-family: monospace;
+	font-size: 20pt;
+	width: 9em;
 }
