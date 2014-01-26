@@ -229,8 +229,8 @@ input {
   -webkit-user-drag: element;
 }
 
-input.address{
+.ip_octet{
 	font-family: monospace;
 	font-size: 20pt;
-	width: 9em;
+	width: 2em;
 }

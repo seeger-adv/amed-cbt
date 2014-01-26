@@ -9,14 +9,15 @@ import de.adv_boeblingen.seegerj.amed.lernsoftware.model.Response;
 
 /**
  * http://jsfiddle.net/3F2gM/3/
- * 
+ *
  * @author seegerj
  */
-public class AddressingQuiz extends QuizRenderer {
+public class AddressingQuiz
+		extends QuizRenderer {
 
 	@Override
 	public Response getResponse(HttpServletRequest request) {
-		String given = request.getParameter("adress");
+		String given = request.getParameter("form[address]");
 
 		Response response = new Response();
 		response.setGivenValue(given.toString());
