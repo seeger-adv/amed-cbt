@@ -234,3 +234,12 @@ input {
 	font-size: 20pt;
 	width: 2em;
 }
+
+h1, h2, h3 {
+	clear:both;
+}
+
+.abbildung {
+	float:left;
+	padding: 12px;
+}
