@@ -24,7 +24,7 @@ public class Constants {
 		public static final String HEADLINE1 = "<h1>%s</h1>";
 		public static final String BREAK = "<br>";
 		public static final String PAR = "<p>%s</p>";
-		public static final String SUBMIT = "<input type=\"submit\">";
+		public static final String SUBMIT = "<input type=\"submit\" class=\"submit\">";
 		public static final String DRAGGABLE = "<div id=\"%s\" class=\"draggable\">%s</div>";
 		public static final String DROPPABLE = "<div id=\"%s\" class=\"droppable\">&nbsp;</div>";
 		public static final String HIDDEN_FIELD = "<input type=\"hidden\" name=\"%s\">";
