@@ -94,7 +94,7 @@ public class StatServlet extends HttpServlet {
 			Response response = state.getResponse(question);
 			Boolean isCorrect = state.isUserResponseCorrect(response);
 			if (isCorrect != null) {
-				out.append(isCorrect ? "y" : "n");
+				out.append(isCorrect ? Constants.Markup.CORRECT_IMG : Constants.Markup.INCORRECT_IMG);
 			}
 			out.append(Constants.Markup.CELL_END);
 		}

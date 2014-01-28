@@ -35,5 +35,7 @@ public class Constants {
 		public static final String TABLE_END = "</table>";
 		public static final String CELL_HEAD = "<td>";
 		public static final String CELL_END = "</td>";
+		public static final String CORRECT_IMG = "<img src=\"images/tick.png\">";
+		public static final String INCORRECT_IMG = "<img src=\"images/1390942963_DeleteRed.png\">";
 	}
 }
