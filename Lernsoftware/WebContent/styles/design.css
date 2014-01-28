@@ -15,7 +15,7 @@ body {
 
 body {
 	background: rgb(43,43,43);
-    background:url(wallpaper324845.jpg); /* http://imageshack.us/photo/my-images/829/wallpaper324845.jpg/ */
+    background:url(../images/wallpaper324845.jpg); /* http://imageshack.us/photo/my-images/829/wallpaper324845.jpg/ */
     background-size: cover;
 }
 
@@ -59,7 +59,7 @@ nav > ul > ul > li {
 }
 
 nav > ul > ul > li.done {
-	background-image: url(tick.png); /* http://www.raymarine.de/uploadedImages/Products/Engine_Interfacing/ECI-100/tick.png */
+	background-image: url(../images/tick.png); /* http://www.raymarine.de/uploadedImages/Products/Engine_Interfacing/ECI-100/tick.png */
 	background-repeat: no-repeat;
 	background-position-y: 2px;
 	position: relative;
