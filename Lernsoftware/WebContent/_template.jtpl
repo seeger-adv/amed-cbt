@@ -6,6 +6,7 @@
 		<title>{title}</title>
 		<link rel="stylesheet" type="text/css" href="{baseurl}/styles/design.css">
 		<script src="{baseurl}/scripts/jquery-2.1.0.js"></script>
+		<script src="{baseurl}/scripts/jquery-migrate-1.2.1.js"></script>
 		<script src="{baseurl}/scripts/h5utils.js"></script>
 		<script src="{baseurl}/scripts/md5.js"></script>
 		<script src="{baseurl}/scripts/dragndrop.js"></script>
