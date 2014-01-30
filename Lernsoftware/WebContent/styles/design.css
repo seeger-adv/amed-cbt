@@ -78,7 +78,7 @@ nav > ul > ul > li.done {
 #main {
 	background: #eee;
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#474747', endColorstr='#2b2b2b',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
-	box-shadow: 1px 1px 2px 1px rgba(15, 15, 15, 0.6);
+	box-shadow: 1px 1px 25px 1px rgba(15, 15, 15, 0.6);
 }
 
 #main p {
