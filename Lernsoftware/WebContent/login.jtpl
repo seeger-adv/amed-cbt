@@ -9,7 +9,7 @@
 	</head>
 <body>
 	<section id="header">
-		<span>{title}</span>
+		<span class="title">{title}</span>
 	</section>
 	<nav>
 	</nav>

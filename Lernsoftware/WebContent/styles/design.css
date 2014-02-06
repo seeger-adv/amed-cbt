@@ -28,7 +28,7 @@ a, a:hover, a:active {
 	height:34px;
 }
 
-#header span {
+span.title {
     display: block;
     margin-top: 8px;
     padding-left: 24px;
