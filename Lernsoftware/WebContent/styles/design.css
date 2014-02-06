@@ -28,6 +28,11 @@ a, a:hover, a:active {
 	height:34px;
 }
 
+#header span {
+    display: block;
+    margin-top: 8px;
+}
+
 nav {
 	position: fixed;
 	top: 35px;
