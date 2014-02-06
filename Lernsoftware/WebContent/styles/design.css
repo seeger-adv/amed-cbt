@@ -280,3 +280,8 @@ h1, h2, h3 {
 table {
     border-collapse: collapse;
 }
+
+abbr {
+    text-decoration: none;
+    border-bottom: 1px blue dotted;
+}
