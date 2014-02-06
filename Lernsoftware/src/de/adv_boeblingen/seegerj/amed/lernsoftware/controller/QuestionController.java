@@ -1,7 +1,9 @@
 package de.adv_boeblingen.seegerj.amed.lernsoftware.controller;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
@@ -53,19 +55,20 @@ public class QuestionController {
 		return null;
 	}
 
-	public static Question getNextQuestion(Question question) {
-		boolean found = false;
-		Lesson lesson = question.getLesson();
-		for (Question currentQuestion : lesson.getQuestions()) {
-			if (currentQuestion.equals(question)) {
-				found = true;
-				continue;
-			}
+	public static Set<Question> getNextQuestions(Question question) {
+		Set<Question> matchingQuestions = new HashSet<Question>();
 
-			if (found) {
-				return currentQuestion;
+		Lesson lesson = question.getLesson();
+		Chapter chapter = lesson.getChapter();
+		for (Lesson currentLesson : chapter.getLessons()) {
+			for (Question currentQuestion : currentLesson.getQuestions()) {
+				if (currentQuestion.equals(question)) {
+					continue;
+				}
+
+				matchingQuestions.add(currentQuestion);
 			}
 		}
-		return null;
+		return matchingQuestions;
 	}
 }

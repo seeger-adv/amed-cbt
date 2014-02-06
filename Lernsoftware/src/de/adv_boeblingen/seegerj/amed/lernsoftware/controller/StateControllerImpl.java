@@ -2,6 +2,7 @@ package de.adv_boeblingen.seegerj.amed.lernsoftware.controller;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
@@ -107,5 +108,17 @@ public class StateControllerImpl implements StateController {
 	@Override
 	public User getUser() {
 		return this.mUser;
+	}
+
+	@Override
+	public Question getNextUnansweredQuestion(Question question) {
+		Set<Question> questions = QuestionController.getNextQuestions(question);
+		for (Question currentQuestion : questions) {
+			Response response = getResponse(currentQuestion);
+			if (response == null) {
+				return currentQuestion;
+			}
+		}
+		return null;
 	}
 }

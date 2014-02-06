@@ -52,8 +52,9 @@ public class NavigationController {
 		return session.getStateController();
 	}
 
-	public static String getLinkToNextQuestionOrChapter(Question question) {
-		Question nextQuestion = QuestionController.getNextQuestion(question);
+	public static String getLinkToNextQuestionOrChapter(StateController state, Question question) {
+		Question nextQuestion = state.getNextUnansweredQuestion(question);
+
 		String next = null;
 		if (nextQuestion != null) {
 			next = NavigationHelper.getQuizLink(nextQuestion);

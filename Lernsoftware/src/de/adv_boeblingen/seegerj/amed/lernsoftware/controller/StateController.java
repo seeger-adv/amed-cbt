@@ -20,4 +20,6 @@ public interface StateController {
 	Boolean isUserResponseCorrect(Response response);
 
 	User getUser();
+
+	Question getNextUnansweredQuestion(Question question);
 }

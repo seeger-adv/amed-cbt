@@ -53,7 +53,7 @@ public class QuizServlet extends HttpServlet {
 	private boolean redirectIfQuestionAlreadyAnswered(StateController state, HttpServletResponse res, Question question)
 			throws IOException {
 		if (state.getResponse(question) != null) {
-			String next = NavigationController.getLinkToNextQuestionOrChapter(question);
+			String next = NavigationController.getLinkToNextQuestionOrChapter(state, question);
 			next = res.encodeRedirectURL(next);
 			res.sendRedirect(next);
 			return true;
@@ -105,7 +105,7 @@ public class QuizServlet extends HttpServlet {
 			state.answerQuestion(response);
 		}
 
-		String next = NavigationController.getLinkToNextQuestionOrChapter(question);
+		String next = NavigationController.getLinkToNextQuestionOrChapter(state, question);
 		next = res.encodeRedirectURL(next);
 		res.sendRedirect(next);
 	}
