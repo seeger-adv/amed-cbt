@@ -13,7 +13,7 @@ insert into T_LESSON (lessonid, title, chapter, content) values (4, 'Layer 3:<br
 insert into T_LESSON (lessonid, title, chapter, content) values (5, 'Subnetting', 2, '<p>The prevoius chapter gave you a quick primer on what the ISO/OSI network stack consists of - This chapter will show you around the Layer 3 and have some addressing fun.</p>');
 insert into T_LESSON (lessonid, title, chapter, content) values (6, 'Classful Addressing', 2, '<applet code="de.adv_boeblingen.seegerj.amed.lernsoftware.applets.SubnetApplet.class" codebase="../Applet/" width=750 height=250><param name="mode" value="class"></applet>');
 insert into T_LESSON (lessonid, title, chapter, content) values (7, 'Classless Addressing', 2, '<applet code="de.adv_boeblingen.seegerj.amed.lernsoftware.applets.SubnetApplet.class" codebase="../Applet/" width=750 height=250><param name="mode" value="cidr"></applet>');
-insert into T_LESSON (lessonid, title, chapter, content) values (8, 'Supernetting', 2, '');
+insert into T_LESSON (lessonid, title, chapter, content) values (8, 'Supernetting', 2, '<p>Supernetting simplifies the configuration of routers by summarizing small adjacent networks reachable by the same router into one route.</p><img src="../content/supernetting.png" class="abbildung">');
 
 /* Fragen */
 insert into T_QUESTION (questionid, lesson, question, type) values (1, 2, 'What&apos;s the first layer&apos;s <abbr title="Prototol Data Unit">PDU</abbr>?', 'multiplechoice');
@@ -35,3 +35,8 @@ insert into T_ANSWER (answerid, questionid, answer) values (9, 3, 'Packet');
 update T_QUESTION set correctanswer = 9 WHERE questionid = 3;
 
 insert into T_QUESTION (questionid, lesson, question, type, isvalanswer, valanswer) values (4, 6, 'Enter the first available address that can be used by a host for 192.168.34.0/24.', 'addressing', true, '192.168.34.1');
+
+insert into T_QUESTION (questionid, lesson, question, type, isvalanswer, valanswer) values (5, 6, 'A {q1a2} network consists of 256^1 addresses and a {q1a2} Network constists of 256^2-2 addressable hosts.', 'dragndrop', true, 'q5a10q5a12');
+insert into T_ANSWER (answerid, questionid, answer) values (10, 5, 'Class A');
+insert into T_ANSWER (answerid, questionid, answer) values (11, 5, 'Class B');
+insert into T_ANSWER (answerid, questionid, answer) values (12, 5, 'Class C');
