@@ -19,6 +19,7 @@ import de.adv_boeblingen.seegerj.amed.lernsoftware.misc.NavigationHelper;
 import de.adv_boeblingen.seegerj.amed.lernsoftware.misc.TemplateRenderer;
 import de.adv_boeblingen.seegerj.amed.lernsoftware.misc.VariableMap;
 import de.adv_boeblingen.seegerj.amed.lernsoftware.model.Chapter;
+import de.adv_boeblingen.seegerj.amed.lernsoftware.model.Lesson;
 import de.adv_boeblingen.seegerj.amed.lernsoftware.model.Question;
 import de.adv_boeblingen.seegerj.amed.lernsoftware.model.Response;
 import de.adv_boeblingen.seegerj.amed.lernsoftware.model.Session;
@@ -82,8 +83,10 @@ public class QuizServlet extends HttpServlet {
 
 	private String renderQuiz(Question question) {
 		StringBuilder sb = new StringBuilder();
-		int questionId = question.getId();
-		sb.append(String.format(Constants.Markup.HEADLINE1, "Quiz for Chapter " + questionId));
+		Lesson lesson = question.getLesson();
+		Chapter chapter = lesson.getChapter();
+		int chapterId = chapter.getId();
+		sb.append(String.format(Constants.Markup.HEADLINE1, "Quiz for Chapter " + chapterId));
 
 		QuizRenderer quiz = QuestionController.getQuiz(question);
 		quiz.render(sb, question);
