@@ -34,6 +34,12 @@ insert into T_ANSWER (answerid, questionid, answer) values (8, 3, 'Bit');
 insert into T_ANSWER (answerid, questionid, answer) values (9, 3, 'Packet');
 update T_QUESTION set correctanswer = 9 WHERE questionid = 3;
 
+insert into T_QUESTION (questionid, lesson, question, type) values (6, 1, 'What does PDU stand for?', 'multiplechoice');
+insert into T_ANSWER (answerid, questionid, answer) values (13, 6, 'Protocol Data Unit');
+insert into T_ANSWER (answerid, questionid, answer) values (14, 6, 'Public Data Unit');
+insert into T_ANSWER (answerid, questionid, answer) values (15, 6, 'Private Data Unit');
+update T_QUESTION set correctanswer = 13 WHERE questionid = 6;
+
 insert into T_QUESTION (questionid, lesson, question, type, isvalanswer, valanswer) values (4, 6, 'Enter the first available address that can be used by a host for 192.168.34.0/24.', 'addressing', true, '192.168.34.1');
 
 insert into T_QUESTION (questionid, lesson, question, type, isvalanswer, valanswer) values (5, 6, 'A {q1a2} network consists of 256^1 addresses and a {q1a2} Network constists of 256^2-2 addressable hosts.', 'dragndrop', true, 'q5a10q5a12');
