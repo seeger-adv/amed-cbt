@@ -250,6 +250,9 @@ input[type=radio] {
 .draggable {
 	display: inline-block;
 	margin: 5px;
+	border: solid 1px #777;
+	border-radius: 5px;
+	padding: 0 4px;
 }
 
 .droppable {
@@ -258,6 +261,7 @@ input[type=radio] {
 	min-width: 75px;
 	margin: 0 5px;
 	border-radius: 5px;
+	padding: 0 4px;
 }
 
 /* Prevent the text contents of draggable elements from being selectable. */
