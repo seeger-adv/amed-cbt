@@ -8,7 +8,6 @@ import javax.servlet.FilterConfig;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
-import javax.servlet.annotation.WebFilter;
 
 import de.adv_boeblingen.seegerj.amed.lernsoftware.controller.ChapterController;
 import de.adv_boeblingen.seegerj.amed.lernsoftware.controller.NavigationController;
@@ -19,14 +18,13 @@ import de.adv_boeblingen.seegerj.amed.lernsoftware.misc.VariableMap;
 import de.adv_boeblingen.seegerj.amed.lernsoftware.model.Chapter;
 import de.adv_boeblingen.seegerj.amed.lernsoftware.model.Lesson;
 
-@WebFilter(urlPatterns = { "/Quiz/*", "/Lesson/*", "/Stats" })
 public class NavigationFilter
-implements Filter {
+		implements Filter {
 	StringBuilder renderedNavigation;
 
 	@Override
 	public void doFilter(ServletRequest req, ServletResponse resp, FilterChain chain) throws IOException,
-			ServletException {
+	ServletException {
 
 		final StateController stateController = NavigationController.retrieveFromSession(req);
 		final VariableMap map = VariableMap.getMappingFromRequest(req);

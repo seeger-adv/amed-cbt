@@ -8,7 +8,6 @@ import javax.servlet.FilterConfig;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
-import javax.servlet.annotation.WebFilter;
 
 import de.adv_boeblingen.seegerj.amed.lernsoftware.misc.Configuration;
 import de.adv_boeblingen.seegerj.amed.lernsoftware.misc.Constants;
@@ -16,13 +15,12 @@ import de.adv_boeblingen.seegerj.amed.lernsoftware.misc.UriBuilder;
 import de.adv_boeblingen.seegerj.amed.lernsoftware.misc.VariableMap;
 import de.adv_boeblingen.seegerj.amed.lernsoftware.util.PathUtil;
 
-@WebFilter(urlPatterns = "/*")
 public class ApplicationFilter
-		implements Filter {
+implements Filter {
 
 	@Override
 	public void doFilter(ServletRequest req, ServletResponse resp, FilterChain chain) throws IOException,
-			ServletException {
+	ServletException {
 
 		VariableMap map = VariableMap.getMappingFromRequest(req);
 		UriBuilder builder = PathUtil.getBaseUriBuilder();

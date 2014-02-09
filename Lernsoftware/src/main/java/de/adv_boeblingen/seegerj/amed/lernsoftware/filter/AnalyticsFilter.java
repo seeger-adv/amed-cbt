@@ -8,7 +8,6 @@ import javax.servlet.FilterConfig;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
-import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 
 import com.dmurph.tracking.AnalyticsConfigData;
@@ -17,13 +16,12 @@ import com.dmurph.tracking.JGoogleAnalyticsTracker.GoogleAnalyticsVersion;
 
 import de.adv_boeblingen.seegerj.amed.lernsoftware.misc.Constants;
 
-@WebFilter(urlPatterns = { "/Quiz/*", "/Lesson/*", "/Stats/*" })
 public class AnalyticsFilter
-		implements Filter {
+implements Filter {
 
 	@Override
 	public void doFilter(ServletRequest req, ServletResponse resp, FilterChain chain) throws IOException,
-			ServletException {
+	ServletException {
 
 		final AnalyticsConfigData analyticsConfig = createConfig(Constants.ANALYTICS_KEY, (HttpServletRequest) req);
 		JGoogleAnalyticsTracker tracker = new JGoogleAnalyticsTracker(analyticsConfig, GoogleAnalyticsVersion.V_4_7_2);
@@ -37,7 +35,6 @@ public class AnalyticsFilter
 	private AnalyticsConfigData createConfig(String analyticsKey, HttpServletRequest req) {
 		AnalyticsConfigData config = new AnalyticsConfigData(Constants.ANALYTICS_KEY);
 		config.setUserLanguage(req.getLocale().toString());
-		config.setUserAgent(req.getHeader("User-Agent"));
 		return config;
 	}
 

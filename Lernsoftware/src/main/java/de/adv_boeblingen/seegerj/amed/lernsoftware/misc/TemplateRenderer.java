@@ -6,15 +6,17 @@ import java.io.PrintWriter;
 import java.net.URL;
 
 import javax.servlet.ServletContext;
-import javax.servlet.ServletRequest;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import net.sf.jtpl.Template;
 
 public class TemplateRenderer {
 	private Template template;
 
-	public TemplateRenderer(ServletRequest req, String filepath) throws IOException {
-		ServletContext ctx = req.getServletContext();
+	public TemplateRenderer(HttpServletRequest req, String filepath) throws IOException {
+		HttpSession session = req.getSession();
+		ServletContext ctx = session.getServletContext();
 		URL resourceUrl = ctx.getResource(filepath);
 		InputStreamReader reader = null;
 		try {

@@ -26,7 +26,6 @@ public class AnalyticsController {
 	private static AnalyticsConfigData createConfig(HttpServletRequest req) {
 		AnalyticsConfigData config = new AnalyticsConfigData(Constants.ANALYTICS_KEY);
 		config.setUserLanguage(req.getLocale().toString());
-		config.setUserAgent(req.getHeader("User-Agent"));
 		return config;
 	}
 }

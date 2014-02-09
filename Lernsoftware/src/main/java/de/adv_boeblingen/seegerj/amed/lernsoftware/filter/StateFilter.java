@@ -8,7 +8,6 @@ import javax.servlet.FilterConfig;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
-import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -25,14 +24,14 @@ import de.adv_boeblingen.seegerj.amed.lernsoftware.model.Response;
 import de.adv_boeblingen.seegerj.amed.lernsoftware.model.Session;
 import de.adv_boeblingen.seegerj.amed.lernsoftware.util.PathUtil;
 
-@WebFilter(urlPatterns = "/Quiz/*")
-public class StateFilter implements Filter {
+public class StateFilter
+		implements Filter {
 
 	private int count;
 
 	@Override
 	public void doFilter(ServletRequest req, ServletResponse resp, FilterChain chain) throws IOException,
-			ServletException {
+	ServletException {
 
 		this.count = 0;
 		VariableMap map = VariableMap.getMappingFromRequest(req);

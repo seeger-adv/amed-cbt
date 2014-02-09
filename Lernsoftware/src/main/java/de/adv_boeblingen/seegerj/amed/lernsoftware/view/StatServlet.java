@@ -5,7 +5,6 @@ import java.util.HashSet;
 import java.util.Set;
 
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -24,9 +23,9 @@ import de.adv_boeblingen.seegerj.amed.lernsoftware.model.Question;
 import de.adv_boeblingen.seegerj.amed.lernsoftware.model.Response;
 import de.adv_boeblingen.seegerj.amed.lernsoftware.model.User;
 
-@WebServlet("/Stats/*")
 @SuppressWarnings("serial")
-public class StatServlet extends HttpServlet {
+public class StatServlet
+		extends HttpServlet {
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
