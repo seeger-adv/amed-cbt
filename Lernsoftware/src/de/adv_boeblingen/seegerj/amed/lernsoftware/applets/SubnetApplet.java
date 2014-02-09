@@ -24,7 +24,7 @@ import org.apache.commons.net.util.SubnetUtils.SubnetInfo;
 
 @SuppressWarnings("serial")
 public class SubnetApplet
-extends Applet {
+		extends Applet {
 	private final JTextField ipInput = new JTextField();
 	private final JComboBox nmInput = new JComboBox();
 	private final JLabel type = new JLabel();
@@ -132,8 +132,8 @@ extends Applet {
 
 		this.sn.setText(info.getNetworkAddress());
 		this.brd.setText(info.getBroadcastAddress());
-		this.first.setText(info.getHighAddress());
-		this.last.setText(info.getLowAddress());
+		this.first.setText(info.getLowAddress());
+		this.last.setText(info.getHighAddress());
 		this.num.setText(Integer.toString(info.getAddressCount()));
 	}
 }
