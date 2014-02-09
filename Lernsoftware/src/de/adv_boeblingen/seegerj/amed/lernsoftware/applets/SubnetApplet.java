@@ -4,11 +4,11 @@ import java.applet.Applet;
 import java.awt.Color;
 import java.awt.Panel;
 import java.awt.event.ActionEvent;
-import java.beans.PropertyChangeListener;
+import java.awt.event.ActionListener;
 
-import javax.swing.Action;
 import javax.swing.InputVerifier;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JSeparator;
@@ -23,11 +23,11 @@ import org.apache.commons.net.util.SubnetUtils;
 import org.apache.commons.net.util.SubnetUtils.SubnetInfo;
 
 @SuppressWarnings("serial")
-public class SubnetApplet extends Applet {
+public class SubnetApplet
+extends Applet {
 	private final JTextField ipInput = new JTextField();
-	private final JTextField nmInput = new JTextField();
+	private final JComboBox nmInput = new JComboBox();
 	private final JLabel type = new JLabel();
-	private final JLabel clazz = new JLabel();
 	private final JLabel first = new JLabel();
 	private final JLabel last = new JLabel();
 	private final JLabel sn = new JLabel();
@@ -38,6 +38,7 @@ public class SubnetApplet extends Applet {
 	public void init() {
 		super.init();
 		Panel panel = new Panel();
+		panel.setBackground(new Color(0xee, 0xee, 0xee));
 		panel.setLayout(new MigLayout());
 
 		this.ipInput.setInputVerifier(new InputVerifier() {
@@ -61,49 +62,32 @@ public class SubnetApplet extends Applet {
 		panel.add(createLabel("Type"), "wrap");
 		panel.add(this.ipInput, "span 2, grow");
 		panel.add(this.type, "wrap");
-		panel.add(createLabel("Network Mask"), "span 2, grow");
-		panel.add(createLabel("Class"), "wrap");
-		panel.add(this.nmInput, "span 2, grow");
-		panel.add(this.clazz, "wrap");
+		panel.add(createLabel("Network Mask"), "span 3, grow, wrap");
+		panel.add(this.nmInput, "span 3, grow, wrap");
+
+		boolean isCidr = "cidr".equals(getMode());
+		if (isCidr) {
+			this.type.setText("CIDR");
+			nmInput.addItem("0.0.0.0");
+		} else {
+			this.type.setText("Classful");
+			nmInput.addItem("255.0.0.0");
+			nmInput.addItem("255.255.0.0");
+			nmInput.addItem("255.255.255.0");
+		}
 
 		panel.add(new JSeparator(SwingConstants.HORIZONTAL), "span 3, grow, wrap");
-		panel.add(new JButton(new Action() {
 
+		JButton button = new JButton("recalculate");
+		panel.add(button, "grow, wrap");
+		panel.add(new JSeparator(SwingConstants.HORIZONTAL), "span 3, grow, wrap");
+
+		button.addActionListener(new ActionListener() {
 			@Override
-			public void actionPerformed(ActionEvent arg0) {
+			public void actionPerformed(ActionEvent e) {
 				recalcAddress();
 			}
-
-			@Override
-			public void setEnabled(boolean arg0) {
-			}
-
-			@Override
-			public void removePropertyChangeListener(PropertyChangeListener arg0) {
-			}
-
-			@Override
-			public void putValue(String arg0, Object arg1) {
-			}
-
-			@Override
-			public boolean isEnabled() {
-				return true;
-			}
-
-			@Override
-			public Object getValue(String arg0) {
-				if ("Name".equals(arg0)) {
-					return "recalculate";
-				}
-				return null;
-			}
-
-			@Override
-			public void addPropertyChangeListener(PropertyChangeListener arg0) {
-			}
-		}), "grow, wrap");
-		panel.add(new JSeparator(SwingConstants.HORIZONTAL), "span 3, grow, wrap");
+		});
 
 		panel.add(createLabel("Network"));
 		panel.add(this.sn, "wrap");
@@ -131,18 +115,22 @@ public class SubnetApplet extends Applet {
 
 	private void recalcAddress() {
 		String host = this.ipInput.getText();
-		String nm = this.nmInput.getText();
-		if ("".equals(getMode())) {
+		String nm = (String) this.nmInput.getSelectedItem();
+
+		SubnetUtils sn = null;
+		boolean isCidr = "cidr".equals(getMode());
+		if (isCidr) {
 			host = host + nm;
+			sn = new SubnetUtils(host);
+		} else {
+			sn = new SubnetUtils(host, nm);
 		}
-		SubnetUtils sn = new SubnetUtils(host);
 		SubnetInfo info = sn.getInfo();
 
-		String[] addrs = info.getAllAddresses();
 		this.sn.setText(info.getNetworkAddress());
 		this.brd.setText(info.getBroadcastAddress());
-		this.first.setText(addrs[0]);
-		this.last.setText(addrs[addrs.length - 1]);
+		this.first.setText(info.getHighAddress());
+		this.last.setText(info.getLowAddress());
 		this.num.setText(Integer.toString(info.getAddressCount()));
 	}
 }
