@@ -84,18 +84,22 @@ public class UserController {
 		final long now = new Date().getTime();
 		final String hash = CryptUtil.loginHash(password);
 
-		DatabaseUtil.runTransaction(new DatabaseRunnable<Void>() {
-			@Override
-			public Void run(EntityManager manager, EntityTransaction transaction) {
-				User user = new User();
-				user.setUsername(username);
-				user.setCreated(now);
-				user.setLastLogin(0);
-				user.setPassword(hash);
-				manager.persist(user);
-				return null;
-			}
-		});
+		try {
+			DatabaseUtil.runTransaction(new DatabaseRunnable<Void>() {
+				@Override
+				public Void run(EntityManager manager, EntityTransaction transaction) {
+					User user = new User();
+					user.setUsername(username);
+					user.setCreated(now);
+					user.setLastLogin(0);
+					user.setPassword(hash);
+					manager.persist(user);
+					return null;
+				}
+			});
+		} catch (Exception e) {
+			return null;
+		}
 
 		return login(username, password);
 	}

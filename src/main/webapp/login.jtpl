@@ -16,6 +16,7 @@
 	<section id="main">
 		<form id="login" action="login" method="post">
             <h1>Login und so&hellip;</h1>
+            <span class="message">{message}</span><br>
             <input type="text" name="loginusername" placeholder="Benutzername"><br>
             <input type="password" name="loginpass" placeholder="Password"><br>
             <input type="submit" name="act" value="Login" id="login"> or

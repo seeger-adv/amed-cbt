@@ -15,6 +15,7 @@ public class Constants {
 	public static final String SERVERNAME = "localhost";
 	public static final int PORT = 8080;
 	public static final String DEPLOYMENT_PATH = "Lernsoftware";
+	public static final String MESSAGE_PARAM = "message";
 
 	public static final class Markup {
 		public static final String FORM_START = "<form action=\"\" method=\"post\">";

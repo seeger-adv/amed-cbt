@@ -8,6 +8,8 @@ import javax.servlet.FilterConfig;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import de.adv_boeblingen.seegerj.amed.lernsoftware.misc.Configuration;
 import de.adv_boeblingen.seegerj.amed.lernsoftware.misc.Constants;
@@ -16,16 +18,21 @@ import de.adv_boeblingen.seegerj.amed.lernsoftware.misc.VariableMap;
 import de.adv_boeblingen.seegerj.amed.lernsoftware.util.PathUtil;
 
 public class ApplicationFilter
-implements Filter {
+		implements Filter {
 
 	@Override
 	public void doFilter(ServletRequest req, ServletResponse resp, FilterChain chain) throws IOException,
-	ServletException {
-
+			ServletException {
 		VariableMap map = VariableMap.getMappingFromRequest(req);
 		UriBuilder builder = PathUtil.getBaseUriBuilder();
 		map.put(Constants.BASE_URL_PARAM, builder.toString());
 		map.put(Constants.TITLE_PARAM, Configuration.APP_TITLE);
+
+		HttpServletRequest request = (HttpServletRequest) req;
+		HttpSession session = request.getSession();
+		String message = (String) session.getAttribute(Constants.MESSAGE_PARAM);
+		map.put(Constants.MESSAGE_PARAM, message == null ? "" : message);
+
 		chain.doFilter(req, resp);
 	}
 
