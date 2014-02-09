@@ -10,6 +10,7 @@ import javax.servlet.http.HttpSession;
 
 import de.adv_boeblingen.seegerj.amed.lernsoftware.controller.UserController;
 import de.adv_boeblingen.seegerj.amed.lernsoftware.misc.Constants;
+import de.adv_boeblingen.seegerj.amed.lernsoftware.misc.Messages;
 import de.adv_boeblingen.seegerj.amed.lernsoftware.misc.TemplateRenderer;
 import de.adv_boeblingen.seegerj.amed.lernsoftware.model.Session;
 
@@ -34,13 +35,13 @@ extends HttpServlet {
 				userSession = UserController.register(user, password);
 
 				if (userSession == null) {
-					setMessage(session, "Registration failed!");
+					setMessage(session, Messages.REGISTRATION_FAILED);
 				}
 			} else {
 				userSession = UserController.login(user, password);
 
 				if (userSession == null) {
-					setMessage(session, "Login failed!");
+					setMessage(session, Messages.LOGIN_FAILED);
 				}
 			}
 

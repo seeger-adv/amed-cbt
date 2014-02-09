@@ -6,7 +6,6 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 
-import de.adv_boeblingen.seegerj.amed.lernsoftware.misc.Messages;
 import de.adv_boeblingen.seegerj.amed.lernsoftware.misc.RetrieveAllQuery;
 import de.adv_boeblingen.seegerj.amed.lernsoftware.model.Session;
 import de.adv_boeblingen.seegerj.amed.lernsoftware.model.User;
@@ -32,8 +31,6 @@ public class UserController {
 		if (foundUser.getPassword().equals(passwordHash)) {
 			writeLoginTime(foundUser);
 			return new Session(foundUser);
-		} else {
-			System.out.println(Messages.LOGIN_FAILED);
 		}
 
 		return null;
