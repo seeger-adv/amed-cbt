@@ -47,6 +47,6 @@ insert into T_ANSWER (answerid, questionid, answer) values (14, 6, 'Public Data 
 insert into T_ANSWER (answerid, questionid, answer) values (15, 6, 'Private Data Unit');
 update T_QUESTION set correctanswer = 13 WHERE questionid = 6;
 
-insert into T_QUESTION (questionid, lesson, question, type, isvalanswer, valanswer) values (7, 8, 'What is the best way to summarize the following subnets?<br>192.168.1.0/25<br>192.168.1.128/25', 'addressing', true, '192.168.1.0/24');
+insert into T_QUESTION (questionid, lesson, question, type, isvalanswer, valanswer) values (7, 8, 'What is the best way to summarize the following subnets?<br>192.168.1.0/25<br>192.168.1.128/25', 'addressing', true, '192.168.1.0');
 
-insert into T_QUESTION (questionid, lesson, question, type, isvalanswer, valanswer) values (8, 7, 'What&apos;s the last usable host address for the subnet 192.168.1.128/26?', 'addressing', true, '192.168.1.191/26');
+insert into T_QUESTION (questionid, lesson, question, type, isvalanswer, valanswer) values (8, 7, 'What&apos;s the last usable host address for the subnet 192.168.1.128/26?', 'addressing', true, '192.168.1.190');
