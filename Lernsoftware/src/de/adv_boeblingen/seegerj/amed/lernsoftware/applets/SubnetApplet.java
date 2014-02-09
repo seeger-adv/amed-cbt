@@ -37,6 +37,7 @@ extends Applet {
 	@Override
 	public void init() {
 		super.init();
+		setBackground(new Color(0xee, 0xee, 0xee));
 		Panel panel = new Panel();
 		panel.setBackground(new Color(0xee, 0xee, 0xee));
 		panel.setLayout(new MigLayout());
@@ -68,7 +69,9 @@ extends Applet {
 		boolean isCidr = "cidr".equals(getMode());
 		if (isCidr) {
 			this.type.setText("CIDR");
-			nmInput.addItem("0.0.0.0");
+			for (int i = 0; i <= 32; i++) {
+				nmInput.addItem("/" + i);
+			}
 		} else {
 			this.type.setText("Classful");
 			nmInput.addItem("255.0.0.0");
