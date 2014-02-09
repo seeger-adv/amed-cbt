@@ -68,7 +68,7 @@ public class SubnetApplet
 		boolean isCidr = "cidr".equals(getMode());
 		if (isCidr) {
 			this.type.setText("CIDR");
-			for (int i = 0; i <= 32; i++) {
+			for (int i = 1; i <= 32; i++) {
 				nmInput.addItem("/" + i);
 			}
 		} else {
