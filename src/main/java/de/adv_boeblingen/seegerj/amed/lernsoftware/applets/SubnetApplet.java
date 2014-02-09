@@ -25,6 +25,7 @@ import org.apache.commons.net.util.SubnetUtils.SubnetInfo;
 @SuppressWarnings("serial")
 public class SubnetApplet
 		extends Applet {
+
 	private final JTextField ipInput = new JTextField();
 	private final JComboBox nmInput = new JComboBox();
 	private final JLabel type = new JLabel();
@@ -45,16 +46,14 @@ public class SubnetApplet
 		this.ipInput.setInputVerifier(new InputVerifier() {
 			@Override
 			public boolean verify(JComponent arg0) {
+				Border border = null;
 				try {
 					recalcAddress();
-					Border border = new LineBorder(Color.black);
-					SubnetApplet.this.ipInput.setBorder(border);
-					SubnetApplet.this.nmInput.setBorder(border);
+					border = new LineBorder(Color.black);
 				} catch (IllegalArgumentException e) {
-					Border border = new LineBorder(Color.red);
-					SubnetApplet.this.ipInput.setBorder(border);
-					SubnetApplet.this.nmInput.setBorder(border);
+					border = new LineBorder(Color.red);
 				}
+				SubnetApplet.this.ipInput.setBorder(border);
 				return true;
 			}
 		});
