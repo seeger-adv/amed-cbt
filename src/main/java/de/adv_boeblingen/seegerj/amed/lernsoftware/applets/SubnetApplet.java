@@ -23,11 +23,10 @@ import org.apache.commons.net.util.SubnetUtils;
 import org.apache.commons.net.util.SubnetUtils.SubnetInfo;
 
 @SuppressWarnings("serial")
-public class SubnetApplet
-		extends Applet {
+public class SubnetApplet extends Applet {
 
 	private final JTextField ipInput = new JTextField();
-	private final JComboBox nmInput = new JComboBox();
+	private final JComboBox<String> nmInput = new JComboBox<String>();
 	private final JLabel type = new JLabel();
 	private final JLabel first = new JLabel();
 	private final JLabel last = new JLabel();
@@ -69,13 +68,13 @@ public class SubnetApplet
 		if (isCidr) {
 			this.type.setText("CIDR");
 			for (int i = 1; i <= 32; i++) {
-				nmInput.addItem("/" + i);
+				this.nmInput.addItem("/" + i);
 			}
 		} else {
 			this.type.setText("Classful");
-			nmInput.addItem("255.0.0.0");
-			nmInput.addItem("255.255.0.0");
-			nmInput.addItem("255.255.255.0");
+			this.nmInput.addItem("255.0.0.0");
+			this.nmInput.addItem("255.255.0.0");
+			this.nmInput.addItem("255.255.255.0");
 		}
 
 		panel.add(new JSeparator(SwingConstants.HORIZONTAL), "span 3, grow, wrap");
